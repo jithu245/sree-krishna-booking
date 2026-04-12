@@ -497,7 +497,10 @@
       </div>
     </div>
     <nav class="sidebar-nav">
-      <button class="nav-item active" data-tab="bookings" onclick="window.switchTab('bookings')">
+      <button class="nav-item active" data-tab="overview" onclick="window.switchTab('overview')">
+        <i class="fas fa-th-large"></i><span class="nav-label">Overview</span>
+      </button>
+      <button class="nav-item" data-tab="bookings" onclick="window.switchTab('bookings')">
         <i class="fas fa-calendar-check"></i><span class="nav-label">Bookings</span>
         <span class="nav-badge" id="navNewBadge" style="display:none;">0</span>
       </button>
@@ -508,14 +511,14 @@
         <i class="fas fa-sticky-note"></i><span class="nav-label">Shift Notes</span>
         <span class="nav-badge" id="shiftNotesBadge" style="display:none;">0</span>
       </button>
-      <button class="nav-item" data-tab="analytics" onclick="window.switchTab('analytics')">
-        <i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span>
-      </button>
       <button class="nav-item" data-tab="calendar" onclick="window.switchTab('calendar')">
         <i class="fas fa-calendar-alt"></i><span class="nav-label">Calendar</span>
       </button>
       <button class="nav-item" data-tab="revenue" onclick="window.switchTab('revenue')">
         <i class="fas fa-rupee-sign"></i><span class="nav-label">Revenue</span>
+      </button>
+      <button class="nav-item" data-tab="analytics" onclick="window.switchTab('analytics')">
+        <i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span>
       </button>
       <button class="nav-item" id="auditLogTab" data-tab="audit-log" onclick="window.switchTab('audit-log')" style="display:none;">
         <i class="fas fa-clipboard-list"></i><span class="nav-label">Audit Log</span>
@@ -577,63 +580,75 @@
   <main class="main-content" id="mainContent" style="display:none;">
     <div class="content-inner">
 
-      <div class="kpi-grid" id="stats" style="grid-template-columns: repeat(3, 1fr);">
-        <!-- ACTIONABLE DATA: Today's Pulse -->
-        <div class="kpi-card" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);cursor:default; border-left: 3px solid var(--gold);">
-          <div class="kpi-icon" style="color:var(--gold);"><i class="fas fa-sign-out-alt"></i></div>
-          <div class="kpi-value" id="statCheckouts">0</div>
-          <div class="kpi-label">Check-outs Today</div>
+      <!-- OVERVIEW TAB -->
+      <div class="tab-panel active" id="tab-overview">
+        <div class="kpi-grid" id="overviewStats" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="kpi-card" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);">
+            <div class="kpi-icon"><i class="fas fa-clipboard-list"></i></div>
+            <div class="kpi-value" id="overviewTotal">0</div>
+            <div class="kpi-label">Total Bookings</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);">
+            <div class="kpi-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="kpi-value" id="overviewActive">0</div>
+            <div class="kpi-label">Active Guests</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);">
+            <div class="kpi-icon" style="color:var(--gold);"><i class="fas fa-rupee-sign"></i></div>
+            <div class="kpi-value" id="overviewRevenue">&#8377;0</div>
+            <div class="kpi-label">This Month Revenue</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--red);--kpi-bg:var(--red-bg);cursor:pointer;" onclick="window.switchTab('bookings')">
+            <div class="kpi-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <div class="kpi-value" id="overviewPending">0</div>
+            <div class="kpi-label">Pending Enquiries</div>
+          </div>
         </div>
-        <div class="kpi-card" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);cursor:default; border-left: 3px solid var(--blue);">
-          <div class="kpi-icon"><i class="fas fa-plane-arrival"></i></div>
-          <div class="kpi-value" id="statArrivals">0</div>
-          <div class="kpi-label">Expected Arrivals</div>
+        
+        <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 16px;">
+          <div class="kpi-card">
+            <div class="kpi-icon"><i class="fas fa-sign-out-alt" style="color:var(--amber);"></i></div>
+            <div class="kpi-value" id="overviewCheckouts">0</div>
+            <div class="kpi-label">Check-outs Today</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon"><i class="fas fa-plane-arrival" style="color:var(--blue);"></i></div>
+            <div class="kpi-value" id="overviewArrivals">0</div>
+            <div class="kpi-label">Arrivals Today</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon"><i class="fas fa-calendar-day" style="color:var(--accent);"></i></div>
+            <div class="kpi-value" id="overviewTodayBookings">0</div>
+            <div class="kpi-label">Bookings Today</div>
+          </div>
         </div>
-        <!-- ACTIONABLE DATA: Attention Required -->
-        <div class="kpi-card" style="--kpi-color:var(--red);--kpi-bg:var(--red-bg);cursor:pointer;" onclick="window.switchTab('availability')">
-          <div class="kpi-icon" style="color:var(--gold);"><i class="fas fa-exclamation-circle"></i></div>
-          <div class="kpi-value" id="statPending">0</div>
-          <div class="kpi-label">Pending Enquiries</div>
+
+        <div class="occupancy-bar" id="overviewOccupancy" style="margin-top: 20px;">
+          <h3><i class="fas fa-chart-bar"></i> Daily Occupancy</h3>
+          <div class="occupancy-date">
+            <label for="occDateOverview">Date:</label>
+            <input type="date" id="occDateOverview">
+          </div>
+          <div class="occupancy-stats">
+            <div class="occ-stat"><div class="occ-val gold" id="occTotal">0</div><div class="occ-label">Total Rooms</div></div>
+            <div class="occ-stat"><div class="occ-val red" id="occBooked">0</div><div class="occ-label">Booked</div></div>
+            <div class="occ-stat"><div class="occ-val green" id="occAvail">0</div><div class="occ-label">Available</div></div>
+            <div class="occ-stat occupancy-pct"><div class="occ-val" id="occPct">0%</div><div class="occ-label">Occupancy</div></div>
+          </div>
         </div>
-        <!-- ACTIONABLE DATA: Revenue Glance -->
-        <div class="kpi-card" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);cursor:default; border-left: 3px solid var(--gold);">
-          <div class="kpi-icon" style="color:var(--gold);"><i class="fas fa-percent"></i></div>
-          <div class="kpi-value" id="occPct">0%</div>
-          <div class="kpi-label">Today's Occupancy</div>
-        </div>
-        <!-- Additional Stats -->
-        <div class="kpi-card stat-total" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);cursor:default;">
-          <div class="kpi-icon"><i class="fas fa-clipboard-list"></i></div>
-          <div class="kpi-value" id="statTotal">0</div>
-          <div class="kpi-label">Total Bookings</div>
-        </div>
-        <div class="kpi-card stat-today" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);cursor:default;">
-          <div class="kpi-icon"><i class="fas fa-calendar-day"></i></div>
-          <div class="kpi-value" id="statToday">0</div>
-          <div class="kpi-label">Today's Bookings</div>
-        </div>
-        <div class="kpi-card stat-active" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);cursor:default;">
-          <div class="kpi-icon"><i class="fas fa-check-circle"></i></div>
-          <div class="kpi-value" id="statActive">0</div>
-          <div class="kpi-label">Active Bookings</div>
+
+        <!-- Quick Actions -->
+        <div style="margin-top: 24px;">
+          <h3 style="font-family:'Outfit',sans-serif;font-size:1rem;color:var(--text);margin-bottom:12px;"><i class="fas fa-bolt" style="color:var(--accent);margin-right:8px;"></i>Quick Actions</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="btn-primary" onclick="window.switchTab('bookings')"><i class="fas fa-calendar-check"></i> View All Bookings</button>
+            <button class="btn-secondary" onclick="window.switchTab('availability')"><i class="fas fa-bed"></i> Check Availability</button>
+            <button class="btn-secondary" onclick="window.switchTab('revenue')"><i class="fas fa-rupee-sign"></i> Revenue Report</button>
+          </div>
         </div>
       </div>
 
-      <div class="occupancy-bar" id="occupancyBar">
-        <h3><i class="fas fa-chart-bar"></i> Daily Occupancy</h3>
-        <div class="occupancy-date">
-          <label for="occDate">Date:</label>
-          <input type="date" id="occDate">
-        </div>
-        <div class="occupancy-stats">
-          <div class="occ-stat"><div class="occ-val gold" id="occTotal">0</div><div class="occ-label">Total Rooms</div></div>
-          <div class="occ-stat"><div class="occ-val red" id="occBooked">0</div><div class="occ-label">Booked</div></div>
-          <div class="occ-stat"><div class="occ-val green" id="occAvail">0</div><div class="occ-label">Available</div></div>
-          <div class="occ-stat occupancy-pct"><div class="occ-val" id="occPct">0%</div><div class="occ-label">Occupancy</div></div>
-        </div>
-      </div>
-
-      <div class="tab-panel active" id="tab-bookings">
+      <div class="tab-panel" id="tab-bookings">
         <div class="priority-bar" id="priorityBar">
           <div class="priority-pill new" id="pillNew" style="display:none;" onclick="document.getElementById('newBookingsSection').scrollIntoView({behavior:'smooth'})">
             <i class="fas fa-bell"></i> New Bookings <span class="count" id="pillNewCount">0</span>
@@ -923,7 +938,7 @@
               <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">Ctrl+K</kbd></div><div class="setting-desc">Focus search</div></div>
               <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">Ctrl+R</kbd></div><div class="setting-desc">Refresh data</div></div>
               <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">Esc</kbd></div><div class="setting-desc">Close modals</div></div>
-              <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">1-5</kbd></div><div class="setting-desc">Switch tabs</div></div>
+              <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">1-7</kbd></div><div class="setting-desc">Switch tabs</div></div>
             </div>
           </div>
           <div class="settings-card">
@@ -1091,6 +1106,10 @@
               <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span style="color: var(--text-secondary);">Close Modal</span>
                 <kbd style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">Escape</kbd>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: var(--text-secondary);">Switch Tabs</span>
+                <kbd style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">1-7</kbd>
               </div>
             </div>
           </div>
@@ -1472,11 +1491,12 @@
         document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
         var target = document.getElementById('tab-' + tabName);
         if (target) target.classList.add('active');
-        var titles = { bookings:'Bookings', 'shift-notes':'Shift Notes', availability:'Availability', calendar:'Calendar', revenue:'Revenue', analytics:'Analytics', 'audit-log':'Audit Log', rooms:'Rooms', settings:'Settings', help:'Help Center' };
-        var subtitles = { bookings:'Manage all reservations', 'shift-notes':'Handover notes between shifts', availability:'Check room availability', calendar:'14-day booking overview', revenue:'Financial analytics', analytics:'Booking trends & insights', 'audit-log':'Activity & change history', rooms:'Manage room types & pricing', settings:'Customize your experience', help:'Documentation and support' };
+        var titles = { overview:'Overview', bookings:'Bookings', 'shift-notes':'Shift Notes', availability:'Availability', calendar:'Calendar', revenue:'Revenue', analytics:'Analytics', 'audit-log':'Audit Log', rooms:'Rooms', settings:'Settings', help:'Help' };
+        var subtitles = { overview:'At-a-glance dashboard', bookings:'Manage all reservations', 'shift-notes':'Handover notes between shifts', availability:'Check room availability', calendar:'14-day booking overview', revenue:'Financial reports', analytics:'Trends & insights', 'audit-log':'Activity & change history', rooms:'Manage room types & pricing', settings:'Customize your experience', help:'Guides & support' };
         document.getElementById('topbarTitle').textContent = titles[tabName] || 'Dashboard';
         document.getElementById('topbarSubtitle').textContent = subtitles[tabName] || '';
         if (isMobile) { sidebar.classList.remove('mobile-open'); sidebarOverlay.classList.remove('show'); }
+        if (tabName === 'overview') window.loadOverview();
         if (tabName === 'analytics') window.loadAnalytics();
         if (tabName === 'audit-log') window.loadAuditLog();
         if (tabName === 'shift-notes') window.loadShiftNotes();
@@ -1531,9 +1551,9 @@
         if (e.ctrlKey && e.key === 'r') { e.preventDefault(); loadBookings(); }
         if (e.key === 'Escape') { window.closeBookingDetail(); window.closePaymentModal(); window.closeGuestHistory(); window.closeWaModal(); }
         if (!e.ctrlKey && !e.altKey && !e.metaKey && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA' && document.activeElement.tagName !== 'SELECT') {
-          var tabs = ['bookings','shift-notes','availability','calendar','revenue','analytics','audit-log'];
+          var tabs = ['overview','bookings','shift-notes','availability','calendar','revenue','analytics'];
           var num = parseInt(e.key, 10);
-          if (num >= 1 && num <= 5) { window.switchTab(tabs[num - 1]); }
+          if (num >= 1 && num <= 7) { window.switchTab(tabs[num - 1]); }
         }
       });
 
@@ -1556,7 +1576,6 @@
         statActive: document.getElementById('statActive'),
         statCancelled: document.getElementById('statCancelled'),
         statCheckins: document.getElementById('statCheckins'),
-        occDate: document.getElementById('occDate'),
         availContent: document.getElementById('availContent'),
         roomMgmtContent: document.getElementById('roomMgmtContent'),
         roleBadge: null
@@ -1680,10 +1699,6 @@
       els.statusFilter.addEventListener('change', resetPagination);
       els.adminDateFilter.addEventListener('change', resetPagination);
       els.availDateFilter.addEventListener('change', renderAvailability);
-      if (els.occDate) {
-        els.occDate.value = new Date().toISOString().substring(0, 10);
-        els.occDate.addEventListener('change', calcOccupancy);
-      }
       var revFrom = document.getElementById('revDateFrom');
       var revTo = document.getElementById('revDateTo');
       if (revFrom) {
@@ -1754,19 +1769,95 @@
       function showMessage() { els.successMsg.classList.add('show'); setTimeout(function() { els.successMsg.classList.remove('show'); }, 3000); }
 
       function updateStats(bookings) {
-        if (els.statTotal) els.statTotal.textContent = totalBookingCount || bookings.length;
-        if (els.statToday) els.statToday.textContent = bookings.filter(function(b) { return isToday(b.created_at); }).length;
-        if (els.statActive) els.statActive.textContent = bookings.filter(function(b) { return b.status === 'active'; }).length;
         var todayStr = new Date().toISOString().substring(0, 10);
-        var checkins = bookings.filter(function(b) { return String(b.check_in).substring(0, 10) === todayStr; }).length;
-        var checkouts = bookings.filter(function(b) { return String(b.check_out).substring(0, 10) === todayStr; }).length;
+        var total = totalBookingCount || bookings.length;
+        var active = bookings.filter(function(b) { return b.status === 'active'; }).length;
+        var pending = bookings.filter(function(b) { return b.status === 'pending'; }).length;
+        var todayBookings = bookings.filter(function(b) { return isToday(b.created_at); }).length;
+        var checkouts = bookings.filter(function(b) { return String(b.check_out).substring(0, 10) === todayStr && b.status === 'active'; }).length;
         var arrivals = bookings.filter(function(b) { return String(b.check_in).substring(0, 10) === todayStr && b.status === 'active'; }).length;
+        
+        // Update old stats if elements exist
+        if (els.statTotal) els.statTotal.textContent = total;
+        if (els.statToday) els.statToday.textContent = todayBookings;
+        if (els.statActive) els.statActive.textContent = active;
         var elCheckouts = document.getElementById('statCheckouts');
         var elArrivals = document.getElementById('statArrivals');
         var elPending = document.getElementById('statPending');
         if (elCheckouts) elCheckouts.textContent = checkouts;
         if (elArrivals) elArrivals.textContent = arrivals;
-        if (elPending) elPending.textContent = bookings.filter(function(b) { return b.status === 'pending'; }).length;
+        if (elPending) elPending.textContent = pending;
+        
+        // Update Overview stats
+        var overviewTotal = document.getElementById('overviewTotal');
+        var overviewActive = document.getElementById('overviewActive');
+        var overviewPending = document.getElementById('overviewPending');
+        var overviewCheckouts = document.getElementById('overviewCheckouts');
+        var overviewArrivals = document.getElementById('overviewArrivals');
+        var overviewTodayBookings = document.getElementById('overviewTodayBookings');
+        var overviewRevenue = document.getElementById('overviewRevenue');
+        
+        if (overviewTotal) overviewTotal.textContent = total;
+        if (overviewActive) overviewActive.textContent = active;
+        if (overviewPending) overviewPending.textContent = pending;
+        if (overviewCheckouts) overviewCheckouts.textContent = checkouts;
+        if (overviewArrivals) overviewArrivals.textContent = arrivals;
+        if (overviewTodayBookings) overviewTodayBookings.textContent = todayBookings;
+        
+        // Calculate this month's revenue
+        if (overviewRevenue) {
+          var roomMap = {};
+          for (var i = 0; i < allRooms.length; i++) { roomMap[allRooms[i].id] = allRooms[i]; }
+          var monthStart = todayStr.substring(0, 8) + '01';
+          var monthRev = 0;
+          for (var i = 0; i < bookings.length; i++) {
+            var b = bookings[i];
+            if (b.status === 'cancelled') continue;
+            var ci = String(b.check_in).substring(0, 10);
+            if (ci < monthStart || ci > todayStr) continue;
+            var co = String(b.check_out).substring(0, 10);
+            var nights = b.nights || Math.max(1, Math.ceil((new Date(co) - new Date(ci)) / 86400000));
+            var price = b.price_at_booking || (roomMap[b.room_id] ? (roomMap[b.room_id].price || 0) : 0);
+            monthRev += price * nights;
+          }
+          overviewRevenue.textContent = '\u20B9' + monthRev.toLocaleString('en-IN');
+        }
+      }
+
+      window.loadOverview = function() {
+        // Set today's date for occupancy
+        var occDateOverview = document.getElementById('occDateOverview');
+        if (occDateOverview) {
+          occDateOverview.value = new Date().toISOString().substring(0, 10);
+          occDateOverview.addEventListener('change', calcOccupancyOverview);
+        }
+        calcOccupancyOverview();
+      };
+
+      function calcOccupancyOverview() {
+        var dateInput = document.getElementById('occDateOverview');
+        if (!dateInput) return;
+        var selDate = dateInput.value || new Date().toISOString().substring(0, 10);
+        var totalRooms = 0;
+        for (var i = 0; i < allRooms.length; i++) { totalRooms += (allRooms[i].total_rooms || 0); }
+        var booked = 0;
+        for (var i = 0; i < allBookings.length; i++) {
+          var b = allBookings[i];
+          if (b.status !== 'active') continue;
+          var bCi = String(b.check_in).substring(0, 10);
+          var bCo = String(b.check_out).substring(0, 10);
+          if (bCi <= selDate && bCo > selDate) booked++;
+        }
+        var avail = totalRooms - booked;
+        var pct = totalRooms > 0 ? Math.round((booked / totalRooms) * 100) : 0;
+        var occTotal = document.getElementById('occTotal');
+        var occBooked = document.getElementById('occBooked');
+        var occAvail = document.getElementById('occAvail');
+        var occPctEl = document.getElementById('occPct');
+        if (occTotal) occTotal.textContent = totalRooms;
+        if (occBooked) occBooked.textContent = booked;
+        if (occAvail) occAvail.textContent = avail;
+        if (occPctEl) occPctEl.textContent = pct + '%';
       }
 
       function updateNotificationBadge() {
@@ -2197,7 +2288,7 @@
           allRooms = responses[1].data || [];
 
           updateStats(allBookings);
-          calcOccupancy();
+          calcOccupancyOverview();
           renderNewBookings();
           renderTodayBookings();
           filterAndRender();
@@ -2250,28 +2341,6 @@
         window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(document.getElementById('waMsgText').value), '_blank', 'noopener,noreferrer');
       };
 
-      function calcOccupancy() {
-        var dateInput = els.occDate;
-        if (!dateInput) return;
-        var selDate = dateInput.value || new Date().toISOString().substring(0, 10);
-        var totalRooms = 0;
-        for (var i = 0; i < allRooms.length; i++) { totalRooms += (allRooms[i].total_rooms || 0); }
-        var booked = 0;
-        for (var i = 0; i < allBookings.length; i++) {
-          var b = allBookings[i];
-          if (b.status !== 'active') continue;
-          var bCi = String(b.check_in).substring(0, 10);
-          var bCo = String(b.check_out).substring(0, 10);
-          if (bCi <= selDate && bCo > selDate) booked++;
-        }
-        var avail = totalRooms - booked;
-        var pct = totalRooms > 0 ? Math.round((booked / totalRooms) * 100) : 0;
-        document.getElementById('occTotal').textContent = totalRooms;
-        document.getElementById('occBooked').textContent = booked;
-        document.getElementById('occAvail').textContent = avail;
-        document.getElementById('occPct').textContent = pct + '%';
-      }
-
       window.updateBookingStatus = function(id, status) {
         if (currentUserRole !== 'manager') { showToast('Unauthorized: only managers can cancel bookings', 'error'); return; }
         if (status === 'cancelled' && !confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) return;
@@ -2297,17 +2366,20 @@
         for (var i = 0; i < allRooms.length; i++) { roomMap[allRooms[i].id] = allRooms[i]; }
         for (var i = 0; i < allBookings.length; i++) {
           var b = allBookings[i];
-          if (b.status !== 'active') continue;
+          // Include both active and completed bookings (not cancelled)
+          if (b.status === 'cancelled') continue;
           var ci = String(b.check_in).substring(0, 10);
           var co = String(b.check_out).substring(0, 10);
           var nights = b.nights || Math.max(1, Math.ceil((new Date(co) - new Date(ci)) / 86400000));
           var price = b.price_at_booking || (roomMap[b.room_id] ? (roomMap[b.room_id].price || 0) : 0);
           var rev = price * nights;
-          if (from && to) { if (ci < from || ci > to) continue; }
+          // Filter by booking date (created_at)
+          var bookedDate = b.created_at ? String(b.created_at).substring(0, 10) : ci;
+          if (from && to) { if (bookedDate < from || bookedDate > to) continue; }
           totalRev += rev;
           count++;
-          if (ci === todayStr) todayRev += rev;
-          if (ci >= monthStart) monthRev += rev;
+          if (bookedDate === todayStr) todayRev += rev;
+          if (bookedDate >= monthStart) monthRev += rev;
         }
         document.getElementById('revTotal').textContent = '\u20B9' + totalRev.toLocaleString('en-IN');
         document.getElementById('revToday').textContent = '\u20B9' + todayRev.toLocaleString('en-IN');
@@ -2806,35 +2878,58 @@
 
       /* ---- ANALYTICS ---- */
       window.loadAnalytics = function() {
-        var days = parseInt(document.getElementById('analyticsDays').value, 10) || 30;
-        supabase.rpc('get_booking_trend', { p_days: days }).then(function(r) {
-          if (r.error) { Logger.error('Trend error:', r.error); return; }
-          renderAnalyticsTrend(r.data || []);
-        }).catch(function(err) { Logger.error('Trend error:', err); });
-        supabase.rpc('get_repeat_guests').then(function(r) {
-          if (r.error) { Logger.error('Repeat guests error:', r.error); return; }
-          renderRepeatGuests(r.data || []);
-        }).catch(function(err) { Logger.error('Repeat guests error:', err); });
+        renderAnalyticsTrend();
+        renderRepeatGuests();
         renderSourceBreakdown();
         renderAnalyticsStats();
       };
 
-      function renderAnalyticsTrend(data) {
+      function renderAnalyticsTrend() {
         var container = document.getElementById('analyticsTrendChart');
         if (!container) return;
-        if (!data.length) { container.innerHTML = '<p class="empty">No data</p>'; return; }
-        var maxBookings = Math.max.apply(null, data.map(function(d) { return d.bookings || 0; })) || 1;
+        if (!allBookings.length) { container.innerHTML = '<p class="empty">No booking data</p>'; return; }
+        
+        var days = parseInt(document.getElementById('analyticsDays').value, 10) || 30;
+        var today = new Date();
+        var dailyData = {};
+        
+        // Initialize last N days
+        for (var d = days - 1; d >= 0; d--) {
+          var date = new Date(today);
+          date.setDate(date.getDate() - d);
+          var dateStr = date.toISOString().substring(0, 10);
+          dailyData[dateStr] = 0;
+        }
+        
+        // Count bookings per day based on created_at
+        for (var i = 0; i < allBookings.length; i++) {
+          var b = allBookings[i];
+          var bookedDate = b.created_at ? String(b.created_at).substring(0, 10) : String(b.check_in).substring(0, 10);
+          if (dailyData.hasOwnProperty(bookedDate)) {
+            dailyData[bookedDate]++;
+          }
+        }
+        
+        var dates = Object.keys(dailyData).sort();
+        var maxBookings = Math.max(1, Math.max.apply(null, Object.values(dailyData)));
         var svgW = 500, svgH = 160, pad = 20;
-        var points = data.map(function(d, i) {
-          var x = pad + (i / (data.length - 1)) * (svgW - 2 * pad);
-          var y = svgH - pad - ((d.bookings || 0) / maxBookings) * (svgH - 2 * pad);
+        
+        var points = dates.map(function(date, i) {
+          var x = pad + (i / (dates.length - 1)) * (svgW - 2 * pad);
+          var y = svgH - pad - ((dailyData[date] || 0) / maxBookings) * (svgH - 2 * pad);
           return x + ',' + y;
         });
-        var areaPoints = points.join(' ') + ' ' + (pad + ((data.length - 1) / (data.length - 1)) * (svgW - 2 * pad)) + ',' + (svgH - pad) + ' ' + pad + ',' + (svgH - pad);
+        
+        var areaPoints = points.join(' ') + ' ' + (pad + ((dates.length - 1) / (dates.length - 1)) * (svgW - 2 * pad)) + ',' + (svgH - pad) + ' ' + pad + ',' + (svgH - pad);
         var html = '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" preserveAspectRatio="none">';
         html += '<polygon class="line-area" points="' + areaPoints + '"/>';
         html += '<polyline points="' + points.join(' ') + '"/>';
         html += '</svg>';
+        html += '<div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.7rem;color:var(--text-muted);">';
+        html += '<span>' + dates[0].substring(5) + '</span>';
+        html += '<span>' + dates[Math.floor(dates.length/2)].substring(5) + '</span>';
+        html += '<span>' + dates[dates.length-1].substring(5) + '</span>';
+        html += '</div>';
         container.innerHTML = html;
       };
 
@@ -2849,23 +2944,55 @@
         var total = allBookings.length || 1;
         var colors = ['#d4a843', '#22c55e', '#60a5fa', '#f87171', '#fbbf24', '#a78bfa', '#34d399', '#fb923c'];
         var html = '';
-        var i = 0;
-        for (var s in sources) {
+        var sourceNames = Object.keys(sources).sort(function(a, b) { return sources[b] - sources[a]; });
+        sourceNames.forEach(function(s, idx) {
           var pct = Math.round((sources[s] / total) * 100);
-          html += '<div class="analytics-stat"><span class="as-label">' + sanitize(s) + '</span><span class="as-value">' + sources[s] + ' (' + pct + '%)</span></div>';
-          i++;
-        }
+          html += '<div class="analytics-stat"><span class="as-label" style="display:flex;align-items:center;gap:6px;">';
+          html += '<span style="width:10px;height:10px;border-radius:2px;background:' + colors[idx % colors.length] + ';"></span>' + sanitize(s) + '</span>';
+          html += '<span class="as-value">' + sources[s] + ' (' + pct + '%)</span></div>';
+        });
         if (!html) html = '<p class="empty">No data</p>';
         container.innerHTML = html;
       };
 
-      function renderRepeatGuests(data) {
+      function renderRepeatGuests() {
         var container = document.getElementById('analyticsRepeatGuests');
         if (!container) return;
-        if (!data.length) { container.innerHTML = '<p class="empty">No repeat guests found</p>'; return; }
+        
+        // Calculate repeat guests from client-side data
+        var guestData = {};
+        var roomMap = {};
+        for (var i = 0; i < allRooms.length; i++) { roomMap[allRooms[i].id] = allRooms[i]; }
+        
+        for (var i = 0; i < allBookings.length; i++) {
+          var b = allBookings[i];
+          if (b.status === 'cancelled') continue;
+          var phone = b.phone;
+          if (!phone) continue;
+          if (!guestData[phone]) {
+            guestData[phone] = { name: b.customer_name, count: 0, total: 0 };
+          }
+          guestData[phone].count++;
+          var ci = String(b.check_in).substring(0, 10);
+          var co = String(b.check_out).substring(0, 10);
+          var nights = b.nights || Math.max(1, Math.ceil((new Date(co) - new Date(ci)) / 86400000));
+          var price = b.price_at_booking || (roomMap[b.room_id] ? (roomMap[b.room_id].price || 0) : 0);
+          guestData[phone].total += price * nights;
+        }
+        
+        // Filter for repeat guests (2+ visits)
+        var repeatGuests = Object.keys(guestData)
+          .filter(function(phone) { return guestData[phone].count >= 2; })
+          .map(function(phone) { return { phone: phone, name: guestData[phone].name, count: guestData[phone].count, total: guestData[phone].total }; })
+          .sort(function(a, b) { return b.count - a.count || b.total - a.total; })
+          .slice(0, 10);
+        
+        if (!repeatGuests.length) { container.innerHTML = '<p class="empty">No repeat guests yet</p>'; return; }
+        
         var html = '';
-        data.slice(0, 10).forEach(function(g) {
-          html += '<div class="analytics-stat"><span class="as-label">' + sanitize(g.guest_name) + ' <span style="color:var(--text-muted);font-size:0.72rem;">' + sanitize(g.phone) + '</span></span><span class="as-value">' + g.visit_count + ' visits \u2022 \u20B9' + (g.total_spent || 0).toLocaleString() + '</span></div>';
+        repeatGuests.forEach(function(g) {
+          var vipLabel = g.count >= 5 ? ' \u2B50 VIP' : '';
+          html += '<div class="analytics-stat"><span class="as-label">' + sanitize(g.name || 'Guest') + ' <span style="color:var(--text-muted);font-size:0.72rem;">' + sanitize(g.phone) + '</span></span><span class="as-value">' + g.count + ' visits \u2022 \u20B9' + g.total.toLocaleString() + vipLabel + '</span></div>';
         });
         container.innerHTML = html;
       };
@@ -2873,22 +3000,48 @@
       function renderAnalyticsStats() {
         var container = document.getElementById('analyticsStats');
         if (!container) return;
+        
         var active = allBookings.filter(function(b) { return b.status === 'active'; }).length;
+        var completed = allBookings.filter(function(b) { return b.status === 'completed'; }).length;
         var cancelled = allBookings.filter(function(b) { return b.status === 'cancelled'; }).length;
+        var pending = allBookings.filter(function(b) { return b.status === 'pending'; }).length;
         var total = allBookings.length;
         var cancelRate = total > 0 ? Math.round((cancelled / total) * 100) : 0;
+        
+        // Calculate average stay from completed bookings
+        var completedBookings = allBookings.filter(function(b) { return b.status === 'completed'; });
         var avgNights = 0;
-        if (active > 0) {
+        if (completedBookings.length > 0) {
           var totalNights = 0;
-          allBookings.filter(function(b) { return b.status === 'active'; }).forEach(function(b) { totalNights += (b.nights || 1); });
-          avgNights = Math.round(totalNights / active * 10) / 10;
+          completedBookings.forEach(function(b) { totalNights += (b.nights || 1); });
+          avgNights = Math.round((totalNights / completedBookings.length) * 10) / 10;
         }
+        
+        // Calculate average room rate
+        var roomMap = {};
+        for (var i = 0; i < allRooms.length; i++) { roomMap[allRooms[i].id] = allRooms[i]; }
+        var totalRevenue = 0;
+        var payingBookings = 0;
+        allBookings.forEach(function(b) {
+          if (b.status === 'cancelled') return;
+          var ci = String(b.check_in).substring(0, 10);
+          var co = String(b.check_out).substring(0, 10);
+          var nights = b.nights || Math.max(1, Math.ceil((new Date(co) - new Date(ci)) / 86400000));
+          var price = b.price_at_booking || (roomMap[b.room_id] ? (roomMap[b.room_id].price || 0) : 0);
+          totalRevenue += price * nights;
+          payingBookings++;
+        });
+        var avgRate = payingBookings > 0 ? Math.round(totalRevenue / payingBookings) : 0;
+        
         var html = '';
         html += '<div class="analytics-stat"><span class="as-label">Total Bookings</span><span class="as-value">' + total + '</span></div>';
         html += '<div class="analytics-stat"><span class="as-label">Active</span><span class="as-value" style="color:var(--green);">' + active + '</span></div>';
+        html += '<div class="analytics-stat"><span class="as-label">Completed</span><span class="as-value" style="color:var(--blue);">' + completed + '</span></div>';
+        html += '<div class="analytics-stat"><span class="as-label">Pending</span><span class="as-value" style="color:var(--amber);">' + pending + '</span></div>';
         html += '<div class="analytics-stat"><span class="as-label">Cancelled</span><span class="as-value" style="color:var(--red);">' + cancelled + '</span></div>';
         html += '<div class="analytics-stat"><span class="as-label">Cancellation Rate</span><span class="as-value">' + cancelRate + '%</span></div>';
         html += '<div class="analytics-stat"><span class="as-label">Avg Stay</span><span class="as-value">' + avgNights + ' nights</span></div>';
+        html += '<div class="analytics-stat"><span class="as-label">Avg Room Rate</span><span class="as-value">\u20B9' + avgRate.toLocaleString() + '</span></div>';
         container.innerHTML = html;
       };
 
@@ -2896,48 +3049,94 @@
       function renderRevenueBarChart() {
         var container = document.getElementById('revenueBarChart');
         if (!container) return;
-        var days = 30;
-        supabase.rpc('get_booking_trend', { p_days: days }).then(function(r) {
-          if (r.error) return;
-          var data = r.data || [];
-          var maxRev = Math.max.apply(null, data.map(function(d) { return parseFloat(d.revenue) || 0; })) || 1;
-          var html = '';
-          data.forEach(function(d) {
-            var h = Math.max(2, ((parseFloat(d.revenue) || 0) / maxRev) * 160);
-            var dateLabel = String(d.date).substring(5);
-            html += '<div class="bar" style="height:' + h + 'px;"><span class="bar-tooltip">\u20B9' + (parseFloat(d.revenue) || 0).toLocaleString() + '<br>' + dateLabel + '</span></div>';
-          });
-          container.innerHTML = html;
-        }).catch(function() {});
+        if (!allBookings.length) { container.innerHTML = '<p class="empty">No booking data</p>'; return; }
+        
+        var roomMap = {};
+        for (var i = 0; i < allRooms.length; i++) { roomMap[allRooms[i].id] = allRooms[i]; }
+        
+        // Calculate daily revenue for last 30 days
+        var today = new Date();
+        var dailyData = {};
+        for (var d = 29; d >= 0; d--) {
+          var date = new Date(today);
+          date.setDate(date.getDate() - d);
+          var dateStr = date.toISOString().substring(0, 10);
+          dailyData[dateStr] = 0;
+        }
+        
+        // Sum revenue by day based on booking creation date
+        for (var i = 0; i < allBookings.length; i++) {
+          var b = allBookings[i];
+          if (b.status === 'cancelled') continue;
+          var bookedDate = b.created_at ? String(b.created_at).substring(0, 10) : String(b.check_in).substring(0, 10);
+          if (!dailyData.hasOwnProperty(bookedDate)) continue;
+          var ci = String(b.check_in).substring(0, 10);
+          var co = String(b.check_out).substring(0, 10);
+          var nights = b.nights || Math.max(1, Math.ceil((new Date(co) - new Date(ci)) / 86400000));
+          var price = b.price_at_booking || (roomMap[b.room_id] ? (roomMap[b.room_id].price || 0) : 0);
+          dailyData[bookedDate] += price * nights;
+        }
+        
+        var dates = Object.keys(dailyData).sort();
+        var maxRev = Math.max(1, Math.max.apply(null, Object.values(dailyData)));
+        var html = '';
+        dates.forEach(function(date) {
+          var rev = dailyData[date] || 0;
+          var h = Math.max(2, (rev / maxRev) * 160);
+          var dateLabel = date.substring(5);
+          html += '<div class="bar" style="height:' + h + 'px;"><span class="bar-tooltip">\u20B9' + rev.toLocaleString() + '<br>' + dateLabel + '</span></div>';
+        });
+        container.innerHTML = html;
       };
 
       function renderRevenuePieChart() {
         var container = document.getElementById('revenuePieChart');
         if (!container) return;
-        var from = document.getElementById('revDateFrom').value;
-        var to = document.getElementById('revDateTo').value;
-        supabase.rpc('get_revenue_by_room', { p_from: from || null, p_to: to || null }).then(function(r) {
-          if (r.error) return;
-          var data = r.data || [];
-          var totalRev = 0;
-          data.forEach(function(d) { totalRev += parseFloat(d.total_revenue) || 0; });
-          if (!totalRev) { container.innerHTML = '<p class="empty">No revenue data</p>'; return; }
-          var colors = ['#d4a843', '#22c55e', '#60a5fa', '#f87171', '#fbbf24', '#a78bfa'];
-          var gradientParts = [];
-          var cumulative = 0;
-          data.forEach(function(d, i) {
-            var pct = ((parseFloat(d.total_revenue) || 0) / totalRev) * 100;
-            gradientParts.push(colors[i % colors.length] + ' ' + cumulative + '% ' + (cumulative + pct) + '%');
-            cumulative += pct;
-          });
-          var html = '<div class="pie-chart" style="background: conic-gradient(' + gradientParts.join(', ') + ');"></div>';
-          html += '<div class="pie-legend">';
-          data.forEach(function(d, i) {
-            html += '<div class="pie-legend-item"><span class="pie-legend-color" style="background:' + colors[i % colors.length] + ';"></span><span>' + sanitize(d.room_name) + ' \u2022 \u20B9' + (parseFloat(d.total_revenue) || 0).toLocaleString() + '</span></div>';
-          });
-          html += '</div>';
-          container.innerHTML = html;
-        }).catch(function() {});
+        if (!allBookings.length) { container.innerHTML = '<p class="empty">No booking data</p>'; return; }
+        
+        var roomMap = {};
+        for (var i = 0; i < allRooms.length; i++) { roomMap[allRooms[i].id] = allRooms[i]; }
+        
+        // Calculate revenue by room type
+        var roomRevenue = {};
+        var totalRev = 0;
+        
+        for (var i = 0; i < allBookings.length; i++) {
+          var b = allBookings[i];
+          if (b.status === 'cancelled') continue;
+          var roomName = roomMap[b.room_id] ? roomMap[b.room_id].name : 'Unknown';
+          var ci = String(b.check_in).substring(0, 10);
+          var co = String(b.check_out).substring(0, 10);
+          var nights = b.nights || Math.max(1, Math.ceil((new Date(co) - new Date(ci)) / 86400000));
+          var price = b.price_at_booking || (roomMap[b.room_id] ? (roomMap[b.room_id].price || 0) : 0);
+          var rev = price * nights;
+          if (!roomRevenue[roomName]) roomRevenue[roomName] = 0;
+          roomRevenue[roomName] += rev;
+          totalRev += rev;
+        }
+        
+        if (!totalRev) { container.innerHTML = '<p class="empty">No revenue data</p>'; return; }
+        
+        var colors = ['#d4a843', '#22c55e', '#60a5fa', '#f87171', '#fbbf24', '#a78bfa', '#34d399', '#fb923c'];
+        var roomNames = Object.keys(roomRevenue).sort(function(a, b) { return roomRevenue[b] - roomRevenue[a]; });
+        var gradientParts = [];
+        var cumulative = 0;
+        
+        roomNames.forEach(function(name, idx) {
+          var rev = roomRevenue[name];
+          var pct = (rev / totalRev) * 100;
+          gradientParts.push(colors[idx % colors.length] + ' ' + cumulative + '% ' + (cumulative + pct) + '%');
+          cumulative += pct;
+        });
+        
+        var html = '<div class="pie-chart" style="background: conic-gradient(' + gradientParts.join(', ') + ');"></div>';
+        html += '<div class="pie-legend">';
+        roomNames.forEach(function(name, idx) {
+          var pct = Math.round((roomRevenue[name] / totalRev) * 100);
+          html += '<div class="pie-legend-item"><span class="pie-legend-color" style="background:' + colors[idx % colors.length] + ';"></span><span>' + sanitize(name) + ' \u2022 \u20B9' + roomRevenue[name].toLocaleString() + ' (' + pct + '%)</span></div>';
+        });
+        html += '</div>';
+        container.innerHTML = html;
       };
 
       /* ---- OTA IMPORT ---- */
