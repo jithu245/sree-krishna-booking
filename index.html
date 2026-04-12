@@ -1684,32 +1684,43 @@ function getRoomImage(name) {
           return;
         }
 
-        supabase.rpc('get_room_availability', {
-          p_check_in: ci,
-          p_check_out: co
-        }).then(function(r) {
+        supabase.from('bookings').select('room_id').then(function(r) {
           if (r.error) throw r.error;
-          var availRooms = r.data || [];
+          var bookedRoomIds = [];
+          if (r.data) {
+            r.data.forEach(function(b) {
+              var bci = b.check_in ? b.check_in.substring(0, 10) : '';
+              var bco = b.check_out ? b.check_out.substring(0, 10) : '';
+              if ((ci >= bci && ci < bco) || (co > bci && co <= bco) || (ci <= bci && co >= bco)) {
+                bookedRoomIds.push(b.room_id);
+              }
+            });
+          }
           renderRooms(allRooms);
-
           var roomsSection = document.getElementById('rooms');
           if (roomsSection) {
             roomsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-
           var hasAvail = false;
-          for (var i = 0; i < availRooms.length; i++) {
-            if (availRooms[i].available_count > 0) { hasAvail = true; break; }
+          for (var i = 0; i < allRooms.length; i++) {
+            var room = allRooms[i];
+            if (room.total_rooms && room.total_rooms > 0) {
+              var bookedCount = bookedRoomIds.filter(function(id) { return id === room.id; }).length;
+              if ((room.total_rooms - bookedCount) > 0) { hasAvail = true; break; }
+            } else if (!room.total_rooms) {
+              hasAvail = true; break;
+            }
           }
           if (hasAvail) {
-            statusEl.textContent = 'Showing available rooms for ' + sanitize(ci) + ' → ' + sanitize(co);
+            statusEl.textContent = 'Showing available rooms for ' + sanitize(ci) + ' to ' + sanitize(co);
             statusEl.className = 'search-status active';
           } else {
             statusEl.textContent = 'No rooms available for selected dates';
             statusEl.className = 'search-status';
           }
         }).catch(function(err) {
-          statusEl.textContent = '[ERR-1002] Error checking availability. Please try again.';
+          console.error('Availability check error:', err);
+          statusEl.textContent = 'Unable to check availability';
           statusEl.className = 'search-status';
           renderRooms(allRooms);
         }).finally(function() {
