@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0a0e1a">
+  <meta name="theme-color" content="#0a0a0a">
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://chjwvpvsxeczvwqyouiw.supabase.co https://*.supabase.io https://cdn.jsdelivr.net; img-src 'self' data: https:; frame-src https://www.google.com;">
   <title>Admin — Sree Krishna Residency</title>
   <link rel="icon" type="image/webp" href="images/Outdoors%20photo%201.webp">
@@ -37,27 +37,27 @@
       --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px; --radius-xl: 18px;
     }
     [data-theme="dark"] {
-      --bg: #0a0e1a; --bg-secondary: #111827; --bg-elevated: #151d2e;
-      --text: #e8ecf1; --text-secondary: #94a3b8; --text-muted: #64748b;
-      --card: #111827; --card-hover: #1a2332;
-      --border: #1e293b; --border-light: #1a2332;
-      --input-bg: #0d1320; --input-border: #2d3a4f;
-      --header-text: #f1f5f9;
+      --bg: #0a0a0a; --bg-secondary: #141414; --bg-elevated: #1a1a1a;
+      --text: #e8e8e8; --text-secondary: #a0a0a0; --text-muted: #666666;
+      --card: #141414; --card-hover: #1e1e1e;
+      --border: #2a2a2a; --border-light: #222222;
+      --input-bg: #111111; --input-border: #333333;
+      --header-text: #f1f1f1;
       --accent: #d4a843; --accent-dark: #b8922e; --accent-light: #e2b94f; --accent-bg: rgba(212,168,67,0.1);
       --green: #22c55e; --green-bg: rgba(34,197,94,0.1);
       --red: #f87171; --red-bg: rgba(248,113,113,0.1);
       --blue: #60a5fa; --blue-bg: rgba(96,165,250,0.1);
       --amber: #fbbf24; --amber-bg: rgba(251,191,36,0.1);
-      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.35);
-      --shadow-lg: 0 12px 32px rgba(0,0,0,0.4);
-      --shadow-xl: 0 20px 48px rgba(0,0,0,0.5);
-      --table-header-bg: #111827; --table-row-hover: #1a2332;
+      --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.45);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.5);
+      --shadow-xl: 0 20px 48px rgba(0,0,0,0.6);
+      --table-header-bg: #141414; --table-row-hover: #1e1e1e;
       --success-bg: rgba(34,197,94,0.1); --error-bg: rgba(248,113,113,0.1);
-      --toast-bg: #151d2e; --toast-border: #2d3a4f;
-      --modal-bg: #151d2e; --modal-overlay: rgba(0,0,0,0.75);
-      --cal-tooltip-bg: #1e293b;
-      --login-bg: linear-gradient(135deg, #020617 0%, #0a0e1a 100%);
+      --toast-bg: #1a1a1a; --toast-border: #2a2a2a;
+      --modal-bg: #1a1a1a; --modal-overlay: rgba(0,0,0,0.8);
+      --cal-tooltip-bg: #222222;
+      --login-bg: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
       --pending-color: #fbbf24;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -514,14 +514,11 @@
       <button class="nav-item" data-tab="calendar" onclick="window.switchTab('calendar')">
         <i class="fas fa-calendar-alt"></i><span class="nav-label">Calendar</span>
       </button>
-      <button class="nav-item" data-tab="revenue" onclick="window.switchTab('revenue')">
+      <button class="nav-item" id="revenueTab" data-tab="revenue" onclick="window.switchTab('revenue')" style="display:none;">
         <i class="fas fa-rupee-sign"></i><span class="nav-label">Revenue</span>
       </button>
-      <button class="nav-item" data-tab="analytics" onclick="window.switchTab('analytics')">
+      <button class="nav-item" id="analyticsTab" data-tab="analytics" onclick="window.switchTab('analytics')" style="display:none;">
         <i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span>
-      </button>
-      <button class="nav-item" id="auditLogTab" data-tab="audit-log" onclick="window.switchTab('audit-log')" style="display:none;">
-        <i class="fas fa-clipboard-list"></i><span class="nav-label">Audit Log</span>
       </button>
       <button class="nav-item" id="roomsTab" data-tab="rooms" onclick="window.switchTab('rooms')">
         <i class="fas fa-cog"></i><span class="nav-label">Rooms</span>
@@ -643,7 +640,7 @@
           <div style="display:flex;gap:12px;flex-wrap:wrap;">
             <button class="btn-primary" onclick="window.switchTab('bookings')"><i class="fas fa-calendar-check"></i> View All Bookings</button>
             <button class="btn-secondary" onclick="window.switchTab('availability')"><i class="fas fa-bed"></i> Check Availability</button>
-            <button class="btn-secondary" onclick="window.switchTab('revenue')"><i class="fas fa-rupee-sign"></i> Revenue Report</button>
+            <button class="btn-secondary" id="quickRevenueBtn" onclick="window.switchTab('revenue')"><i class="fas fa-rupee-sign"></i> Revenue Report</button>
           </div>
         </div>
       </div>
@@ -1485,20 +1482,24 @@
       });
       
       window.switchTab = function(tabName) {
+        var restrictedTabs = ['revenue', 'analytics'];
+        if (restrictedTabs.indexOf(tabName) !== -1 && currentUserRole !== 'manager') {
+          showToast('Access denied: managers only', 'error');
+          return;
+        }
         document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
         var navItem = document.querySelector('.nav-item[data-tab="' + tabName + '"]');
         if (navItem) navItem.classList.add('active');
         document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
         var target = document.getElementById('tab-' + tabName);
         if (target) target.classList.add('active');
-        var titles = { overview:'Overview', bookings:'Bookings', 'shift-notes':'Shift Notes', availability:'Availability', calendar:'Calendar', revenue:'Revenue', analytics:'Analytics', 'audit-log':'Audit Log', rooms:'Rooms', settings:'Settings', help:'Help' };
-        var subtitles = { overview:'At-a-glance dashboard', bookings:'Manage all reservations', 'shift-notes':'Handover notes between shifts', availability:'Check room availability', calendar:'14-day booking overview', revenue:'Financial reports', analytics:'Trends & insights', 'audit-log':'Activity & change history', rooms:'Manage room types & pricing', settings:'Customize your experience', help:'Guides & support' };
+        var titles = { overview:'Overview', bookings:'Bookings', 'shift-notes':'Shift Notes', availability:'Availability', calendar:'Calendar', revenue:'Revenue', analytics:'Analytics', rooms:'Rooms', settings:'Settings', help:'Help' };
+        var subtitles = { overview:'At-a-glance dashboard', bookings:'Manage all reservations', 'shift-notes':'Handover notes between shifts', availability:'Check room availability', calendar:'14-day booking overview', revenue:'Financial reports', analytics:'Trends & insights', rooms:'Manage room types & pricing', settings:'Customize your experience', help:'Guides & support' };
         document.getElementById('topbarTitle').textContent = titles[tabName] || 'Dashboard';
         document.getElementById('topbarSubtitle').textContent = subtitles[tabName] || '';
         if (isMobile) { sidebar.classList.remove('mobile-open'); sidebarOverlay.classList.remove('show'); }
         if (tabName === 'overview') window.loadOverview();
         if (tabName === 'analytics') window.loadAnalytics();
-        if (tabName === 'audit-log') window.loadAuditLog();
         if (tabName === 'shift-notes') window.loadShiftNotes();
       };
 
@@ -1510,6 +1511,12 @@
         if (themeBtn) themeBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
       }
       applyTheme(currentTheme);
+      document.getElementById('themeToggle').addEventListener('click', function() {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(currentTheme);
+        settings.theme = currentTheme;
+        localStorage.setItem('settings', JSON.stringify(settings));
+      });
       document.getElementById('themeToggle').addEventListener('click', function() {
         currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
         applyTheme(currentTheme);
@@ -1546,14 +1553,22 @@
         return allBookings.filter(function(b) { return b.phone === phone && (b.status === 'active' || b.status === 'completed'); }).length;
       }
 
+      function getVisibleTabs() {
+        if (currentUserRole === 'manager') {
+          return ['overview','bookings','shift-notes','availability','calendar','revenue','analytics'];
+        } else {
+          return ['overview','bookings','shift-notes','availability','calendar'];
+        }
+      }
+
       document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && e.key === 'k') { e.preventDefault(); var s = document.getElementById('searchInput'); if (s) s.focus(); }
         if (e.ctrlKey && e.key === 'r') { e.preventDefault(); loadBookings(); }
         if (e.key === 'Escape') { window.closeBookingDetail(); window.closePaymentModal(); window.closeGuestHistory(); window.closeWaModal(); }
         if (!e.ctrlKey && !e.altKey && !e.metaKey && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA' && document.activeElement.tagName !== 'SELECT') {
-          var tabs = ['overview','bookings','shift-notes','availability','calendar','revenue','analytics'];
+          var tabs = getVisibleTabs();
           var num = parseInt(e.key, 10);
-          if (num >= 1 && num <= 7) { window.switchTab(tabs[num - 1]); }
+          if (num >= 1 && num <= tabs.length) { window.switchTab(tabs[num - 1]); }
         }
       });
 
@@ -1613,10 +1628,18 @@
       function applyRolePermissions() {
         updateRoleBadge();
         
+        var revenueTab = document.getElementById('revenueTab');
+        var analyticsTab = document.getElementById('analyticsTab');
+        var quickRevenueBtn = document.getElementById('quickRevenueBtn');
+        
         if (currentUserRole === 'manager') {
-          if (auditLogTab) auditLogTab.style.display = '';
+          if (revenueTab) revenueTab.style.display = '';
+          if (analyticsTab) analyticsTab.style.display = '';
+          if (quickRevenueBtn) quickRevenueBtn.style.display = '';
         } else {
-          if (auditLogTab) auditLogTab.style.display = 'none';
+          if (revenueTab) revenueTab.style.display = 'none';
+          if (analyticsTab) analyticsTab.style.display = 'none';
+          if (quickRevenueBtn) quickRevenueBtn.style.display = 'none';
         }
       }
 
@@ -1627,7 +1650,8 @@
         els.loginScreen.classList.remove('show');
         els.dashboard.style.display = 'block';
         var defaultTab = settings.defaultTab || 'bookings';
-        if (defaultTab === 'audit-log' && currentUserRole !== 'manager') { defaultTab = 'bookings'; }
+        var restrictedTabs = ['revenue', 'analytics'];
+        if (restrictedTabs.indexOf(defaultTab) !== -1 && currentUserRole !== 'manager') { defaultTab = 'bookings'; }
         window.switchTab(defaultTab);
         loadBookings();
         setupAutoRefresh(settings.autoRefresh);
