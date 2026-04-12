@@ -1687,11 +1687,12 @@ function getRoomImage(name) {
 
       function loadRooms() {
         if (!container) return;
-        console.log('Loading rooms...');
+        console.log('Loading rooms for property:', window.VYANTRA_PROP_ID);
         
         supabase
           .from('rooms')
           .select('*')
+          .eq('property_id', window.VYANTRA_PROP_ID || 'sreekrishna')
           .order('price', { ascending: true })
           .then(function(r) {
             console.log('Rooms response:', r);
@@ -1701,6 +1702,7 @@ function getRoomImage(name) {
             }
             allRooms = r.data || [];
             if (allRooms.length === 0) {
+              console.log('No rooms found for property:', window.VYANTRA_PROP_ID);
               container.innerHTML = '<p class="rooms-error">No rooms found in database.</p>';
               return;
             }
