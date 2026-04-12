@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://chjwvpvsxeczvwqyouiw.supabase.co https://*.jsdelivr.net https://*.cloudflare.com; worker-src 'self' blob:; img-src 'self' data: https:; frame-src https://www.google.com;">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://chjwvpvsxeczvwqyouiw.supabase.co https://*.supabase.io https://*.supabase.co https://cdn.jsdelivr.net https://*.jsdelivr.net; worker-src 'self' blob:; img-src 'self' data: https:; frame-src https://www.google.com;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="description" content="Sree Krishna Residency - Premium hotel near Guruvayur Temple, Kerala. 62 rooms, AC marriage hall, free Wi-Fi, parking. Enquire now!">
   <meta name="keywords" content="Sree Krishna Residency, Guruvayur hotel, Kerala hotel, hotel near temple, Guruvayur accommodation, marriage hall">
@@ -1683,21 +1683,28 @@ function getRoomImage(name) {
 
       function loadRooms() {
         if (!container) return;
-
+        console.log('Loading rooms...');
+        
         supabase
           .from('rooms')
           .select('*')
           .order('price', { ascending: true })
           .then(function(r) {
+            console.log('Rooms response:', r);
             if (r.error) {
-              container.innerHTML = '<p class="rooms-error">[ERR-1002] Failed to load rooms. Please refresh.</p>';
+              container.innerHTML = '<p class="rooms-error">[ERR-1002] ' + (r.error.message || 'Failed to load rooms') + '</p>';
               return;
             }
             allRooms = r.data || [];
+            if (allRooms.length === 0) {
+              container.innerHTML = '<p class="rooms-error">No rooms found in database.</p>';
+              return;
+            }
             renderRooms(allRooms);
           })
           .catch(function(err) {
-            container.innerHTML = '<p class="rooms-error">[ERR-1001] Connection error. Check internet and refresh.</p>';
+            console.error('Rooms error:', err);
+            container.innerHTML = '<p class="rooms-error">[ERR-1001] ' + (err.message || 'Connection error') + '</p>';
           });
       }
 
