@@ -24,7 +24,7 @@
       defaultTitle: "Sree Krishna Residency",
       defaultDesc: "Premium accommodation with exceptional comfort, modern furnishings, and dedicated service.",
       phoneSupport: "0487-2556505",
-      logoIconClass: "fa-om",
+      logoIconClass: "fa-hotel",
       brandHomeUrl: "index.html" // Usually derived from '?return_url='
     };
   </script>
@@ -57,8 +57,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html { scroll-behavior: smooth; font-size: 16px; background-color: var(--page-bg); }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--page-bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; min-height: 100dvh; position: relative; }
-    body.loading { overflow: hidden; }
-    
+
     h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; line-height: 1.2; font-weight: 500; letter-spacing: -0.02em; }
     button, input, select, textarea { font-size: 16px !important; }
 
@@ -78,18 +77,6 @@
     .nav-back:hover i { background: var(--gold-main); color: #FFF; border-color: var(--gold-main); }
     .nav-logo { gap: 10px; font-family: 'Playfair Display', serif; font-size: 1.1rem; border-left: 1px solid var(--border-hard); padding-left: 20px; }
     .nav-logo-icon i { color: var(--gold-dark); }
-
-    /* Loader */
-    .loader { position: fixed; inset: 0; background: var(--page-bg); display: flex; align-items: center; justify-content: center; z-index: 9999; }
-    .loader.hidden { opacity: 0; visibility: hidden; transition: opacity 0.8s cubic-bezier(0.32,0.72,0,1), visibility 0.8s; }
-    .loader-content { display: flex; flex-direction: column; align-items: center; }
-    .loader-om { position: relative; width: 60px; height: 60px; margin-bottom: 25px; }
-    .loader-om-circle { position: absolute; inset: 0; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 50%; animation: loaderPulse 2s cubic-bezier(0.32,0.72,0,1) infinite; }
-    .loader-om i { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; font-size: 24px; color: var(--gold-dark); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); }
-    @keyframes loaderPulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
-    .loader-bar { width: 150px; height: 2px; background: var(--border-soft); border-radius: 2px; overflow: hidden; }
-    .loader-bar-fill { height: 100%; background: var(--gold-main); width: 0; animation: loadBar 1s ease-in-out forwards; }
-    @keyframes loadBar { to { width: 100%; } }
 
     /* Layout Archetype: The Editorial Split */
     .checkout-board { max-width: 1300px; margin: 0 auto; padding: 140px 24px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; position: relative; z-index: 10; }
@@ -244,7 +231,6 @@
       document.getElementById('footerName').textContent = brandName;
       document.getElementById('footerYear').textContent = new Date().getFullYear();
       document.getElementById('navBrandIcon').className = 'fas ' + brandIcon;
-      document.getElementById('loaderIcon').className = 'fas ' + brandIcon;
 
       if (roomId) {
         var canonical = document.getElementById('canonicalLink');
@@ -271,13 +257,6 @@
         setTimeout(function() { toast.classList.remove('show'); }, 4000);
       }
 
-      function hideLoader() {
-        var loader = document.getElementById('loader');
-        if (loader) loader.classList.add('hidden');
-        document.body.classList.remove('loading');
-        triggerStaggerAnim();
-      }
-
       function triggerStaggerAnim() {
         var elements = document.querySelectorAll('.stagger-up');
         elements.forEach(function(el, i) {
@@ -288,7 +267,7 @@
       function renderNotFound() {
         var html = '<div class="checkout-board"><div class="not-found stagger-up"><h2>Room Unavailable</h2><p style="color:var(--text-muted)">The selected room does not exist or has been removed from the system.</p><a href="' + sanitize(returnPath) + '">Go Back</a></div></div>';
         document.getElementById('content').innerHTML = html;
-        hideLoader();
+        triggerStaggerAnim();
       }
 
       function renderRoom(r) {
@@ -345,7 +324,7 @@
         if (phone) phone.addEventListener('input', function() { document.getElementById('phoneShell').classList.remove('error'); document.getElementById('bPhoneError').classList.remove('show'); });
 
         document.getElementById('universalBookingForm').addEventListener('submit', handleBookingSubmit);
-        hideLoader();
+        triggerStaggerAnim();
       }
 
       function handleBookingSubmit(e) {
@@ -409,7 +388,7 @@
       }
 
       if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', bootSystem); } else { bootSystem(); }
-      window.addEventListener('load', function() { hideLoader(); });
+      window.addEventListener('load', function() { triggerStaggerAnim(); });
     })();
   </script>
 </body>
