@@ -1595,10 +1595,8 @@
         updateRoleBadge();
         
         if (currentUserRole === 'manager') {
-          if (roomsTab) roomsTab.style.display = '';
           if (auditLogTab) auditLogTab.style.display = '';
         } else {
-          if (roomsTab) roomsTab.style.display = 'none';
           if (auditLogTab) auditLogTab.style.display = 'none';
         }
       }
@@ -1610,7 +1608,6 @@
         els.loginScreen.classList.remove('show');
         els.dashboard.style.display = 'block';
         var defaultTab = settings.defaultTab || 'bookings';
-        if (defaultTab === 'rooms' && currentUserRole !== 'manager') { defaultTab = 'bookings'; }
         if (defaultTab === 'audit-log' && currentUserRole !== 'manager') { defaultTab = 'bookings'; }
         window.switchTab(defaultTab);
         loadBookings();
@@ -2409,6 +2406,7 @@
       function renderRoomManagement() {
         var content = document.getElementById('roomMgmtContent');
         if (!allRooms.length) { content.innerHTML = '<p class="error">Rooms data not loaded. Please refresh.</p>'; return; }
+        var isManager = currentUserRole === 'manager';
         var grid = document.createElement('div');
         grid.className = 'room-mgmt-grid';
         allRooms.forEach(function(room) {
@@ -2418,22 +2416,24 @@
           var h4 = document.createElement('h4');
           h4.textContent = room.name;
           card.appendChild(h4);
-          var priceRow = document.createElement('div');
-          priceRow.className = 'room-mgmt-row';
-          var priceLabel = document.createElement('label');
-          priceLabel.textContent = 'Price (\u20B9)';
-          var priceInput = document.createElement('input');
-          priceInput.type = 'number';
-          priceInput.className = 'edit-price';
-          priceInput.value = room.price || 0;
-          priceInput.min = '0';
-          priceRow.appendChild(priceLabel);
-          priceRow.appendChild(priceInput);
-          card.appendChild(priceRow);
+          if (isManager) {
+            var priceRow = document.createElement('div');
+            priceRow.className = 'room-mgmt-row';
+            var priceLabel = document.createElement('label');
+            priceLabel.textContent = 'Price (\u20B9)';
+            var priceInput = document.createElement('input');
+            priceInput.type = 'number';
+            priceInput.className = 'edit-price';
+            priceInput.value = room.price || 0;
+            priceInput.min = '0';
+            priceRow.appendChild(priceLabel);
+            priceRow.appendChild(priceInput);
+            card.appendChild(priceRow);
+          }
           var roomsRow = document.createElement('div');
           roomsRow.className = 'room-mgmt-row';
           var roomsLabel = document.createElement('label');
-          roomsLabel.textContent = 'Total Rooms';
+          roomsLabel.textContent = 'Available Rooms';
           var roomsInput = document.createElement('input');
           roomsInput.type = 'number';
           roomsInput.className = 'edit-total-rooms';
@@ -2445,8 +2445,13 @@
           var saveBtn = document.createElement('button');
           saveBtn.className = 'save-room-btn';
           saveBtn.setAttribute('data-room-id', room.id);
-          saveBtn.textContent = 'Save Changes';
-          saveBtn.addEventListener('click', function() { window.updateRoom(room.id, saveBtn); });
+          if (isManager) {
+            saveBtn.textContent = 'Save All Changes';
+            saveBtn.addEventListener('click', function() { window.updateRoom(room.id, saveBtn); });
+          } else {
+            saveBtn.textContent = 'Update Availability';
+            saveBtn.addEventListener('click', function() { window.updateRoomAvailability(room.id, saveBtn); });
+          }
           card.appendChild(saveBtn);
           var msgEl = document.createElement('p');
           msgEl.className = 'room-mgmt-msg';
@@ -2487,6 +2492,34 @@
           btnEl.disabled = false;
           btnEl.textContent = 'Save Changes';
           showToast('Failed to update room: ' + (err.message || 'Unknown error'), 'error');
+        });
+      };
+
+      window.updateRoomAvailability = function(roomId, btnEl) {
+        var card = btnEl.closest('.room-mgmt-card');
+        var roomsInput = card.querySelector('.edit-total-rooms');
+        var msgEl = card.querySelector('.room-mgmt-msg');
+        var totalRooms = parseInt(roomsInput.value, 10);
+        if (isNaN(totalRooms) || totalRooms < 1) { msgEl.textContent = 'Minimum 1 room required'; msgEl.className = 'room-mgmt-msg error'; return; }
+        btnEl.disabled = true;
+        btnEl.textContent = 'Updating...';
+        msgEl.className = 'room-mgmt-msg';
+        msgEl.textContent = 'Updating availability...';
+        supabase.from('rooms').update({ total_rooms: totalRooms }).eq('id', roomId).then(function(r) {
+          if (r.error) throw r.error;
+          msgEl.textContent = 'Availability updated!';
+          msgEl.className = 'room-mgmt-msg success';
+          btnEl.disabled = false;
+          btnEl.textContent = 'Update Availability';
+          showToast('Room availability updated!');
+          loadBookings();
+        }).catch(function(err) {
+          Logger.error('Update availability error:', err);
+          msgEl.textContent = 'Failed: ' + (err.message || 'Unknown error');
+          msgEl.className = 'room-mgmt-msg error';
+          btnEl.disabled = false;
+          btnEl.textContent = 'Update Availability';
+          showToast('Failed to update availability: ' + (err.message || 'Unknown error'), 'error');
         });
       };
 
