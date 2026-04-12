@@ -1,0 +1,29 @@
+{
+  "name": "Sree Krishna Residency",
+  "short_name": "Sree Krishna",
+  "description": "Premium hotel near Guruvayur Temple - 62 rooms, AC marriage hall, restaurant",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#c9a84c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/Outdoors%20photo%201.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/Outdoors%20photo%201.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["travel", "hotel", "Accommodation"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}

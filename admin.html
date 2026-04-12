@@ -1,0 +1,3044 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0e1a">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://chjwvpvsxeczvwqyouiw.supabase.co https://*.supabase.io https://cdn.jsdelivr.net; img-src 'self' data: https:; frame-src https://www.google.com;">
+  <title>Admin — Sree Krishna Residency</title>
+  <link rel="icon" type="image/webp" href="images/Outdoors%20photo%201.webp">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f6f9; --bg-secondary: #e8ecf1; --bg-elevated: #ffffff;
+      --text: #1a1d23; --text-secondary: #5f6b7a; --text-muted: #8892a0;
+      --card: #ffffff; --card-hover: #f8f9fb;
+      --border: #e2e6ec; --border-light: #eef0f4;
+      --input-bg: #ffffff; --input-border: #d1d5db;
+      --header-text: #0f172a;
+      --accent: #c9a84c; --accent-dark: #a8872e; --accent-light: #e2c97e; --accent-bg: rgba(201,168,76,0.08);
+      --green: #16a34a; --green-bg: rgba(22,163,74,0.08);
+      --red: #dc2626; --red-bg: rgba(220,38,38,0.08);
+      --blue: #2563eb; --blue-bg: rgba(37,99,235,0.08);
+      --amber: #d97706; --amber-bg: rgba(217,119,6,0.08);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.07);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 48px rgba(0,0,0,0.12);
+      --table-header-bg: #f8f9fb; --table-row-hover: #f8f9fb;
+      --success-bg: rgba(22,163,74,0.08); --error-bg: rgba(220,38,38,0.08);
+      --toast-bg: #ffffff; --toast-border: #e2e6ec;
+      --modal-bg: #ffffff; --modal-overlay: rgba(0,0,0,0.5);
+      --cal-tooltip-bg: #1a1d23;
+      --login-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      --pending-color: #d97706;
+      --sidebar-width: 260px; --sidebar-collapsed: 72px; --topbar-height: 64px;
+      --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px; --radius-xl: 18px;
+    }
+    [data-theme="dark"] {
+      --bg: #0a0e1a; --bg-secondary: #111827; --bg-elevated: #151d2e;
+      --text: #e8ecf1; --text-secondary: #94a3b8; --text-muted: #64748b;
+      --card: #111827; --card-hover: #1a2332;
+      --border: #1e293b; --border-light: #1a2332;
+      --input-bg: #0d1320; --input-border: #2d3a4f;
+      --header-text: #f1f5f9;
+      --accent: #d4a843; --accent-dark: #b8922e; --accent-light: #e2b94f; --accent-bg: rgba(212,168,67,0.1);
+      --green: #22c55e; --green-bg: rgba(34,197,94,0.1);
+      --red: #f87171; --red-bg: rgba(248,113,113,0.1);
+      --blue: #60a5fa; --blue-bg: rgba(96,165,250,0.1);
+      --amber: #fbbf24; --amber-bg: rgba(251,191,36,0.1);
+      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.35);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,0.4);
+      --shadow-xl: 0 20px 48px rgba(0,0,0,0.5);
+      --table-header-bg: #111827; --table-row-hover: #1a2332;
+      --success-bg: rgba(34,197,94,0.1); --error-bg: rgba(248,113,113,0.1);
+      --toast-bg: #151d2e; --toast-border: #2d3a4f;
+      --modal-bg: #151d2e; --modal-overlay: rgba(0,0,0,0.75);
+      --cal-tooltip-bg: #1e293b;
+      --login-bg: linear-gradient(135deg, #020617 0%, #0a0e1a 100%);
+      --pending-color: #fbbf24;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; transition: background 0.3s ease, color 0.3s ease; overflow-x: hidden; }
+    h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; }
+    button,input,select,textarea { font-family: 'DM Sans', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+    .sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh; background: var(--card); border-right: 1px solid var(--border); z-index: 1000; transition: width 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s ease; display: flex; flex-direction: column; overflow: hidden; }
+    .sidebar.collapsed { width: var(--sidebar-collapsed); }
+    .sidebar-header { padding: 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); min-height: 72px; }
+    .sidebar-logo { width: 36px; height: 36px; min-width: 36px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #0f172a; font-weight: 700; }
+    .sidebar-brand { overflow: hidden; white-space: nowrap; transition: opacity 0.2s; }
+    .sidebar.collapsed .sidebar-brand { opacity: 0; width: 0; }
+    .sidebar-brand h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+    .sidebar-brand span { font-size: 0.65rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sidebar-nav { flex: 1; padding: 12px 10px; overflow-y: auto; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--radius-md); color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease; margin-bottom: 2px; position: relative; white-space: nowrap; font-size: 0.88rem; font-weight: 500; border: none; background: none; width: 100%; text-align: left; }
+    .nav-item:hover { background: var(--bg-secondary); color: var(--text); }
+    .nav-item.active { background: var(--accent-bg); color: var(--accent); font-weight: 600; }
+    .nav-item.active::before { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); width: 3px; height: 24px; background: var(--accent); border-radius: 0 3px 3px 0; }
+    .nav-item i { width: 20px; text-align: center; font-size: 1rem; min-width: 20px; }
+    .nav-item .nav-label { overflow: hidden; transition: opacity 0.2s; }
+    .sidebar.collapsed .nav-item .nav-label { opacity: 0; width: 0; }
+    .nav-item .nav-badge { margin-left: auto; background: var(--accent); color: #0f172a; font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; min-width: 20px; text-align: center; }
+    .sidebar.collapsed .nav-item .nav-badge { display: none; }
+    .sidebar-footer { padding: 16px; border-top: 1px solid var(--border); text-align: center; overflow: hidden; transition: opacity 0.2s; }
+    .sidebar.collapsed .sidebar-footer { opacity: 0; height: 0; padding: 0; }
+    .sidebar-footer p { font-size: 0.65rem; color: var(--text-muted); line-height: 1.5; }
+    .sidebar-footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .sidebar-footer a:hover { text-decoration: underline; }
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; backdrop-filter: blur(4px); }
+    .sidebar-overlay.show { display: block; }
+
+    .topbar { position: fixed; top: 0; left: var(--sidebar-width); right: 0; height: var(--topbar-height); background: var(--card); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 900; transition: left 0.3s cubic-bezier(0.4,0,0.2,1); backdrop-filter: blur(12px); }
+    .sidebar.collapsed ~ .topbar { left: var(--sidebar-collapsed); }
+    .topbar-left { display: flex; align-items: center; gap: 16px; }
+    .sidebar-toggle { width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 0.9rem; }
+    .sidebar-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .topbar-title h2 { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .topbar-title p { font-size: 0.7rem; color: var(--text-muted); }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+    .topbar-btn { width: 40px; height: 40px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; position: relative; font-size: 0.95rem; }
+    .topbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .topbar-btn .badge { position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; background: var(--red); color: #fff; font-size: 0.6rem; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--card); }
+    .topbar-btn .badge:empty { display: none; }
+    .user-menu { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--bg-secondary); cursor: pointer; transition: all 0.2s; }
+    .user-menu:hover { border-color: var(--accent); }
+    .user-avatar { width: 32px; height: 32px; border-radius: var(--radius-sm); background: linear-gradient(135deg, var(--accent), var(--accent-dark)); display: flex; align-items: center; justify-content: center; color: #0f172a; font-size: 0.75rem; font-weight: 700; }
+    .user-info { line-height: 1.2; }
+    .user-info .name { font-size: 0.78rem; font-weight: 600; color: var(--text); }
+    .user-info .role { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
+
+    .main-content { margin-left: var(--sidebar-width); padding-top: var(--topbar-height); min-height: 100vh; transition: margin-left 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-collapsed); }
+    .content-inner { padding: 24px; max-width: 1400px; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .kpi-card { background: var(--card); border-radius: var(--radius-lg); padding: 20px; border: 1px solid var(--border); transition: all 0.25s ease; cursor: pointer; position: relative; overflow: hidden; }
+    .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--kpi-color, var(--accent)); opacity: 0.8; }
+    .kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .kpi-icon { width: 40px; height: 40px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 12px; background: var(--kpi-bg, var(--accent-bg)); color: var(--kpi-color, var(--accent)); }
+    .kpi-value { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--text); line-height: 1; }
+    .kpi-label { font-size: 0.72rem; color: var(--text-secondary); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+
+    .priority-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+    .priority-pill { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid; }
+    .priority-pill.new { background: var(--accent-bg); border-color: rgba(201,168,76,0.3); color: var(--accent); }
+    .priority-pill.new:hover { background: var(--accent); color: #0f172a; }
+    .priority-pill.today { background: var(--blue-bg); border-color: rgba(37,99,235,0.2); color: var(--blue); }
+    .priority-pill.today:hover { background: var(--blue); color: #fff; }
+    .priority-pill .count { background: currentColor; color: var(--card); font-size: 0.65rem; padding: 1px 6px; border-radius: 8px; font-weight: 700; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeSlideIn 0.3s ease forwards; }
+    @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .filters { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; align-items: center; }
+    .search-box { position: relative; flex: 1; min-width: 200px; max-width: 320px; }
+    .search-box input { width: 100%; padding: 10px 16px 10px 38px; border: 1px solid var(--input-border); border-radius: var(--radius-md); font-size: 0.88rem; background: var(--input-bg); color: var(--text); transition: all 0.2s; }
+    .search-box input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
+    .search-box::before { content: '\f002'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; color: var(--text-muted); }
+    .filter-select, .date-filter { padding: 10px 16px; border: 1px solid var(--input-border); border-radius: var(--radius-md); font-size: 0.88rem; background: var(--input-bg); cursor: pointer; color: var(--text); transition: all 0.2s; }
+    .filter-select:focus, .date-filter:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
+
+    .refresh-btn { background: var(--bg-secondary); color: var(--text); border: 1px solid var(--border); padding: 10px 18px; border-radius: var(--radius-md); cursor: pointer; font-size: 0.82rem; font-weight: 500; transition: all 0.2s; }
+    .refresh-btn:hover { background: var(--accent); color: #0f172a; border-color: var(--accent); transform: translateY(-1px); }
+    .logout-btn { background: var(--card); color: var(--red); border: 1px solid var(--red); padding: 10px 18px; border-radius: var(--radius-md); cursor: pointer; font-size: 0.82rem; font-weight: 500; transition: all 0.2s; }
+    .logout-btn:hover { background: var(--red); color: #fff; transform: translateY(-1px); }
+
+    .booking-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+    .booking-card { background: var(--card); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: all 0.25s ease; }
+    .booking-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .booking-card.cancelled { opacity: 0.6; }
+    .booking-card.unseen { border-left: 4px solid var(--accent); box-shadow: 0 0 16px rgba(201,168,76,0.15), var(--shadow); }
+    .booking-card.unseen:hover { box-shadow: 0 0 24px rgba(201,168,76,0.25), var(--shadow-lg); }
+    .booking-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .booking-card-header h4 { font-family: 'Outfit', sans-serif; font-size: 1rem; color: var(--text); margin-bottom: 2px; }
+    .booking-card-header .room-name { font-size: 0.82rem; color: var(--accent); font-weight: 500; }
+    .booking-card-body { margin-bottom: 14px; }
+    .booking-card-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.85rem; }
+    .booking-card-row .label { color: var(--text-secondary); }
+    .booking-card-row .value { font-weight: 500; color: var(--text-muted); }
+    .booking-card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border-light); }
+
+    .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
+    .status-badge.active { background: var(--green-bg); color: var(--green); }
+    .status-badge.pending { background: var(--amber-bg); color: var(--pending-color); }
+    .status-badge.cancelled { background: var(--red-bg); color: var(--red); }
+    .status-badge.completed { background: var(--blue-bg); color: var(--blue); }
+
+    .cancel-btn { background: var(--card); color: var(--red); border: 1px solid var(--red); padding: 6px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; }
+    .cancel-btn:hover { background: var(--red); color: #fff; transform: translateY(-1px); }
+    .cancel-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .status-btn { border: none; padding: 6px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; }
+    .status-btn-confirmed { background: var(--green-bg); color: var(--green); cursor: default; }
+    .whatsapp-btn { background: #25D366; color: #fff; border: none; padding: 6px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; display: flex; align-items: center; gap: 4px; }
+    .whatsapp-btn:hover { background: #128C7E; transform: translateY(-1px); }
+    .mark-seen-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 6px 14px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .mark-seen-btn:hover { background: var(--accent); color: #0f172a; }
+    .mark-seen-btn:disabled { opacity: 0.5; cursor: default; }
+
+    .success-msg { background: var(--success-bg); color: var(--green); padding: 12px 20px; border-radius: var(--radius-md); margin-bottom: 20px; display: none; font-weight: 500; }
+    .success-msg.show { display: block; }
+    .loading, .error, .empty { text-align: center; padding: 60px 20px; color: var(--text-secondary); font-size: 1rem; }
+    .error { color: var(--red); }
+
+    .priority-section { margin-bottom: 20px; }
+    .priority-section h3 { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .priority-section h3 .badge-count { background: var(--accent); color: #0f172a; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+    .table-wrap { background: var(--card); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--border); }
+
+    .pagination-btn { background: var(--bg-secondary); color: var(--text); border: 1px solid var(--border); padding: 8px 20px; border-radius: var(--radius-md); cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s; }
+    .pagination-btn:hover:not(:disabled) { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+    .pagination-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .occupancy-bar { background: var(--card); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow); margin-bottom: 24px; border: 1px solid var(--border); }
+    .occupancy-bar h3 { font-family: 'Outfit', sans-serif; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .occupancy-bar h3 i { color: var(--accent); }
+    .occupancy-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .occ-stat { text-align: center; padding: 16px 8px; background: var(--bg-secondary); border-radius: var(--radius-md); }
+    .occ-stat .occ-val { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--text); }
+    .occ-stat .occ-label { font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+    .occ-stat .occ-val.green { color: var(--green); }
+    .occ-stat .occ-val.gold { color: var(--accent); }
+    .occ-stat .occ-val.red { color: var(--red); }
+    .occ-stat .occ-val.blue { color: var(--blue); }
+    .occupancy-date { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .occupancy-date label { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); }
+    .occupancy-date input { padding: 8px 12px; border: 1px solid var(--input-border); border-radius: var(--radius-sm); font-size: 0.9rem; background: var(--input-bg); color: var(--text); }
+    .occupancy-date input:focus { outline: none; border-color: var(--accent); }
+    .occupancy-pct { text-align: center; padding: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: var(--radius-md); }
+    .occupancy-pct .occ-val { color: #0f172a; font-size: 1.8rem; }
+    .occupancy-pct .occ-label { color: rgba(15,23,42,0.7); }
+
+    .avail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .avail-card { background: var(--card); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: all 0.25s; }
+    .avail-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .avail-card h4 { font-family: 'Outfit', sans-serif; font-size: 1rem; color: var(--text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); }
+    .avail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-light); }
+    .avail-row:last-child { border-bottom: none; }
+    .avail-row .label { color: var(--text-secondary); font-size: 0.85rem; }
+    .avail-row .value { font-weight: 600; font-size: 0.95rem; }
+    .avail-row .value.green { color: var(--green); }
+    .avail-row .value.red { color: var(--red); }
+    .avail-row .value.gold { color: var(--accent); }
+
+    .room-mgmt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+    .room-mgmt-card { background: var(--card); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: all 0.25s; }
+    .room-mgmt-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .room-mgmt-card h4 { font-family: 'Outfit', sans-serif; font-size: 1rem; color: var(--text); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); }
+    .room-mgmt-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .room-mgmt-row label { font-size: 0.85rem; color: var(--text-secondary); min-width: 100px; }
+    .room-mgmt-row input { flex: 1; padding: 8px 12px; border: 1px solid var(--input-border); border-radius: var(--radius-sm); font-size: 0.9rem; background: var(--input-bg); color: var(--text); }
+    .room-mgmt-row input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
+    .save-room-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0f172a; border: none; padding: 10px 24px; border-radius: var(--radius-md); cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; display: block; width: 100%; margin-top: 8px; }
+    .save-room-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(201,168,76,0.35); }
+    .save-room-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .room-mgmt-msg { font-size: 0.8rem; margin-top: 8px; min-height: 20px; }
+    .room-mgmt-msg.success { color: var(--green); }
+    .room-mgmt-msg.error { color: var(--red); }
+
+    .calendar-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; background: var(--card); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 20px; border: 1px solid var(--border); }
+    .calendar-table { min-width: 600px; border-collapse: collapse; width: 100%; }
+    .calendar-table th { padding: 10px 8px; font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); text-align: center; position: sticky; left: 0; background: var(--card); }
+    .calendar-table th:first-child { text-align: left; position: sticky; left: 0; z-index: 2; background: var(--card); min-width: 120px; }
+    .calendar-table td { padding: 8px; text-align: center; border-bottom: 1px solid var(--border-light); }
+    .calendar-table td:first-child { text-align: left; font-weight: 500; font-size: 0.85rem; position: sticky; left: 0; background: var(--card); z-index: 1; color: var(--text-muted); }
+    .cal-cell { width: 40px; height: 32px; border-radius: 6px; display: inline-block; cursor: pointer; transition: all 0.2s; position: relative; }
+    .cal-cell.booked { background: var(--red-bg); border: 1px solid rgba(248,113,113,0.3); }
+    .cal-cell.available { background: var(--green-bg); border: 1px solid rgba(74,222,128,0.3); }
+    .cal-cell:hover { transform: scale(1.15); box-shadow: var(--shadow-md); }
+    .cal-cell .cal-tooltip { display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: var(--cal-tooltip-bg); color: var(--text); padding: 6px 10px; border-radius: 6px; font-size: 0.7rem; white-space: nowrap; z-index: 10; margin-bottom: 4px; }
+    .cal-cell:hover .cal-tooltip { display: block; }
+
+    .settings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+    .settings-card { background: var(--card); border-radius: var(--radius-lg); border: 1px solid var(--border); overflow: hidden; }
+    .settings-card-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .settings-card-header i { color: var(--accent); font-size: 1rem; }
+    .settings-card-header h4 { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600; }
+    .settings-card-body { padding: 20px; }
+    .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-light); }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-label { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+    .setting-desc { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+    .setting-control select, .setting-control input { padding: 8px 12px; border: 1px solid var(--input-border); border-radius: var(--radius-sm); font-size: 0.85rem; background: var(--input-bg); color: var(--text); }
+    .setting-control select:focus, .setting-control input:focus { outline: none; border-color: var(--accent); }
+    .setting-btn { padding: 8px 16px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text); transition: all 0.2s; }
+    .setting-btn:hover { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+    .setting-btn.danger { color: var(--red); border-color: var(--red); }
+    .setting-btn.danger:hover { background: var(--red); color: #fff; }
+    .toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; display: inline-block; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; inset: 0; background: var(--border); border-radius: 12px; transition: 0.3s; }
+    .toggle-slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.3s; }
+    .toggle-switch input:checked + .toggle-slider { background: var(--accent); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+    .toast { position: fixed; top: 80px; right: 20px; background: var(--toast-bg); border: 1px solid var(--toast-border); border-radius: var(--radius-md); padding: 14px 20px; box-shadow: var(--shadow-xl); z-index: 10000; transform: translateX(120%); transition: transform 0.3s ease; display: flex; align-items: center; gap: 10px; font-weight: 500; color: var(--text); max-width: 400px; }
+    .toast.show { transform: translateX(0); }
+    .toast i { font-size: 1.1rem; }
+    .toast i.fa-check-circle { color: var(--green); }
+    .toast i.fa-exclamation-circle { color: var(--red); }
+    .toast i.fa-bell { color: var(--blue); }
+
+    .wa-modal { position: fixed; inset: 0; background: var(--modal-overlay); display: flex; align-items: center; justify-content: center; z-index: 9000; opacity: 0; visibility: hidden; transition: all 0.3s; padding: 20px; }
+    .wa-modal.active { opacity: 1; visibility: visible; }
+    .wa-modal-content { background: var(--modal-bg); border-radius: var(--radius-lg); max-width: 500px; width: 100%; padding: 28px; transform: scale(0.9); transition: transform 0.3s; border: 1px solid var(--border); }
+    .wa-modal.active .wa-modal-content { transform: scale(1); }
+    .wa-modal-content h4 { font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: var(--text); margin-bottom: 16px; }
+    .wa-modal-content textarea { width: 100%; min-height: 120px; padding: 12px; border: 1px solid var(--input-border); border-radius: var(--radius-md); font-size: 0.9rem; resize: vertical; margin-bottom: 16px; background: var(--input-bg); color: var(--text); }
+    .wa-modal-content textarea:focus { outline: none; border-color: var(--accent); }
+    .wa-modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .wa-modal-btn { padding: 10px 20px; border-radius: var(--radius-md); font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+    .wa-modal-btn:hover { transform: translateY(-1px); }
+    .wa-modal-btn-copy { background: var(--text-muted); color: #fff; }
+    .wa-modal-btn-copy:hover { background: var(--text-secondary); }
+    .wa-modal-btn-open { background: #25D366; color: #fff; }
+    .wa-modal-btn-open:hover { background: #128C7E; }
+    .wa-modal-btn-close { background: var(--bg-secondary); color: var(--text-secondary); }
+    .wa-modal-btn-close:hover { background: var(--border); }
+
+    .login-screen { display: none; min-height: 100vh; justify-content: center; align-items: center; padding: 20px; background: var(--login-bg); }
+    .login-screen.show { display: flex; }
+    .login-box { background: var(--card); padding: 48px 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); width: 100%; max-width: 420px; text-align: center; border: 1px solid var(--border); }
+    .login-box .logo { width: 56px; height: 56px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px; color: #0f172a; }
+    .login-box h2 { font-family: 'Outfit', sans-serif; color: var(--text); margin-bottom: 6px; font-size: 1.5rem; }
+    .login-box .sub { color: var(--text-secondary); margin-bottom: 28px; font-size: 0.85rem; }
+    .login-box input { width: 100%; padding: 14px 16px; border: 1px solid var(--input-border); border-radius: var(--radius-md); font-size: 0.95rem; margin-bottom: 14px; background: var(--input-bg); color: var(--text); }
+    .login-box input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
+    .login-box input::placeholder { color: var(--text-secondary); }
+    .login-btn { width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0f172a; border: none; padding: 14px; border-radius: var(--radius-md); cursor: pointer; font-size: 1rem; font-weight: 600; transition: all 0.2s; }
+    .login-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.35); }
+    .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .login-btn.loading { color: transparent; position: relative; }
+    .login-btn.loading::after { content: ''; position: absolute; width: 20px; height: 20px; top: 50%; left: 50%; margin: -10px 0 0 -10px; border: 2px solid #0f172a; border-radius: 50%; border-top-color: transparent; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .login-error { color: var(--red); font-size: 0.85rem; margin-top: 14px; display: none; padding: 10px; background: var(--error-bg); border-radius: var(--radius-sm); }
+    .login-error.show { display: block; }
+
+    @media (max-width: 1024px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.mobile-open { transform: translateX(0); }
+      .topbar { left: 0 !important; }
+      .main-content { margin-left: 0 !important; }
+      .user-info { display: none; }
+    }
+    @media (max-width: 768px) {
+      .content-inner { padding: 16px; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .kpi-card { padding: 16px; }
+      .kpi-value { font-size: 1.4rem; }
+      .occupancy-stats { grid-template-columns: repeat(2, 1fr); }
+      .booking-cards { grid-template-columns: 1fr; }
+      .avail-grid { grid-template-columns: 1fr; }
+      .room-mgmt-grid { grid-template-columns: 1fr; }
+      .settings-grid { grid-template-columns: 1fr; }
+      .filters { flex-direction: column; }
+      .search-box { max-width: 100%; min-width: 100%; }
+      .filter-select, .date-filter { width: 100%; }
+      .booking-card-footer { flex-direction: column; gap: 10px; }
+      .booking-card-footer > div { width: 100%; }
+      .booking-card-footer .cancel-btn, .booking-card-footer .status-btn, .booking-card-footer .whatsapp-btn { width: 100%; text-align: center; justify-content: center; min-height: 44px; padding: 10px; }
+      .priority-bar { flex-direction: column; }
+      .priority-pill { width: 100%; justify-content: center; }
+      .topbar { padding: 0 16px; }
+      .topbar-title p { display: none; }
+    }
+    @media (max-width: 480px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .kpi-card { padding: 14px; }
+      .kpi-value { font-size: 1.3rem; }
+      .kpi-label { font-size: 0.65rem; }
+      .login-box { padding: 36px 24px; }
+    }
+
+    /* Online Indicator */
+    .online-indicator { font-size: 0.72rem; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+    .online-indicator.online { background: var(--green-bg); color: var(--green); }
+    .online-indicator.offline { background: var(--red-bg); color: var(--red); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+    /* Booking Card Enhancements */
+    .booking-card-badges { display: flex; gap: 4px; flex-wrap: wrap; }
+    .booking-badge { font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 8px; text-transform: uppercase; }
+    .booking-badge.noshow { background: var(--red-bg); color: var(--red); }
+    .booking-badge.overstay { background: var(--amber-bg); color: var(--amber); }
+    .booking-badge.vip { background: var(--accent-bg); color: var(--accent); }
+    .detail-btn { background: var(--bg-secondary); color: var(--text); border: 1px solid var(--border); padding: 6px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; }
+    .detail-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .payment-btn { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); padding: 6px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; }
+    .payment-btn:hover { background: var(--accent); color: #0f172a; }
+
+    /* Modals */
+    .detail-modal { position: fixed; inset: 0; background: var(--modal-overlay); display: flex; align-items: center; justify-content: center; z-index: 9000; opacity: 0; visibility: hidden; transition: all 0.3s; padding: 20px; }
+    .detail-modal.active { opacity: 1; visibility: visible; }
+    .detail-modal-content { background: var(--modal-bg); border-radius: var(--radius-lg); max-width: 700px; width: 100%; padding: 28px; transform: scale(0.9); transition: transform 0.3s; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
+    .detail-modal.active .detail-modal-content { transform: scale(1); }
+    .detail-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .detail-modal-header h3 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; color: var(--text); }
+    .detail-modal-btn-close { background: var(--bg-secondary); color: var(--text-secondary); border: none; padding: 8px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem; }
+    .detail-modal-btn-close:hover { background: var(--border); }
+    .detail-section { margin-bottom: 20px; }
+    .detail-section h5 { font-family: 'Outfit', sans-serif; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border-light); }
+    .detail-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.88rem; }
+    .detail-row .label { color: var(--text-secondary); }
+    .detail-row .value { font-weight: 500; color: var(--text); }
+    .detail-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .detail-action-btn { padding: 8px 16px; border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text); transition: all 0.2s; }
+    .detail-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .detail-action-btn.danger { color: var(--red); border-color: var(--red); }
+    .detail-action-btn.danger:hover { background: var(--red); color: #fff; }
+    .detail-action-btn.primary { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+    .detail-action-btn.primary:hover { background: var(--accent-dark); }
+
+    .guest-history-item { padding: 10px 12px; background: var(--bg-secondary); border-radius: var(--radius-sm); margin-bottom: 6px; }
+    .guest-history-item .gh-room { font-weight: 600; color: var(--text); }
+    .guest-history-item .gh-dates { font-size: 0.78rem; color: var(--text-secondary); }
+    .guest-history-item .gh-amount { font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+
+    /* Shift Notes */
+    .shift-notes-compose { background: var(--card); border-radius: var(--radius-lg); padding: 20px; border: 1px solid var(--border); margin-bottom: 20px; }
+    .shift-notes-compose textarea { width: 100%; padding: 12px; border: 1px solid var(--input-border); border-radius: var(--radius-md); font-size: 0.9rem; background: var(--input-bg); color: var(--text); resize: vertical; min-height: 80px; margin-bottom: 12px; }
+    .shift-notes-compose textarea:focus { outline: none; border-color: var(--accent); }
+    .shift-note-actions { display: flex; gap: 10px; align-items: center; }
+    .shift-note-actions select { padding: 8px 12px; border: 1px solid var(--input-border); border-radius: var(--radius-sm); font-size: 0.85rem; background: var(--input-bg); color: var(--text); }
+    .shift-notes-filters { display: flex; gap: 8px; margin-bottom: 16px; }
+    .shift-notes-filters .filter-btn { padding: 6px 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-secondary); font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+    .shift-notes-filters .filter-btn.active { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+    .shift-note-card { background: var(--card); border-radius: var(--radius-lg); padding: 16px; border: 1px solid var(--border); margin-bottom: 10px; }
+    .shift-note-card.urgent { border-left: 4px solid var(--red); }
+    .shift-note-card.resolved { opacity: 0.5; }
+    .shift-note-card .sn-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .shift-note-card .sn-author { font-weight: 600; font-size: 0.85rem; color: var(--text); }
+    .shift-note-card .sn-time { font-size: 0.72rem; color: var(--text-muted); }
+    .shift-note-card .sn-note { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px; }
+    .shift-note-card .sn-footer { display: flex; justify-content: space-between; align-items: center; }
+    .shift-note-card .sn-priority { font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 8px; text-transform: uppercase; }
+    .shift-note-card .sn-priority.urgent { background: var(--red-bg); color: var(--red); }
+    .shift-note-card .sn-priority.normal { background: var(--accent-bg); color: var(--accent); }
+    .shift-note-card .sn-priority.low { background: var(--blue-bg); color: var(--blue); }
+    .shift-note-card .sn-resolve { background: transparent; border: 1px solid var(--green); color: var(--green); padding: 4px 12px; border-radius: var(--radius-sm); font-size: 0.75rem; cursor: pointer; }
+    .shift-note-card .sn-resolve:hover { background: var(--green); color: #fff; }
+
+    /* Audit Log */
+    .audit-filters { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .audit-filters select, .audit-filters input { padding: 8px 12px; border: 1px solid var(--input-border); border-radius: var(--radius-sm); font-size: 0.85rem; background: var(--input-bg); color: var(--text); }
+    .audit-table { width: 100%; border-collapse: collapse; }
+    .audit-table th { padding: 10px 12px; text-align: left; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+    .audit-table td { padding: 10px 12px; font-size: 0.85rem; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); }
+    .audit-table tr:hover td { background: var(--bg-secondary); }
+
+    /* Charts */
+    .revenue-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 24px; }
+    .chart-card { background: var(--card); border-radius: var(--radius-lg); padding: 20px; border: 1px solid var(--border); }
+    .chart-card h4 { font-family: 'Outfit', sans-serif; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; }
+    .bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 180px; padding: 10px 0; }
+    .bar-chart .bar { flex: 1; min-width: 8px; background: linear-gradient(to top, var(--accent), var(--accent-light)); border-radius: 3px 3px 0 0; position: relative; transition: height 0.5s ease; }
+    .bar-chart .bar:hover { opacity: 0.8; }
+    .bar-chart .bar .bar-tooltip { display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: var(--cal-tooltip-bg); color: var(--text); padding: 4px 8px; border-radius: 4px; font-size: 0.65rem; white-space: nowrap; margin-bottom: 4px; }
+    .bar-chart .bar:hover .bar-tooltip { display: block; }
+    .pie-chart { width: 180px; height: 180px; border-radius: 50%; margin: 0 auto; position: relative; }
+    .pie-legend { margin-top: 12px; }
+    .pie-legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; padding: 4px 0; }
+    .pie-legend-color { width: 12px; height: 12px; border-radius: 3px; }
+    .line-chart-container { position: relative; height: 180px; }
+    .line-chart-container svg { width: 100%; height: 100%; }
+    .line-chart-container polyline { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+    .line-chart-container .line-area { fill: var(--accent); opacity: 0.1; stroke: none; }
+
+    /* Analytics */
+    .analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 24px; }
+    .analytics-card { background: var(--card); border-radius: var(--radius-lg); padding: 20px; border: 1px solid var(--border); }
+    .analytics-card h4 { font-family: 'Outfit', sans-serif; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; }
+    .analytics-stat { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-light); font-size: 0.85rem; }
+    .analytics-stat .as-label { color: var(--text-secondary); }
+    .analytics-stat .as-value { font-weight: 600; color: var(--text); }
+
+    /* OTA Import */
+    .ota-import-section { background: var(--card); border-radius: var(--radius-lg); padding: 20px; border: 1px solid var(--border); margin-bottom: 20px; }
+    .ota-import-section h4 { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--text); margin-bottom: 8px; }
+    .ota-import-section p { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 12px; }
+    .ota-preview { margin-top: 12px; max-height: 300px; overflow-y: auto; }
+    .ota-preview table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .ota-preview th, .ota-preview td { padding: 6px 8px; border: 1px solid var(--border); text-align: left; }
+    .ota-preview th { background: var(--bg-secondary); font-weight: 600; }
+    .btn-primary { background: var(--accent); color: #0f172a; border: none; padding: 8px 20px; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-secondary { background: var(--bg-secondary); color: var(--text); border: 1px solid var(--border); padding: 8px 20px; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .booking-card-footer { flex-direction: column; gap: 10px; }
+      .booking-card-footer > div { width: 100%; }
+      .booking-card-footer .cancel-btn, .booking-card-footer .status-btn, .booking-card-footer .whatsapp-btn, .booking-card-footer .detail-btn, .booking-card-footer .payment-btn { width: 100%; text-align: center; justify-content: center; min-height: 44px; padding: 10px; }
+      .revenue-charts { grid-template-columns: 1fr; }
+      .analytics-grid { grid-template-columns: 1fr; }
+      .detail-modal-content { padding: 20px; }
+      .detail-actions { flex-direction: column; }
+      .detail-action-btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">&#9784;</div>
+      <div class="sidebar-brand">
+        <h3>Sree Krishna</h3>
+        <span>Admin Panel</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-tab="bookings" onclick="window.switchTab('bookings')">
+        <i class="fas fa-calendar-check"></i><span class="nav-label">Bookings</span>
+        <span class="nav-badge" id="navNewBadge" style="display:none;">0</span>
+      </button>
+      <button class="nav-item" data-tab="availability" onclick="window.switchTab('availability')">
+        <i class="fas fa-bed"></i><span class="nav-label">Availability</span>
+      </button>
+      <button class="nav-item" data-tab="shift-notes" onclick="window.switchTab('shift-notes')">
+        <i class="fas fa-sticky-note"></i><span class="nav-label">Shift Notes</span>
+        <span class="nav-badge" id="shiftNotesBadge" style="display:none;">0</span>
+      </button>
+      <button class="nav-item" data-tab="analytics" onclick="window.switchTab('analytics')">
+        <i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span>
+      </button>
+      <button class="nav-item" data-tab="calendar" onclick="window.switchTab('calendar')">
+        <i class="fas fa-calendar-alt"></i><span class="nav-label">Calendar</span>
+      </button>
+      <button class="nav-item" data-tab="revenue" onclick="window.switchTab('revenue')">
+        <i class="fas fa-rupee-sign"></i><span class="nav-label">Revenue</span>
+      </button>
+      <button class="nav-item" id="auditLogTab" data-tab="audit-log" onclick="window.switchTab('audit-log')" style="display:none;">
+        <i class="fas fa-clipboard-list"></i><span class="nav-label">Audit Log</span>
+      </button>
+      <button class="nav-item" id="roomsTab" data-tab="rooms" onclick="window.switchTab('rooms')">
+        <i class="fas fa-cog"></i><span class="nav-label">Rooms</span>
+      </button>
+      <button class="nav-item" data-tab="settings" onclick="window.switchTab('settings')">
+        <i class="fas fa-sliders-h"></i><span class="nav-label">Settings</span>
+      </button>
+      <button class="nav-item" data-tab="help" onclick="window.switchTab('help')">
+        <i class="fas fa-headset"></i><span class="nav-label">Help</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Designed &amp; Developed by<br><a href="#" target="_blank" rel="noopener noreferrer">Vyantra Studio</a></p>
+      <p style="font-size:0.6rem;color:var(--text-muted);margin-top:8px;">v<span id="vyantraVersion"></span>-Universal</p>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-left">
+      <button class="sidebar-toggle" id="sidebarToggle" title="Toggle sidebar"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h2 id="topbarTitle">Bookings</h2>
+        <p id="topbarSubtitle">Manage all reservations</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span id="onlineIndicator" class="online-indicator online">\uD83D\uDFE2 Online</span>
+      <button class="topbar-btn" id="notifBtn" title="Notifications" onclick="window.toggleNotificationDropdown(event)">
+        <i class="fas fa-bell"></i>
+        <span class="badge" id="notifBadge"></span>
+      </button>
+      <div class="notif-dropdown" id="notifDropdown" style="display:none;position:absolute;top:60px;right:140px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;min-width:320px;box-shadow:var(--shadow-lg);z-index:10000;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;border-bottom:1px solid var(--border-light);padding-bottom:10px;">
+          <i class="fas fa-bell" style="color:var(--accent);"></i>
+          <span style="font-weight:600;color:var(--text);">Recent Activity</span>
+        </div>
+        <div id="notifList" style="max-height:250px;overflow-y:auto;">
+          <p style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:20px 0;">No new activity</p>
+        </div>
+      </div>
+      <button class="topbar-btn" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+      <button class="topbar-btn" id="refreshBtn" title="Refresh data"><i class="fas fa-sync-alt"></i></button>
+      <div class="user-menu" id="userMenu">
+        <div class="user-avatar" id="userAvatar">M</div>
+        <div class="user-info">
+          <div class="name" id="userName">Manager</div>
+          <div class="role" id="userRole">admin</div>
+        </div>
+      </div>
+      <button class="logout-btn" id="logoutBtn" style="padding:8px 14px;font-size:0.78rem;"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </header>
+
+  <main class="main-content" id="mainContent" style="display:none;">
+    <div class="content-inner">
+
+      <div class="kpi-grid" id="stats" style="grid-template-columns: repeat(3, 1fr);">
+        <!-- ACTIONABLE DATA: Today's Pulse -->
+        <div class="kpi-card" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);cursor:default; border-left: 3px solid var(--gold);">
+          <div class="kpi-icon" style="color:var(--gold);"><i class="fas fa-sign-out-alt"></i></div>
+          <div class="kpi-value" id="statCheckouts">0</div>
+          <div class="kpi-label">Check-outs Today</div>
+        </div>
+        <div class="kpi-card" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);cursor:default; border-left: 3px solid var(--blue);">
+          <div class="kpi-icon"><i class="fas fa-plane-arrival"></i></div>
+          <div class="kpi-value" id="statArrivals">0</div>
+          <div class="kpi-label">Expected Arrivals</div>
+        </div>
+        <!-- ACTIONABLE DATA: Attention Required -->
+        <div class="kpi-card" style="--kpi-color:var(--red);--kpi-bg:var(--red-bg);cursor:pointer;" onclick="window.switchTab('availability')">
+          <div class="kpi-icon" style="color:var(--gold);"><i class="fas fa-exclamation-circle"></i></div>
+          <div class="kpi-value" id="statPending">0</div>
+          <div class="kpi-label">Pending Enquiries</div>
+        </div>
+        <!-- ACTIONABLE DATA: Revenue Glance -->
+        <div class="kpi-card" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);cursor:default; border-left: 3px solid var(--gold);">
+          <div class="kpi-icon" style="color:var(--gold);"><i class="fas fa-percent"></i></div>
+          <div class="kpi-value" id="occPct">0%</div>
+          <div class="kpi-label">Today's Occupancy</div>
+        </div>
+        <!-- Additional Stats -->
+        <div class="kpi-card stat-total" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);cursor:default;">
+          <div class="kpi-icon"><i class="fas fa-clipboard-list"></i></div>
+          <div class="kpi-value" id="statTotal">0</div>
+          <div class="kpi-label">Total Bookings</div>
+        </div>
+        <div class="kpi-card stat-today" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);cursor:default;">
+          <div class="kpi-icon"><i class="fas fa-calendar-day"></i></div>
+          <div class="kpi-value" id="statToday">0</div>
+          <div class="kpi-label">Today's Bookings</div>
+        </div>
+        <div class="kpi-card stat-active" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);cursor:default;">
+          <div class="kpi-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="kpi-value" id="statActive">0</div>
+          <div class="kpi-label">Active Bookings</div>
+        </div>
+      </div>
+
+      <div class="occupancy-bar" id="occupancyBar">
+        <h3><i class="fas fa-chart-bar"></i> Daily Occupancy</h3>
+        <div class="occupancy-date">
+          <label for="occDate">Date:</label>
+          <input type="date" id="occDate">
+        </div>
+        <div class="occupancy-stats">
+          <div class="occ-stat"><div class="occ-val gold" id="occTotal">0</div><div class="occ-label">Total Rooms</div></div>
+          <div class="occ-stat"><div class="occ-val red" id="occBooked">0</div><div class="occ-label">Booked</div></div>
+          <div class="occ-stat"><div class="occ-val green" id="occAvail">0</div><div class="occ-label">Available</div></div>
+          <div class="occ-stat occupancy-pct"><div class="occ-val" id="occPct">0%</div><div class="occ-label">Occupancy</div></div>
+        </div>
+      </div>
+
+      <div class="tab-panel active" id="tab-bookings">
+        <div class="priority-bar" id="priorityBar">
+          <div class="priority-pill new" id="pillNew" style="display:none;" onclick="document.getElementById('newBookingsSection').scrollIntoView({behavior:'smooth'})">
+            <i class="fas fa-bell"></i> New Bookings <span class="count" id="pillNewCount">0</span>
+          </div>
+          <div class="priority-pill today" id="pillToday" style="display:none;" onclick="document.getElementById('todayBookingsSection').scrollIntoView({behavior:'smooth'})">
+            <i class="fas fa-calendar-day"></i> Today <span class="count" id="pillTodayCount">0</span>
+          </div>
+        </div>
+        <div id="newBookingsSection" class="priority-section" style="display:none;"></div>
+        <div id="todayBookingsSection" class="priority-section" style="display:none;"></div>
+        <div class="filters">
+          <div class="search-box"><input type="text" id="searchInput" placeholder="Search name or phone..." aria-label="Search bookings by name or phone"></div>
+          <select class="filter-select" id="statusFilter" aria-label="Filter by status">
+            <option value="all">All Status</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <input type="date" class="date-filter" id="adminDateFilter" title="Filter by check-in date" aria-label="Filter by check-in date">
+        </div>
+        <div class="success-msg" id="successMsg">Booking cancelled successfully!</div>
+        <div class="table-wrap">
+          <div id="tableContent"><p class="loading">Loading bookings...</p></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-availability">
+        <div class="filters">
+          <input type="date" class="date-filter" id="availDateFilter" title="Check availability for date">
+          <span style="color:var(--text-secondary);font-size:0.85rem;">Select a date to see room availability</span>
+        </div>
+        <div id="availContent"><p class="empty">Select a date above to view availability</p></div>
+      </div>
+
+      <div class="tab-panel" id="tab-rooms">
+        <div class="success-msg" id="roomUpdateMsg">Room updated successfully!</div>
+        <div id="roomMgmtContent"><p class="loading">Loading rooms...</p></div>
+      </div>
+
+      <div class="tab-panel" id="tab-revenue">
+        <div class="filters">
+          <input type="date" class="date-filter" id="revDateFrom" title="From date">
+          <input type="date" class="date-filter" id="revDateTo" title="To date">
+          <button class="refresh-btn" id="calcRevenueBtn"><i class="fas fa-calculator"></i> Calculate</button>
+        </div>
+        <div class="revenue-charts" id="revenueCharts">
+          <div class="chart-card">
+            <h4>30-Day Revenue</h4>
+            <div class="bar-chart" id="revenueBarChart"><p class="empty" style="padding:20px 0;">Click Calculate to load</p></div>
+          </div>
+          <div class="chart-card">
+            <h4>Revenue by Room Type</h4>
+            <div id="revenuePieChart"><p class="empty" style="padding:20px 0;">Click Calculate to load</p></div>
+          </div>
+        </div>
+        <div class="kpi-grid" id="revStats">
+          <div class="kpi-card" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);">
+            <div class="kpi-icon"><i class="fas fa-indian-rupee-sign"></i></div>
+            <div class="kpi-value" id="revTotal">&#8377;0</div>
+            <div class="kpi-label">Total Revenue</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);">
+            <div class="kpi-icon"><i class="fas fa-calendar-day"></i></div>
+            <div class="kpi-value" id="revToday">&#8377;0</div>
+            <div class="kpi-label">Today's Revenue</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);">
+            <div class="kpi-icon"><i class="fas fa-calendar"></i></div>
+            <div class="kpi-value" id="revMonth">&#8377;0</div>
+            <div class="kpi-label">This Month</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--text-secondary);--kpi-bg:var(--bg-secondary);">
+            <div class="kpi-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="kpi-value" id="revAvg">&#8377;0</div>
+            <div class="kpi-label">Avg per Booking</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-shift-notes">
+        <div class="shift-notes-compose">
+          <textarea id="shiftNoteInput" placeholder="Write a note for the next shift..."></textarea>
+          <div class="shift-note-actions">
+            <select id="shiftNotePriority">
+              <option value="normal">Normal</option>
+              <option value="urgent">\uD83D\uDD34 Urgent</option>
+              <option value="low">Low</option>
+            </select>
+            <button class="btn-primary" onclick="window.postShiftNote()">Post Note</button>
+          </div>
+        </div>
+        <div class="shift-notes-filters">
+          <button class="filter-btn active" onclick="window.filterShiftNotes('all')">All</button>
+          <button class="filter-btn" onclick="window.filterShiftNotes('unresolved')">Unresolved</button>
+          <button class="filter-btn" onclick="window.filterShiftNotes('urgent')">\uD83D\uDD34 Urgent</button>
+        </div>
+        <div id="shiftNotesList"><p class="empty">No shift notes yet</p></div>
+      </div>
+
+      <div class="tab-panel" id="tab-analytics">
+        <div class="filters">
+          <select id="analyticsDays" onchange="window.loadAnalytics()">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+          </select>
+          <button class="refresh-btn" onclick="window.loadAnalytics()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <h4>Booking Trend</h4>
+            <div class="line-chart-container" id="analyticsTrendChart"><p class="empty">Loading...</p></div>
+          </div>
+          <div class="analytics-card">
+            <h4>Booking Sources</h4>
+            <div id="analyticsSourceBreakdown"><p class="empty">Loading...</p></div>
+          </div>
+          <div class="analytics-card">
+            <h4>Repeat Guests</h4>
+            <div id="analyticsRepeatGuests"><p class="empty">Loading...</p></div>
+          </div>
+          <div class="analytics-card">
+            <h4>Key Metrics</h4>
+            <div id="analyticsStats"><p class="empty">Loading...</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-audit-log">
+        <div class="audit-filters">
+          <select id="auditActionFilter" onchange="window.filterAuditLog()">
+            <option value="all">All Actions</option>
+            <option value="booking_cancelled">Booking Cancelled</option>
+            <option value="booking_completed">Booking Completed</option>
+            <option value="room_updated">Room Updated</option>
+            <option value="payment_recorded">Payment Recorded</option>
+            <option value="shift_note">Shift Note</option>
+          </select>
+          <input type="date" id="auditDateFrom" onchange="window.filterAuditLog()">
+          <input type="date" id="auditDateTo" onchange="window.filterAuditLog()">
+          <button class="refresh-btn" onclick="window.loadAuditLog()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+        <div id="auditLogContent"><p class="empty">Loading audit log...</p></div>
+      </div>
+
+      <div class="tab-panel" id="tab-calendar">
+        <div class="calendar-wrapper">
+          <div id="calendarContent"><p class="empty">Loading calendar...</p></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-settings">
+        <div class="settings-grid">
+          <div class="settings-card">
+            <div class="settings-card-header"><i class="fas fa-palette"></i><h4>Appearance</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row">
+                <div><div class="setting-label">Theme</div><div class="setting-desc">Choose your preferred theme</div></div>
+                <div class="setting-control">
+                  <select id="settingTheme" onchange="window.applySetting('theme', this.value)">
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Sidebar</div><div class="setting-desc">Expanded or collapsed</div></div>
+                <div class="setting-control">
+                  <select id="settingSidebar" onchange="window.applySetting('sidebar', this.value)">
+                    <option value="expanded">Expanded</option>
+                    <option value="collapsed">Collapsed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Default Tab</div><div class="setting-desc">Landing page on login</div></div>
+                <div class="setting-control">
+                  <select id="settingDefaultTab" onchange="window.applySetting('defaultTab', this.value)">
+                    <option value="bookings">Bookings</option>
+                    <option value="availability">Availability</option>
+                    <option value="calendar">Calendar</option>
+                    <option value="revenue">Revenue</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-header"><i class="fas fa-list-ol"></i><h4>Display</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row">
+                <div><div class="setting-label">Items per page</div><div class="setting-desc">Bookings shown per page</div></div>
+                <div class="setting-control">
+                  <select id="settingPerPage" onchange="window.applySetting('perPage', this.value)">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Date Format</div><div class="setting-desc">How dates are displayed</div></div>
+                <div class="setting-control">
+                  <select id="settingDateFormat" onchange="window.applySetting('dateFormat', this.value)">
+                    <option value="DD Mon, YYYY">DD Mon, YYYY</option>
+                    <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                  </select>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Time Format</div><div class="setting-desc">12-hour or 24-hour clock</div></div>
+                <div class="setting-control">
+                  <select id="settingTimeFormat" onchange="window.applySetting('timeFormat', this.value)">
+                    <option value="12">12-hour</option>
+                    <option value="24">24-hour</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-header"><i class="fas fa-bell"></i><h4>Notifications</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row">
+                <div><div class="setting-label">Notification Sound</div><div class="setting-desc">Play sound on new booking</div></div>
+                <div class="setting-control">
+                  <label class="toggle-switch"><input type="checkbox" id="settingSound" checked onchange="window.applySetting('sound', this.checked)"><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Auto-refresh</div><div class="setting-desc">Automatically refresh data</div></div>
+                <div class="setting-control">
+                  <select id="settingAutoRefresh" onchange="window.applySetting('autoRefresh', this.value)">
+                    <option value="0">Off</option>
+                    <option value="30">Every 30s</option>
+                    <option value="60">Every 60s</option>
+                    <option value="300">Every 5min</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-header"><i class="fas fa-database"></i><h4>Data & Export</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row">
+                <div><div class="setting-label">Export Bookings</div><div class="setting-desc">Download as CSV file</div></div>
+                <div class="setting-control"><button class="setting-btn" onclick="window.exportBookingsCSV()"><i class="fas fa-download"></i> Export</button></div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Export Revenue</div><div class="setting-desc">Download revenue report</div></div>
+                <div class="setting-control"><button class="setting-btn" onclick="window.exportRevenueCSV()"><i class="fas fa-download"></i> Export</button></div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Reset Preferences</div><div class="setting-desc">Clear all custom settings</div></div>
+                <div class="setting-control"><button class="setting-btn danger" onclick="window.resetSettings()"><i class="fas fa-trash"></i> Reset</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-header"><i class="fas fa-keyboard"></i><h4>Keyboard Shortcuts</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">Ctrl+K</kbd></div><div class="setting-desc">Focus search</div></div>
+              <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">Ctrl+R</kbd></div><div class="setting-desc">Refresh data</div></div>
+              <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">Esc</kbd></div><div class="setting-desc">Close modals</div></div>
+              <div class="setting-row"><div class="setting-label"><kbd style="background:var(--bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.75rem;">1-5</kbd></div><div class="setting-desc">Switch tabs</div></div>
+            </div>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-header"><i class="fas fa-info-circle"></i><h4>About</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row"><div class="setting-label">Version</div><div class="setting-desc">v2.0.0 Enterprise Edition</div></div>
+              <div class="setting-row"><div class="setting-label">Backend</div><div class="setting-desc">Supabase + PostgreSQL</div></div>
+              <div class="setting-row">
+                <div class="setting-label">Credits</div>
+                <div class="setting-desc">Designed &amp; Developed by <a href="#" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;font-weight:600;">Vyantra Studio</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ota-import-section" id="otaImportSection" style="margin-top:20px;">
+          <h4><i class="fas fa-file-import"></i> Import OTA Bookings</h4>
+          <p>Upload CSV from MakeMyTrip, Booking.com, or other platforms</p>
+          <input type="file" id="otaCsvFile" accept=".csv" onchange="window.previewOtaImport()">
+          <div id="otaPreview" class="ota-preview"></div>
+          <button class="btn-primary" id="importOtaBtn" onclick="window.importOtaBookings()" style="display:none;margin-top:12px;"><i class="fas fa-upload"></i> Import Bookings</button>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-help">
+        <div class="priority-section" style="margin-bottom: 30px;">
+          <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 8px;">Manager's Playbook</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">Real scenarios, real solutions for Kerala hospitality.</p>
+        </div>
+
+        <!-- Scenario-Based Guide -->
+        <div style="display:flex;flex-direction:column;gap:12px;max-width:700px;">
+          
+          <details class="kpi-card" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);padding:20px;" open>
+            <summary style="font-weight:600;font-size:1.1rem;display:flex;align-items:center;gap:10px;list-style:none;">
+              <i class="fas fa-user-plus" style="color:var(--gold);"></i> Scenario: Walk-in Guest
+            </summary>
+            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light);font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
+              <p style="margin-bottom:10px;"><strong>Problem:</strong> A guest walks in without a prior booking.</p>
+              <p style="margin-bottom:10px;"><strong>Solution:</strong></p>
+              <p style="margin-bottom:8px;">1. Go to <strong>"Rooms"</strong> in sidebar</p>
+              <p style="margin-bottom:8px;">2. Find an available room and toggle it to "Occupied"</p>
+              <p style="margin-bottom:8px;">3. <strong>Don't create a booking yet</strong> - just mark the room occupied</p>
+              <p>4. Click <strong>"Save All Room Changes"</strong> to update the live system</p>
+            </div>
+          </details>
+
+          <details class="kpi-card" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);padding:20px;">
+            <summary style="font-weight:600;font-size:1.1rem;display:flex;align-items:center;gap:10px;list-style:none;">
+              <i class="fas fa-tags" style="color:var(--gold);"></i> Scenario: Festival Season Pricing
+            </summary>
+            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light);font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
+              <p style="margin-bottom:10px;"><strong>Problem:</strong> It's Onam/Vishu and you need to raise rates.</p>
+              <p style="margin-bottom:10px;"><strong>Solution:</strong></p>
+              <p style="margin-bottom:8px;">1. Go to <strong>"Rooms"</strong> in sidebar</p>
+              <p style="margin-bottom:8px;">2. Update the price field for each room type</p>
+              <p style="margin-bottom:8px;">3. Scroll to <strong>"Save All Room Changes"</strong> at bottom</p>
+              <p>4. The booking page updates automatically! No code changes needed.</p>
+              <p style="margin-top:10px;color:var(--text-muted);"><em>Pro tip: Kerala festivals = higher demand. Check your WhatsApp for enquiry spikes!</em></p>
+            </div>
+          </details>
+
+          <details class="kpi-card" style="--kpi-color:var(--red);--kpi-bg:var(--red-bg);padding:20px;">
+            <summary style="font-weight:600;font-size:1.1rem;display:flex;align-items:center;gap:10px;list-style:none;">
+              <i class="fas fa-ban" style="color:var(--gold);"></i> Scenario: Dealing with Spam/Fake Bookings
+            </summary>
+            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light);font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
+              <p style="margin-bottom:10px;"><strong>Problem:</strong> You receive obviously fake bookings.</p>
+              <p style="margin-bottom:10px;"><strong>Solution:</strong></p>
+              <p style="margin-bottom:8px;">1. The system has <strong>Rate Limiter</strong> built-in - it blocks repeated spam automatically</p>
+              <p style="margin-bottom:8px;">2. Go to <strong>"Bookings"</strong> tab</p>
+              <p style="margin-bottom:8px;">3. Find the fake entry and click <strong>"Cancel"</strong></p>
+              <p>4. Optionally delete the booking permanently</p>
+            </div>
+          </details>
+
+          <details class="kpi-card" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);padding:20px;">
+            <summary style="font-weight:600;font-size:1.1rem;display:flex;align-items:center;gap:10px;list-style:none;">
+              <i class="fas fa-clock" style="color:var(--gold);"></i> Scenario: Shift Hand-over
+            </summary>
+            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light);font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
+              <p style="margin-bottom:10px;"><strong>Problem:</strong> Morning shift handing over to evening.</p>
+              <p style="margin-bottom:10px;"><strong>Solution:</strong></p>
+              <p style="margin-bottom:8px;">1. Go to <strong>"Shift Notes"</strong> in sidebar</p>
+              <p style="margin-bottom:8px;">2. Write notes about pending guests, issues, etc.</p>
+              <p style="margin-bottom:8px;">3. Click <strong>"Post Note"</strong></p>
+              <p>4. Next shift sees your notes immediately on login</p>
+            </div>
+          </details>
+
+        </div>
+
+        <div class="settings-grid" style="margin-top: 30px;">
+          <div class="settings-card" style="grid-column: span 1;">
+            <div class="settings-card-header"><i class="fas fa-book-open"></i><h4>System Instructions & FAQs</h4></div>
+            <div class="settings-card-body" id="faqList">
+              <div class="setting-row" style="flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 16px;">
+                <div class="setting-label" style="font-weight: 600; font-size: 0.95rem;">How do I message a guest via WhatsApp?</div>
+                <div class="setting-desc" style="white-space: normal; line-height: 1.5; font-size: 0.85rem;">In the Bookings tab, simply click the WhatsApp icon next to any guest's name. It will automatically prepare a greeting message with their details for rapid follow-ups.</div>
+              </div>
+              <div class="setting-row" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 0;">
+                <div class="setting-label" style="font-weight: 600; font-size: 0.95rem;">How do I process a Check-in or Check-out?</div>
+                <div class="setting-desc" style="white-space: normal; line-height: 1.5; font-size: 0.85rem;">Locate the reservation. Use the Status dropdown to update it to 'Active' for check-in, or 'Completed' for check-out. The Room Availability tab will update securely in real-time.</div>
+              </div>
+              <div class="setting-row" style="flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 16px; border-bottom: none;">
+                <div class="setting-label" style="font-weight: 600; font-size: 0.95rem;">What if a manager needs to restrict staff access?</div>
+                <div class="setting-desc" style="white-space: normal; line-height: 1.5; font-size: 0.85rem;">This system strictly uses Multi-Tenant Row Level Security. General staff members (receptionists) securely log in without seeing manager-exclusive tabs like Audit Logs or Revenue reports.</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="settings-card" style="grid-column: span 1;">
+            <div class="settings-card-header"><i class="fas fa-server"></i><h4>System Status</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row">
+                <div class="setting-label">Supabase Database Connection</div>
+                <div class="status-badge active">Operational</div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-label">Real-time Synchronization</div>
+                <div class="status-badge active">Operational</div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-label">WhatsApp Integration</div>
+                <div class="status-badge active">Operational</div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-label">Last Database Sync</div>
+                <div class="setting-desc" id="helpLastSync" style="font-weight: 500; color: var(--green);">Just now</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="login-screen show" id="loginScreen">
+    <div class="login-box">
+      <div class="logo">&#9784;</div>
+      <h2>Admin Panel</h2>
+      <p class="sub">Sign in to manage bookings</p>
+      <form id="loginForm" role="form" aria-label="Admin login form">
+        <input type="email" id="emailInput" placeholder="Email address" required autocomplete="email" aria-label="Email address">
+        <input type="password" id="passwordInput" placeholder="Password" required autocomplete="current-password" aria-label="Password">
+        <button type="submit" class="login-btn" id="loginBtn" aria-label="Sign in">Sign In</button>
+      </form>
+      <p class="login-error" id="loginError"></p>
+    </div>
+  </div>
+
+  <div id="appError" style="display:none;position:fixed;inset:0;background:#0a0e1a;color:#f1f5f9;font-family:'DM Sans',sans-serif;text-align:center;padding:60px 20px;z-index:99999;overflow:auto;">
+    <h2 style="color:#f87171;margin-bottom:16px;font-family:'Outfit',sans-serif;">Application Error</h2>
+    <p id="appErrorMsg" style="color:#94a3b8;max-width:500px;margin:0 auto 16px;line-height:1.6;font-size:1.1rem;"></p>
+    <p id="appErrorDetails" style="display:none;color:#64748b;max-width:600px;margin:0 auto 24px;line-height:1.6;font-size:0.9rem;font-family:monospace;background:#1e293b;padding:16px;border-radius:8px;text-align:left;white-space:pre-wrap;word-break:break-all;"></p>
+    <button onclick="location.reload()" style="background:linear-gradient(135deg,#d4a843,#b8922e);color:#0f172a;border:none;padding:12px 32px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Reload Page</button>
+    <div style="margin-top:20px;color:#64748b;font-size:0.85rem;">
+      <p>If the problem persists, note the error details and contact technical support.</p>
+      <p style="margin-top:8px;">Common solutions:</p>
+      <ul style="text-align:left;max-width:400px;margin:10px auto;list-style:disc;display:inline-block;">
+        <li>Clear browser cache (Ctrl+Shift+Delete)</li>
+        <li>Check internet connection</li>
+        <li>Try a different browser</li>
+        <li>Disable browser extensions temporarily</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+  <div class="wa-modal" id="waModal">
+    <div class="wa-modal-content">
+      <h4><i class="fab fa-whatsapp" style="color:#25D366;"></i> WhatsApp Message</h4>
+      <textarea id="waMsgText" readonly></textarea>
+      <div class="wa-modal-actions">
+        <button class="wa-modal-btn wa-modal-btn-copy" id="copyWaMsgBtn"><i class="fas fa-copy"></i> Copy</button>
+        <button class="wa-modal-btn wa-modal-btn-open" id="openWaMsgBtn"><i class="fab fa-whatsapp"></i> Open in WhatsApp</button>
+        <button class="wa-modal-btn wa-modal-btn-close" id="closeWaModalBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-modal" id="bookingDetailModal">
+    <div class="detail-modal-content">
+      <div class="detail-modal-header">
+        <h3><i class="fas fa-receipt"></i> Booking Details</h3>
+        <button class="detail-modal-btn detail-modal-btn-close" onclick="window.closeBookingDetail()"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="bookingDetailBody"></div>
+      <div id="bookingDetailFooter" class="detail-actions"></div>
+    </div>
+  </div>
+
+  <div class="detail-modal" id="paymentModal">
+    <div class="detail-modal-content">
+      <div class="detail-modal-header">
+        <h3><i class="fas fa-money-bill-wave"></i> Record Payment</h3>
+        <button class="detail-modal-btn detail-modal-btn-close" onclick="window.closePaymentModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="detail-section">
+        <div class="detail-row"><span class="label">Guest</span><span class="value" id="payGuestName"></span></div>
+        <div class="detail-row"><span class="label">Room</span><span class="value" id="payRoomName"></span></div>
+        <div class="detail-row"><span class="label">Expected Amount</span><span class="value" id="payExpectedAmount"></span></div>
+      </div>
+      <div class="detail-section">
+        <div class="setting-row" style="border:none;padding:8px 0;">
+          <div><div class="setting-label">Discount (&#8377;)</div></div>
+          <div class="setting-control"><input type="number" id="payDiscount" min="0" step="1" value="0" style="width:120px;" oninput="window.calcDiscount()"></div>
+        </div>
+        <div class="setting-row" style="border:none;padding:8px 0;">
+          <div><div class="setting-label">Cash Given / Payable (&#8377;)</div></div>
+          <div class="setting-control"><input type="number" id="payAmount" min="0" step="1" style="width:120px;"></div>
+        </div>
+        <div class="setting-row" style="border:none;padding:8px 0;">
+          <div><div class="setting-label">Payment Type</div></div>
+          <div class="setting-control"><select id="payType"><option value="advance">Advance</option><option value="full">Full</option><option value="early">Early</option><option value="checkout">Checkout</option><option value="partial">Partial</option></select></div>
+        </div>
+        <div class="setting-row" style="border:none;padding:8px 0;">
+          <div><div class="setting-label">Method</div></div>
+          <div class="setting-control"><select id="payMethod"><option value="cash">Cash</option><option value="upi">UPI</option><option value="card">Card</option><option value="bank_transfer">Bank Transfer</option><option value="waiver">Waiver</option></select></div>
+        </div>
+        <div class="setting-row" style="border:none;padding:8px 0;">
+          <div><div class="setting-label">Notes</div></div>
+          <div class="setting-control"><input type="text" id="payNotes" style="width:200px;" placeholder="Optional"></div>
+        </div>
+      </div>
+      <div class="detail-actions">
+        <button class="detail-action-btn primary" onclick="window.submitPayment()">Record Payment</button>
+        <button class="detail-action-btn" onclick="window.closePaymentModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-modal" id="guestHistoryModal">
+    <div class="detail-modal-content">
+      <div class="detail-modal-header">
+        <h3><i class="fas fa-user"></i> Guest History</h3>
+        <button class="detail-modal-btn detail-modal-btn-close" onclick="window.closeGuestHistory()"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="guestHistoryBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // Universal Property ID - Must load BEFORE vyantra-core.js and Supabase
+    window.VYANTRA_PROP_ID = 'sreekrishna';
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="vyantra-core.js"></script>
+  <script>
+    (function() {
+      'use strict';
+
+      var IS_PROD = false;
+      var SUPABASE_URL = 'https://chjwvpvsxeczvwqyouiw.supabase.co';
+      var SUPABASE_KEY = 'sb_publishable_NzVSE86YgeHsKbVYqOLGGw_MT1YQO3n';
+
+      var supabase = window.VyantraCore ? VyantraCore.initSupabase(SUPABASE_URL, SUPABASE_KEY) : window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      var currentUserPropertyId = 'sreekrishna'; // Will be overridden by JWT metadata
+      var allBookings = [];
+      var allRooms = [];
+      var allShiftNotes = [];
+      var allAuditLogs = [];
+      var lastBookingCount = 0;
+      var currentUserRole = null;
+      var currentPage = 1;
+      var itemsPerPage = 20;
+      var totalBookingCount = 0;
+      var lastBookingTime = '';
+      var refreshInterval = null;
+      var settings = loadSettings();
+      var currentShiftNoteFilter = 'all';
+      var currentAuditFilter = 'all';
+      var currentPaymentBookingId = null;
+      var currentDetailBookingId = null;
+      var otaCsvData = [];
+
+      function loadSettings() {
+        try {
+          var s = JSON.parse(localStorage.getItem('adminSettings') || '{}');
+          return {
+            theme: s.theme || 'dark',
+            sidebar: s.sidebar || 'expanded',
+            defaultTab: s.defaultTab || 'bookings',
+            perPage: parseInt(s.perPage, 10) || 20,
+            dateFormat: s.dateFormat || 'DD Mon, YYYY',
+            timeFormat: s.timeFormat || '12',
+            sound: s.sound !== false,
+            autoRefresh: (s.autoRefresh !== undefined) ? parseInt(s.autoRefresh, 10) : 30
+          };
+        } catch(e) {
+          return { theme:'dark', sidebar:'expanded', defaultTab:'bookings', perPage:20, dateFormat:'DD Mon, YYYY', timeFormat:'12', sound:true, autoRefresh:0 };
+        }
+      }
+
+      function saveSettings() {
+        try { localStorage.setItem('adminSettings', JSON.stringify(settings)); } catch(e) {}
+      }
+
+      function sanitize(str) {
+        if (str == null) return '-';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+      }
+
+      function debounce(fn, delay) {
+        var timer;
+        return function() {
+          var context = this, args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(function() { fn.apply(context, args); }, delay);
+        };
+      }
+
+      var Logger = {
+        info: function() { if (!IS_PROD) console.log.apply(console, arguments); },
+        error: function() { if (!IS_PROD) console.error.apply(console, arguments); },
+        warn: function() { if (!IS_PROD) console.warn.apply(console, arguments); }
+      };
+
+      var audioCtx = null;
+      function playNotificationSound() {
+        if (!settings.sound) return;
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          var osc = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.frequency.value = 880; osc.type = 'sine';
+          gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+          osc.start(audioCtx.currentTime); osc.stop(audioCtx.currentTime + 0.5);
+        } catch(e) { Logger.warn('Sound failed:', e); }
+      }
+
+      var audioInitialized = false;
+      document.addEventListener('click', function initAudioOnce() {
+        if (!audioInitialized) {
+          audioInitialized = true;
+          try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+          } catch(e) {}
+        }
+      }, { once: true });
+
+      window.applySetting = function(key, value) {
+        if (key === 'perPage') value = parseInt(value, 10);
+        if (key === 'autoRefresh') value = parseInt(value, 10);
+        if (key === 'sound') value = !!value;
+        settings[key] = value;
+        saveSettings();
+        if (key === 'theme') applyTheme(value);
+        if (key === 'sidebar') toggleSidebar(value === 'collapsed');
+        if (key === 'perPage') { itemsPerPage = value; currentPage = 1; filterAndRender(); }
+        if (key === 'autoRefresh') setupAutoRefresh(value);
+      };
+
+      function loadSettingsUI() {
+        var el = function(id) { return document.getElementById(id); };
+        if (el('settingTheme')) el('settingTheme').value = settings.theme;
+        if (el('settingSidebar')) el('settingSidebar').value = settings.sidebar;
+        if (el('settingDefaultTab')) el('settingDefaultTab').value = settings.defaultTab;
+        if (el('settingPerPage')) el('settingPerPage').value = String(settings.perPage);
+        if (el('settingDateFormat')) el('settingDateFormat').value = settings.dateFormat;
+        if (el('settingTimeFormat')) el('settingTimeFormat').value = settings.timeFormat;
+        if (el('settingSound')) el('settingSound').checked = settings.sound;
+        if (el('settingAutoRefresh')) el('settingAutoRefresh').value = String(settings.autoRefresh);
+        itemsPerPage = settings.perPage;
+      }
+
+      window.resetSettings = function() {
+        if (!confirm('Reset all settings to defaults?')) return;
+        localStorage.removeItem('adminSettings');
+        settings = { theme:'dark', sidebar:'expanded', defaultTab:'bookings', perPage:20, dateFormat:'DD Mon, YYYY', timeFormat:'12', sound:true, autoRefresh:0 };
+        loadSettingsUI();
+        applyTheme('dark');
+        toggleSidebar(false);
+        itemsPerPage = 20;
+        currentPage = 1;
+        filterAndRender();
+        showToast('Settings reset to defaults');
+      };
+
+      window.exportBookingsCSV = function() {
+        if (!allBookings.length) { showToast('No bookings to export', 'error'); return; }
+        var roomMap = {};
+        allRooms.forEach(function(r) { roomMap[r.id] = r.name; });
+        var rows = [['ID','Guest','Phone','Room','Check-in','Check-out','Nights','Amount','Status','Booked']];
+        allBookings.forEach(function(b) {
+          var nights = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
+          var price = b.price_at_booking || (roomMap[b.room_id] ? roomMap[b.room_id].price || 0 : 0);
+          rows.push([b.id, b.customer_name, b.phone, roomMap[b.room_id]||'', b.check_in, b.check_out, nights, price*nights, b.status, b.created_at]);
+        });
+        downloadCSV(rows, 'bookings_' + new Date().toISOString().slice(0,10) + '.csv');
+      };
+
+      window.exportRevenueCSV = function() {
+        if (!allBookings.length) { showToast('No data to export', 'error'); return; }
+        var roomMap = {};
+        allRooms.forEach(function(r) { roomMap[r.id] = r.name; });
+        var rows = [['Booking ID','Guest','Room','Check-in','Check-out','Nights','Price','Revenue','Status']];
+        allBookings.forEach(function(b) {
+          if (b.status !== 'active') return;
+          var nights = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
+          var price = b.price_at_booking || (roomMap[b.room_id] ? roomMap[b.room_id].price || 0 : 0);
+          rows.push([b.id, b.customer_name, roomMap[b.room_id]||'', b.check_in, b.check_out, nights, price, price*nights, b.status]);
+        });
+        downloadCSV(rows, 'revenue_' + new Date().toISOString().slice(0,10) + '.csv');
+      };
+
+      function downloadCSV(rows, filename) {
+        var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
+        var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = filename; a.click();
+        URL.revokeObjectURL(url);
+        showToast('File downloaded: ' + filename);
+      }
+
+      var sidebar = document.getElementById('sidebar');
+      var sidebarOverlay = document.getElementById('sidebarOverlay');
+      var isMobile = window.innerWidth <= 1024;
+
+      window.addEventListener('resize', debounce(function() {
+        isMobile = window.innerWidth <= 1024;
+        if (!isMobile) { sidebarOverlay.classList.remove('show'); sidebar.classList.remove('mobile-open'); }
+      }, 100));
+
+      document.getElementById('sidebarToggle').addEventListener('click', function() {
+        if (isMobile) {
+          sidebar.classList.toggle('mobile-open');
+          sidebarOverlay.classList.toggle('show');
+        } else {
+          sidebar.classList.toggle('collapsed');
+          settings.sidebar = sidebar.classList.contains('collapsed') ? 'collapsed' : 'expanded';
+          saveSettings();
+          if (document.getElementById('settingSidebar')) document.getElementById('settingSidebar').value = settings.sidebar;
+        }
+      });
+
+      sidebarOverlay.addEventListener('click', function() {
+        sidebar.classList.remove('mobile-open');
+        sidebarOverlay.classList.remove('show');
+      });
+
+      function toggleSidebar(collapsed) {
+        if (isMobile) return;
+        if (collapsed) { sidebar.classList.add('collapsed'); } else { sidebar.classList.remove('collapsed'); }
+      }
+
+      window.toggleNotificationDropdown = function(e) {
+        e.stopPropagation();
+        var dropdown = document.getElementById('notifDropdown');
+        if (dropdown) {
+          dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
+      };
+      document.addEventListener('click', function() {
+        var dropdown = document.getElementById('notifDropdown');
+        if (dropdown) dropdown.style.display = 'none';
+      });
+      
+      window.switchTab = function(tabName) {
+        document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+        var navItem = document.querySelector('.nav-item[data-tab="' + tabName + '"]');
+        if (navItem) navItem.classList.add('active');
+        document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+        var target = document.getElementById('tab-' + tabName);
+        if (target) target.classList.add('active');
+        var titles = { bookings:'Bookings', 'shift-notes':'Shift Notes', availability:'Availability', calendar:'Calendar', revenue:'Revenue', analytics:'Analytics', 'audit-log':'Audit Log', rooms:'Rooms', settings:'Settings', help:'Help Center' };
+        var subtitles = { bookings:'Manage all reservations', 'shift-notes':'Handover notes between shifts', availability:'Check room availability', calendar:'14-day booking overview', revenue:'Financial analytics', analytics:'Booking trends & insights', 'audit-log':'Activity & change history', rooms:'Manage room types & pricing', settings:'Customize your experience', help:'Documentation and support' };
+        document.getElementById('topbarTitle').textContent = titles[tabName] || 'Dashboard';
+        document.getElementById('topbarSubtitle').textContent = subtitles[tabName] || '';
+        if (isMobile) { sidebar.classList.remove('mobile-open'); sidebarOverlay.classList.remove('show'); }
+        if (tabName === 'analytics') window.loadAnalytics();
+        if (tabName === 'audit-log') window.loadAuditLog();
+        if (tabName === 'shift-notes') window.loadShiftNotes();
+      };
+
+      var currentTheme = settings.theme || 'dark';
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        var themeBtn = document.getElementById('themeToggle');
+        if (themeBtn) themeBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+      applyTheme(currentTheme);
+      document.getElementById('themeToggle').addEventListener('click', function() {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(currentTheme);
+        settings.theme = currentTheme;
+        saveSettings();
+        if (document.getElementById('settingTheme')) document.getElementById('settingTheme').value = currentTheme;
+      });
+
+      function setupAutoRefresh(seconds) {
+        if (refreshInterval) clearInterval(refreshInterval);
+        if (seconds > 0 && navigator.onLine) {
+          refreshInterval = setInterval(function() { loadBookings(); }, seconds * 1000);
+        }
+      }
+
+      function updateOnlineStatus() {
+        var el = document.getElementById('onlineIndicator');
+        if (!el) return;
+        if (navigator.onLine) {
+          el.className = 'online-indicator online';
+          el.textContent = '\uD83D\uDFE2 Online';
+          if (settings.autoRefresh > 0) setupAutoRefresh(settings.autoRefresh);
+        } else {
+          el.className = 'online-indicator offline';
+          el.textContent = '\uD83D\uDD34 Offline';
+          if (refreshInterval) clearInterval(refreshInterval);
+        }
+      }
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+
+      function getGuestVisitCount(phone) {
+        if (!phone) return 0;
+        return allBookings.filter(function(b) { return b.phone === phone && (b.status === 'active' || b.status === 'completed'); }).length;
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'k') { e.preventDefault(); var s = document.getElementById('searchInput'); if (s) s.focus(); }
+        if (e.ctrlKey && e.key === 'r') { e.preventDefault(); loadBookings(); }
+        if (e.key === 'Escape') { window.closeBookingDetail(); window.closePaymentModal(); window.closeGuestHistory(); window.closeWaModal(); }
+        if (!e.ctrlKey && !e.altKey && !e.metaKey && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA' && document.activeElement.tagName !== 'SELECT') {
+          var tabs = ['bookings','shift-notes','availability','calendar','revenue','analytics','audit-log'];
+          var num = parseInt(e.key, 10);
+          if (num >= 1 && num <= 5) { window.switchTab(tabs[num - 1]); }
+        }
+      });
+
+      var els = {
+        loginScreen: document.getElementById('loginScreen'),
+        dashboard: document.getElementById('mainContent'),
+        loginForm: document.getElementById('loginForm'),
+        emailInput: document.getElementById('emailInput'),
+        passwordInput: document.getElementById('passwordInput'),
+        loginBtn: document.getElementById('loginBtn'),
+        loginError: document.getElementById('loginError'),
+        searchInput: document.getElementById('searchInput'),
+        statusFilter: document.getElementById('statusFilter'),
+        adminDateFilter: document.getElementById('adminDateFilter'),
+        availDateFilter: document.getElementById('availDateFilter'),
+        tableContent: document.getElementById('tableContent'),
+        successMsg: document.getElementById('successMsg'),
+        statTotal: document.getElementById('statTotal'),
+        statToday: document.getElementById('statToday'),
+        statActive: document.getElementById('statActive'),
+        statCancelled: document.getElementById('statCancelled'),
+        statCheckins: document.getElementById('statCheckins'),
+        occDate: document.getElementById('occDate'),
+        availContent: document.getElementById('availContent'),
+        roomMgmtContent: document.getElementById('roomMgmtContent'),
+        roleBadge: null
+      };
+
+      async function loadUserRole() {
+        try {
+          var result = await supabase.auth.getUser();
+          if (result.error) {
+            Logger.error('Get user error:', result.error);
+            currentUserRole = null;
+            return;
+          }
+          if (result.data && result.data.user && result.data.user.user_metadata) {
+            currentUserRole = result.data.user.user_metadata.role;
+            currentUserPropertyId = result.data.user.user_metadata.property_id || 'sreekrishna';
+          } else {
+            currentUserRole = 'receptionist';
+          }
+        } catch(e) {
+          Logger.error('Role load error:', e);
+          currentUserRole = 'receptionist';
+        }
+      }
+
+      function updateRoleBadge() {
+        var userName = document.getElementById('userName');
+        var userRole = document.getElementById('userRole');
+        var userAvatar = document.getElementById('userAvatar');
+        if (userName) userName.textContent = currentUserRole === 'manager' ? 'Manager' : 'Receptionist';
+        if (userRole) userRole.textContent = currentUserRole || 'unauthenticated';
+        if (userAvatar) userAvatar.textContent = (currentUserRole || 'U').charAt(0).toUpperCase();
+      }
+
+      function applyRolePermissions() {
+        updateRoleBadge();
+        
+        if (currentUserRole === 'manager') {
+          if (roomsTab) roomsTab.style.display = '';
+          if (auditLogTab) auditLogTab.style.display = '';
+        } else {
+          if (roomsTab) roomsTab.style.display = 'none';
+          if (auditLogTab) auditLogTab.style.display = 'none';
+        }
+      }
+
+      async function showDashboard(session) {
+        await loadUserRole();
+        if (!currentUserRole) { currentUserRole = 'receptionist'; }
+        applyRolePermissions();
+        els.loginScreen.classList.remove('show');
+        els.dashboard.style.display = 'block';
+        var defaultTab = settings.defaultTab || 'bookings';
+        if (defaultTab === 'rooms' && currentUserRole !== 'manager') { defaultTab = 'bookings'; }
+        if (defaultTab === 'audit-log' && currentUserRole !== 'manager') { defaultTab = 'bookings'; }
+        window.switchTab(defaultTab);
+        loadBookings();
+        setupAutoRefresh(settings.autoRefresh);
+      }
+
+      function showLogin() {
+        els.dashboard.style.display = 'none';
+        els.loginScreen.classList.add('show');
+      }
+
+      function checkSession() {
+        supabase.auth.getSession().then(function(r) {
+          if (r.error) { showLogin(); return; }
+          if (r.data && r.data.session) {
+            showDashboard(r.data.session);
+          } else {
+            showLogin();
+          }
+        }).catch(function(err) {
+          Logger.error('Session check error:', err);
+          showLogin();
+        });
+      }
+
+      function initApp() {
+        if (!supabase) {
+          supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        }
+        supabase.from('rooms').select('id').limit(1).then(function(r) {
+          if (r.error) {
+            console.error('Connection test failed:', r.error);
+            var errEl = document.getElementById('loginError') || document.querySelector('.login-error');
+            if (errEl) {
+              errEl.textContent = 'Connection error: ' + r.error.message;
+              errEl.classList.add('show');
+            }
+          } else {
+            console.log('Connection test passed');
+          }
+        }).catch(function(err) {
+          console.error('Connection test exception:', err);
+          var errEl = document.getElementById('loginError') || document.querySelector('.login-error');
+          if (errEl) {
+            errEl.textContent = 'Connection error: ' + err.message;
+            errEl.classList.add('show');
+          }
+        });
+        supabase.auth.onAuthStateChange(function(event, session) {
+          if (event === 'SIGNED_OUT' || (event === 'TOKEN_REFRESHED' && !session)) window.location.reload();
+        });
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+          supabase.auth.signOut().then(function() { window.location.reload(); }).catch(function(err) { Logger.error('Logout error:', err); window.location.reload(); });
+        });
+        els.loginForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          els.loginError.classList.remove('show');
+          els.loginBtn.classList.add('loading');
+          els.loginBtn.disabled = true;
+          var email = els.emailInput.value.trim();
+          var password = els.passwordInput.value;
+          supabase.auth.signInWithPassword({ email: email, password: password }).then(function(r) {
+            if (r.error) {
+              els.loginBtn.classList.remove('loading');
+              els.loginBtn.disabled = false;
+              els.loginError.textContent = r.error.message === 'Invalid login credentials' ? 'Incorrect email or password' : r.error.message;
+              els.loginError.classList.add('show');
+              return;
+            }
+            els.loginBtn.classList.remove('loading');
+            els.loginBtn.disabled = false;
+            els.emailInput.value = '';
+            els.passwordInput.value = '';
+            showDashboard(r.data.session);
+          }).catch(function(err) {
+            els.loginBtn.classList.remove('loading');
+            els.loginBtn.disabled = false;
+            els.loginError.textContent = err.message || 'Login failed. Please try again.';
+            els.loginError.classList.add('show');
+          });
+        });
+        loadSettingsUI();
+        checkSession();
+      }
+
+      document.getElementById('refreshBtn').addEventListener('click', loadBookings);
+      document.getElementById('calcRevenueBtn').addEventListener('click', function() { window.calcRevenue(); });
+      els.searchInput.addEventListener('input', debounce(resetPagination, 300));
+      els.statusFilter.addEventListener('change', resetPagination);
+      els.adminDateFilter.addEventListener('change', resetPagination);
+      els.availDateFilter.addEventListener('change', renderAvailability);
+      if (els.occDate) {
+        els.occDate.value = new Date().toISOString().substring(0, 10);
+        els.occDate.addEventListener('change', calcOccupancy);
+      }
+      var revFrom = document.getElementById('revDateFrom');
+      var revTo = document.getElementById('revDateTo');
+      if (revFrom) {
+        var now = new Date();
+        revFrom.value = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().substring(0, 10);
+        revTo.value = now.toISOString().substring(0, 10);
+      }
+
+      function getDateFormatParts() {
+        var fmt = settings.dateFormat || 'DD Mon, YYYY';
+        if (fmt === 'DD/MM/YYYY') return { day:'2-digit', month:'2-digit', year:'numeric' };
+        if (fmt === 'MM/DD/YYYY') return { month:'2-digit', day:'2-digit', year:'numeric' };
+        return { day:'2-digit', month:'short', year:'numeric' };
+      }
+
+      function getTimeOptions() {
+        var opts = { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+        if (settings.timeFormat === '24') { opts.hour12 = false; } else { opts.hour12 = true; }
+        return opts;
+      }
+
+      function formatDate(d) {
+        if (!d) return '-';
+        var safeDate = d;
+        if (String(d).indexOf('Z') === -1) safeDate = d + 'Z';
+        var date = new Date(safeDate);
+        return date.toLocaleDateString('en-IN', getDateFormatParts());
+      }
+
+      function formatDateTime(d) {
+        if (!d) return '-';
+        var safeDate = d;
+        if (String(d).indexOf('Z') === -1) safeDate = d + 'Z';
+        var date = new Date(safeDate);
+        return date.toLocaleString('en-IN', getTimeOptions());
+      }
+
+      function isToday(d) {
+        if (!d) return false;
+        var today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+        var check = new Date(d).toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+        return today === check;
+      }
+
+      function isTodayIST(dateStr) {
+        if (!dateStr) return false;
+        var d = new Date(String(dateStr).indexOf('Z') === -1 ? dateStr + 'Z' : dateStr);
+        var now = new Date();
+        var istNow = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+        var istDate = new Date(d.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+        return istNow.getDate() === istDate.getDate() && istNow.getMonth() === istDate.getMonth() && istNow.getFullYear() === istDate.getFullYear();
+      }
+
+      function relativeTime(dateStr) {
+        if (!dateStr) return '-';
+        var safeDate = String(dateStr).indexOf('Z') === -1 ? dateStr + 'Z' : dateStr;
+        var diff = Date.now() - new Date(safeDate).getTime();
+        var mins = Math.floor(diff / 60000);
+        if (mins < 1) return 'Just now';
+        if (mins < 60) return mins + 'm ago';
+        var hrs = Math.floor(mins / 60);
+        if (hrs < 24) return hrs + 'h ago';
+        var days = Math.floor(hrs / 24);
+        if (days < 7) return days + 'd ago';
+        return formatDate(dateStr);
+      }
+
+      function showMessage() { els.successMsg.classList.add('show'); setTimeout(function() { els.successMsg.classList.remove('show'); }, 3000); }
+
+      function updateStats(bookings) {
+        if (els.statTotal) els.statTotal.textContent = totalBookingCount || bookings.length;
+        if (els.statToday) els.statToday.textContent = bookings.filter(function(b) { return isToday(b.created_at); }).length;
+        if (els.statActive) els.statActive.textContent = bookings.filter(function(b) { return b.status === 'active'; }).length;
+        var todayStr = new Date().toISOString().substring(0, 10);
+        var checkins = bookings.filter(function(b) { return String(b.check_in).substring(0, 10) === todayStr; }).length;
+        var checkouts = bookings.filter(function(b) { return String(b.check_out).substring(0, 10) === todayStr; }).length;
+        var arrivals = bookings.filter(function(b) { return String(b.check_in).substring(0, 10) === todayStr && b.status === 'active'; }).length;
+        var elCheckouts = document.getElementById('statCheckouts');
+        var elArrivals = document.getElementById('statArrivals');
+        var elPending = document.getElementById('statPending');
+        if (elCheckouts) elCheckouts.textContent = checkouts;
+        if (elArrivals) elArrivals.textContent = arrivals;
+        if (elPending) elPending.textContent = bookings.filter(function(b) { return b.status === 'pending'; }).length;
+      }
+
+      function updateNotificationBadge() {
+        var unseen = 0;
+        try { unseen = allBookings.filter(function(b) { return b.is_seen !== true; }).length; } catch(e) { unseen = 0; }
+        var badge = document.getElementById('notifBadge');
+        var navBadge = document.getElementById('navNewBadge');
+        var pillNew = document.getElementById('pillNew');
+        var pillNewCount = document.getElementById('pillNewCount');
+        if (badge) { badge.textContent = unseen > 0 ? String(unseen) : ''; }
+        if (navBadge) { navBadge.textContent = String(unseen); navBadge.style.display = unseen > 0 ? '' : 'none'; }
+        if (pillNew) { pillNew.style.display = unseen > 0 ? '' : 'none'; }
+        if (pillNewCount) pillNewCount.textContent = String(unseen);
+      }
+
+      function renderBookingCard(b, showMarkSeen) {
+        var roomMap = {};
+        allRooms.forEach(function(r) { roomMap[r.id] = r.name; });
+        var sc = b.status || 'active';
+        var sl = sc.charAt(0).toUpperCase() + sc.slice(1);
+        var badgeClass = sc === 'active' ? 'active' : (sc === 'cancelled' ? 'cancelled' : (sc === 'completed' ? 'completed' : 'pending'));
+
+        var card = document.createElement('div');
+        var isUnseen = false;
+        try { isUnseen = !b.is_seen; } catch(e) { isUnseen = false; }
+        card.className = 'booking-card' + (sc === 'cancelled' ? ' cancelled' : '') + (isUnseen ? ' unseen' : '');
+
+        var header = document.createElement('div');
+        header.className = 'booking-card-header';
+        var headerLeft = document.createElement('div');
+        var nameEl = document.createElement('h4');
+        nameEl.textContent = b.customer_name || '-';
+        var visitCount = getGuestVisitCount(b.phone);
+        if (visitCount >= 5) {
+          var vipBadge = document.createElement('span');
+          vipBadge.className = 'booking-badge vip';
+          vipBadge.textContent = '\u2B50 VIP';
+          vipBadge.style.marginLeft = '6px';
+          nameEl.appendChild(vipBadge);
+        } else if (visitCount >= 2) {
+          var returnBadge = document.createElement('span');
+          returnBadge.className = 'booking-badge vip';
+          returnBadge.textContent = '\uD83D\uDD01 ' + visitCount + 'x';
+          returnBadge.style.marginLeft = '6px';
+          nameEl.appendChild(returnBadge);
+        }
+        nameEl.style.cursor = 'pointer';
+        nameEl.addEventListener('click', function() { window.openGuestHistory(b.phone); });
+        headerLeft.appendChild(nameEl);
+        var roomNameEl = document.createElement('span');
+        roomNameEl.className = 'room-name';
+        roomNameEl.textContent = roomMap[b.room_id] || 'Unknown';
+        headerLeft.appendChild(roomNameEl);
+
+        var badgesDiv = document.createElement('div');
+        badgesDiv.className = 'booking-card-badges';
+        var statusBadge = document.createElement('span');
+        statusBadge.className = 'status-badge ' + badgeClass;
+        statusBadge.textContent = sl;
+        badgesDiv.appendChild(statusBadge);
+
+        if (sc === 'active' && settings.showNoShowAlerts) {
+
+          var todayStr = new Date().toISOString().substring(0, 10);
+          if (b.check_in < todayStr) {
+            var noshow = document.createElement('span');
+            noshow.className = 'booking-badge noshow';
+            noshow.textContent = 'NO-SHOW';
+            badgesDiv.appendChild(noshow);
+          }
+          if (b.check_out < todayStr) {
+            var daysPast = Math.ceil((new Date(todayStr + 'T00:00:00Z') - new Date(b.check_out + 'T00:00:00Z')) / 86400000);
+            var overstay = document.createElement('span');
+            overstay.className = 'booking-badge overstay';
+            overstay.textContent = 'OVERSTAY ' + daysPast + 'd';
+            badgesDiv.appendChild(overstay);
+          }
+        }
+        if (b.payment_status && b.payment_status !== 'unpaid' && b.payment_status !== 'fully_paid') {
+          var payBadge = document.createElement('span');
+          payBadge.className = 'booking-badge payment-' + b.payment_status;
+          payBadge.textContent = b.payment_status.replace('_', ' ').toUpperCase();
+          badgesDiv.appendChild(payBadge);
+        }
+
+        var seenBadge = document.createElement('span');
+        seenBadge.className = 'booking-badge';
+        try {
+          if (!b.is_seen) {
+            seenBadge.style.cssText = 'background:var(--accent-bg);color:var(--accent);';
+            seenBadge.textContent = 'NEW';
+          } else {
+            seenBadge.style.cssText = 'background:var(--green-bg);color:var(--green);';
+            seenBadge.textContent = 'SEEN';
+          }
+        } catch(e) {
+          seenBadge.style.cssText = 'background:var(--green-bg);color:var(--green);';
+          seenBadge.textContent = 'SEEN';
+        }
+        badgesDiv.appendChild(seenBadge);
+
+        header.appendChild(headerLeft);
+        header.appendChild(badgesDiv);
+
+        var body = document.createElement('div');
+        body.className = 'booking-card-body';
+        var nights = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
+        var price = b.price_at_booking || (roomMap[b.room_id] ? roomMap[b.room_id].price || 0 : 0);
+        var rows = [
+          { icon: 'fa-phone', label: 'Phone', value: b.phone || '-' },
+          { icon: 'fa-sign-in-alt', label: 'Check-in', value: formatDate(b.check_in) },
+          { icon: 'fa-sign-out-alt', label: 'Check-out', value: formatDate(b.check_out) },
+          { icon: 'fa-moon', label: 'Nights', value: nights },
+          { icon: 'fa-indian-rupee-sign', label: 'Amount', value: '\u20B9' + (price * nights).toLocaleString() },
+          { icon: 'fa-clock', label: 'Booked', value: relativeTime(b.created_at), small: true }
+        ];
+        for (var r = 0; r < rows.length; r++) {
+          var row = document.createElement('div');
+          row.className = 'booking-card-row';
+          var label = document.createElement('span');
+          label.className = 'label';
+          var icon = document.createElement('i');
+          icon.className = 'fas ' + rows[r].icon;
+          label.appendChild(icon);
+          label.appendChild(document.createTextNode(' ' + rows[r].label));
+          var value = document.createElement('span');
+          value.className = 'value';
+          value.textContent = rows[r].value;
+          if (rows[r].small) value.style.fontSize = '0.8rem';
+          row.appendChild(label);
+          row.appendChild(value);
+          body.appendChild(row);
+        }
+
+        var footer = document.createElement('div');
+        footer.className = 'booking-card-footer';
+        var footerLeft = document.createElement('div');
+        footerLeft.style.cssText = 'display:flex;flex-direction:column;gap:8px;flex:1;';
+        var btnRow = document.createElement('div');
+        btnRow.style.cssText = 'display:flex;gap:6px;align-items:center;flex-wrap:wrap;';
+
+        var detailBtn = document.createElement('button');
+        detailBtn.className = 'detail-btn';
+        detailBtn.innerHTML = '<i class="fas fa-eye"></i> Details';
+        detailBtn.addEventListener('click', function() { window.openBookingDetail(b.id); });
+        btnRow.appendChild(detailBtn);
+
+        if (sc === 'active') {
+          var activeBtn = document.createElement('button');
+          activeBtn.className = 'status-btn status-btn-confirmed';
+          activeBtn.disabled = true;
+          activeBtn.textContent = 'Active';
+          btnRow.appendChild(activeBtn);
+          if (currentUserRole === 'manager') {
+            var cancelBtn = document.createElement('button');
+            cancelBtn.className = 'cancel-btn';
+            cancelBtn.textContent = 'Cancel';
+            cancelBtn.addEventListener('click', function() { window.updateBookingStatus(b.id, 'cancelled'); });
+            btnRow.appendChild(cancelBtn);
+          }
+        } else if (sc === 'completed') {
+          var compBtn = document.createElement('button');
+          compBtn.className = 'status-btn status-btn-confirmed';
+          compBtn.disabled = true;
+          compBtn.textContent = 'Completed';
+          btnRow.appendChild(compBtn);
+        } else {
+          var cancelDisabled = document.createElement('button');
+          cancelDisabled.className = 'cancel-btn';
+          cancelDisabled.disabled = true;
+          cancelDisabled.textContent = 'Cancelled';
+          btnRow.appendChild(cancelDisabled);
+        }
+
+        if (showMarkSeen && isUnseen) {
+          var markBtn = document.createElement('button');
+          markBtn.className = 'mark-seen-btn';
+          markBtn.textContent = 'Mark Seen';
+          markBtn.addEventListener('click', function() { window.markAsSeen(b.id); });
+          btnRow.appendChild(markBtn);
+        }
+
+        footerLeft.appendChild(btnRow);
+
+        if (sc !== 'cancelled') {
+          var payBtn = document.createElement('button');
+          payBtn.className = 'payment-btn';
+          payBtn.innerHTML = '<i class="fas fa-money-bill-wave"></i> Payment';
+          payBtn.addEventListener('click', function() { window.openPaymentModal(b.id); });
+          footerLeft.appendChild(payBtn);
+          var waBtn = document.createElement('button');
+          waBtn.className = 'whatsapp-btn';
+          waBtn.title = 'Send WhatsApp message';
+          var waIcon = document.createElement('i');
+          waIcon.className = 'fab fa-whatsapp';
+          waBtn.appendChild(waIcon);
+          waBtn.appendChild(document.createTextNode(' WhatsApp'));
+          (function(booking) {
+            waBtn.addEventListener('click', function() { openWhatsApp(booking, roomMap); });
+          })(b);
+          footerLeft.appendChild(waBtn);
+        }
+
+        footer.appendChild(footerLeft);
+        card.appendChild(header);
+        card.appendChild(body);
+        card.appendChild(footer);
+        return card;
+      }
+
+      function renderNewBookings() {
+        var container = document.getElementById('newBookingsSection');
+        if (!container) return;
+        var unseen = [];
+        try { unseen = allBookings.filter(function(b) { return b.is_seen !== true; }); } catch(e) { unseen = []; }
+        var todayBookings = allBookings.filter(function(b) { return isTodayIST(b.created_at); });
+        var pillToday = document.getElementById('pillToday');
+        var pillTodayCount = document.getElementById('pillTodayCount');
+        if (pillToday) pillToday.style.display = todayBookings.length > 0 ? '' : 'none';
+        if (pillTodayCount) pillTodayCount.textContent = todayBookings.length;
+        if (!unseen.length) { container.style.display = 'none'; container.innerHTML = ''; return; }
+        container.style.display = 'block';
+        container.innerHTML = '';
+        var h3 = document.createElement('h3');
+        h3.innerHTML = '<i class="fas fa-bell" style="color:#c9a84c;"></i> New Bookings <span class="badge-count">' + unseen.length + '</span>';
+        container.appendChild(h3);
+        var markAllBtn = document.createElement('button');
+        markAllBtn.className = 'mark-seen-btn';
+        markAllBtn.textContent = 'Mark All Seen';
+        markAllBtn.style.cssText = 'margin-bottom:12px;';
+        markAllBtn.addEventListener('click', function() { window.markAllSeen(); });
+        container.appendChild(markAllBtn);
+        var grid = document.createElement('div');
+        grid.className = 'booking-cards';
+        for (var i = 0; i < unseen.length; i++) { grid.appendChild(renderBookingCard(unseen[i], true)); }
+        container.appendChild(grid);
+        updateNotificationBadge();
+      }
+
+      function renderTodayBookings() {
+        var container = document.getElementById('todayBookingsSection');
+        if (!container) return;
+        var todayBookings = allBookings.filter(function(b) { return isTodayIST(b.created_at); });
+        if (!todayBookings.length) { container.style.display = 'none'; container.innerHTML = ''; return; }
+        container.style.display = 'block';
+        container.innerHTML = '';
+        var h3 = document.createElement('h3');
+        h3.innerHTML = '<i class="fas fa-calendar-day" style="color:#3b82f6;"></i> Today\'s Bookings <span class="badge-count">' + todayBookings.length + '</span>';
+        container.appendChild(h3);
+        var grid = document.createElement('div');
+        grid.className = 'booking-cards';
+        for (var i = 0; i < todayBookings.length; i++) { grid.appendChild(renderBookingCard(todayBookings[i], false)); }
+        container.appendChild(grid);
+      }
+
+      window.markAsSeen = function(id) {
+        var booking = allBookings.find(function(x) { return x.id === id; });
+        if (booking) booking.is_seen = true;
+        supabase.from('bookings').update({ is_seen: true }).eq('id', id).then(function(r) {
+          if (r.error) {
+            Logger.error('Mark seen error:', r.error);
+            if (booking) booking.is_seen = false;
+            showToast('Failed to mark as seen', 'error');
+            return;
+          }
+          showToast('Booking marked as seen');
+          renderNewBookings();
+          renderTodayBookings();
+          updateNotificationBadge();
+          filterAndRender();
+        }).catch(function(err) {
+          Logger.error('Mark seen error:', err);
+          if (booking) booking.is_seen = false;
+          showToast('Failed to mark as seen', 'error');
+        });
+      };
+
+      window.markAllSeen = function() {
+        var unseenBookings = allBookings.filter(function(b) { return b.is_seen !== true; });
+        var unseenIds = unseenBookings.map(function(b) { return b.id; });
+        if (!unseenIds.length) return;
+        unseenBookings.forEach(function(b) { b.is_seen = true; });
+        supabase.from('bookings').update({ is_seen: true }).in('id', unseenIds).then(function(r) {
+          if (r.error) {
+            Logger.error('Mark all seen error:', r.error);
+            unseenBookings.forEach(function(b) { b.is_seen = false; });
+            showToast('Failed to mark all as seen', 'error');
+            return;
+          }
+          showToast('All bookings marked as seen');
+          renderNewBookings();
+          renderTodayBookings();
+          updateNotificationBadge();
+          filterAndRender();
+        }).catch(function(err) {
+          Logger.error('Mark all seen error:', err);
+          unseenBookings.forEach(function(b) { b.is_seen = false; });
+          showToast('Failed to mark all as seen', 'error');
+        });
+      };
+
+      function filterAndRender() {
+        var search = els.searchInput.value.toLowerCase().trim();
+        var status = els.statusFilter.value;
+        var dateFilter = els.adminDateFilter.value;
+        var filtered = allBookings.slice();
+        if (status !== 'all') { filtered = filtered.filter(function(b) { return b.status === status; }); }
+        if (dateFilter) { filtered = filtered.filter(function(b) { return String(b.check_in).substring(0, 10) === dateFilter; }); }
+        if (search) { filtered = filtered.filter(function(b) { return (b.customer_name && b.customer_name.toLowerCase().indexOf(search) !== -1) || (b.phone && b.phone.indexOf(search) !== -1); }); }
+        filtered.sort(function(a, b) { return new Date(b.created_at) - new Date(a.created_at); });
+        var totalItems = filtered.length;
+        var totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
+        if (currentPage > totalPages) currentPage = totalPages;
+        if (!totalItems) { els.tableContent.innerHTML = '<p class="empty">' + (search || status !== 'all' || dateFilter ? 'No matching bookings found' : 'No bookings yet') + '</p>'; renderPagination(0); return; }
+        var start = (currentPage - 1) * itemsPerPage;
+        var paginated = filtered.slice(start, start + itemsPerPage);
+        var roomMap = {};
+        allRooms.forEach(function(r) { roomMap[r.id] = r.name; });
+        var container = document.createElement('div');
+        container.className = 'booking-cards';
+        for (var i = 0; i < paginated.length; i++) {
+          (function(b) {
+            var card = renderBookingCard(b, false);
+            container.appendChild(card);
+          })(paginated[i]);
+        }
+        els.tableContent.innerHTML = '';
+        els.tableContent.appendChild(container);
+        renderPagination(totalPages);
+      }
+
+      function renderPagination(totalPages) {
+        var existing = document.getElementById('paginationControls');
+        if (existing) existing.remove();
+        if (totalPages <= 1) return;
+        var wrapper = document.createElement('div');
+        wrapper.id = 'paginationControls';
+        wrapper.style.cssText = 'display:flex;justify-content:center;align-items:center;gap:12px;margin-top:24px;padding:16px 0;';
+        var prevBtn = document.createElement('button');
+        prevBtn.textContent = 'Previous';
+        prevBtn.className = 'pagination-btn';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.addEventListener('click', function() { if (currentPage > 1) { currentPage--; filterAndRender(); els.tableContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+        var pageInfo = document.createElement('span');
+        pageInfo.style.cssText = 'color:var(--text-secondary);font-size:0.85rem;font-weight:500;';
+        pageInfo.textContent = 'Page ' + currentPage + ' of ' + totalPages;
+        var nextBtn = document.createElement('button');
+        nextBtn.textContent = 'Next';
+        nextBtn.className = 'pagination-btn';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.addEventListener('click', function() { if (currentPage < totalPages) { currentPage++; filterAndRender(); els.tableContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+        wrapper.appendChild(prevBtn);
+        wrapper.appendChild(pageInfo);
+        wrapper.appendChild(nextBtn);
+        var tableWrap = els.tableContent.closest('.table-wrap');
+        if (tableWrap) { tableWrap.appendChild(wrapper); } else { els.tableContent.parentNode.insertBefore(wrapper, els.tableContent.nextSibling); }
+      }
+
+      function resetPagination() { currentPage = 1; filterAndRender(); }
+
+      function openWhatsApp(booking, roomMap) {
+        var phone = booking.phone || '';
+        if (!phone) return;
+        var cleanPhone = phone.replace(/[\s\+\-()]/g, '');
+        if (!/^91/.test(cleanPhone)) cleanPhone = '91' + cleanPhone;
+        var name = sanitize(booking.customer_name || 'Guest');
+        var bookingId = sanitize(booking.id || 'N/A');
+        var roomName = sanitize(roomMap[booking.room_id] || 'N/A');
+        var checkIn = sanitize(formatDate(booking.check_in));
+        var checkOut = sanitize(formatDate(booking.check_out));
+        var msg = 'Hello ' + name + ',\n\nThank you for your booking at Sree Krishna Residency.\n\nBooking Details:\n- Booking ID: ' + bookingId + '\n- Room: ' + roomName + '\n- Check-in: ' + checkIn + '\n- Check-out: ' + checkOut + '\n\nThis booking is not yet confirmed.\nOur staff will contact you shortly for confirmation.\n\nIf you have any questions, feel free to reply here.\n\nThank you';
+        window.open('https://wa.me/' + cleanPhone + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+      }
+
+      function loadBookings() {
+        els.tableContent.innerHTML = '<p class="loading">Loading bookings...</p>';
+        Promise.all([
+          supabase.from('bookings').select('*', { count: 'exact' }).order('created_at', { ascending: false }),
+          supabase.from('rooms').select('*')
+        ]).then(function(responses) {
+          // Handle bookings error
+          if (responses[0].error) {
+            var err = responses[0].error;
+            var context = 'Loading Bookings';
+            var msg = err.message || 'Database error';
+            var code = err.code || '';
+            var suggestion = '';
+            
+            if (code === 'PGRST301') {
+              suggestion = 'Your session may have expired. Try logging in again.';
+            } else if (msg.includes('connection')) {
+              suggestion = 'Check your internet connection and try again.';
+            } else if (msg.includes('timeout')) {
+              suggestion = 'Server is taking too long. Try again in a few seconds.';
+            } else {
+              suggestion = 'If this persists, try refreshing the page.';
+            }
+            
+            showDetailedError(context, msg, suggestion);
+            Logger.error('Bookings error:', err);
+            els.tableContent.innerHTML = '<p class="error">Failed to load bookings: ' + sanitize(msg) + '</p>';
+            return;
+          }
+          
+          // Handle rooms error
+          if (responses[1].error) {
+            var err = responses[1].error;
+            var msg = err.message || 'Database error';
+            Logger.error('Rooms error:', err);
+            showDetailedError('Loading Rooms', msg, 'Room data is needed for booking display. Try refreshing.');
+            els.tableContent.innerHTML = '<p class="error">Failed to load rooms: ' + sanitize(msg) + '</p>';
+            return;
+          }
+          var allData = responses[0].data || [];
+          totalBookingCount = responses[0].count || allData.length;
+
+          if (lastBookingCount > 0 && allData.length > 0) {
+            var newest = allData[0];
+            if (newest.created_at && new Date(newest.created_at) > new Date(lastBookingTime)) {
+              playNotificationSound();
+              showToast('New booking received!');
+            }
+          }
+          lastBookingCount = allData.length;
+          lastBookingTime = allData.length > 0 ? allData[0].created_at : '';
+
+          allBookings = allData;
+          allRooms = responses[1].data || [];
+
+          updateStats(allBookings);
+          calcOccupancy();
+          renderNewBookings();
+          renderTodayBookings();
+          filterAndRender();
+          renderAvailability();
+          renderRoomManagement();
+          calcRevenue();
+          renderCalendar();
+        }).catch(function(err) {
+          Logger.error('Error loading bookings:', err);
+          els.tableContent.innerHTML = '<p class="error">Connection error. Please refresh.</p>';
+        });
+      }
+
+      function showToast(msg, type) {
+        var toast = document.getElementById('toast');
+        var toastMsg = document.getElementById('toastMsg');
+        var toastIcon = toast.querySelector('i');
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = msg;
+        if (toastIcon) toastIcon.className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 3500);
+      }
+      window.showToast = showToast;
+
+      window.openWaModal = function(phone, msg) {
+        var textarea = document.getElementById('waMsgText');
+        textarea.value = decodeURIComponent(msg);
+        document.getElementById('waModal').classList.add('active');
+      };
+      window.closeWaModal = function() { document.getElementById('waModal').classList.remove('active'); };
+
+      function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function() { showToast('Message copied to clipboard!'); }).catch(function() { fallbackCopy(text); });
+        } else { fallbackCopy(text); }
+      }
+      window.copyToClipboard = copyToClipboard;
+      function fallbackCopy(text) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text; textarea.style.position = 'fixed'; textarea.style.opacity = '0';
+        document.body.appendChild(textarea); textarea.select();
+        try { document.execCommand('copy'); showToast('Message copied to clipboard!'); } catch(e) { showToast('Failed to copy', 'error'); }
+        document.body.removeChild(textarea);
+      }
+      window.copyWaMsg = function() { copyToClipboard(document.getElementById('waMsgText').value); };
+      window.openWaMsg = function() {
+        var phone = document.getElementById('waMsgText').getAttribute('data-phone');
+        if (!phone) { showToast('No phone number', 'error'); return; }
+        window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(document.getElementById('waMsgText').value), '_blank', 'noopener,noreferrer');
+      };
+
+      function calcOccupancy() {
+        var dateInput = els.occDate;
+        if (!dateInput) return;
+        var selDate = dateInput.value || new Date().toISOString().substring(0, 10);
+        var totalRooms = 0;
+        for (var i = 0; i < allRooms.length; i++) { totalRooms += (allRooms[i].total_rooms || 0); }
+        var booked = 0;
+        for (var i = 0; i < allBookings.length; i++) {
+          var b = allBookings[i];
+          if (b.status !== 'active') continue;
+          var bCi = String(b.check_in).substring(0, 10);
+          var bCo = String(b.check_out).substring(0, 10);
+          if (bCi <= selDate && bCo > selDate) booked++;
+        }
+        var avail = totalRooms - booked;
+        var pct = totalRooms > 0 ? Math.round((booked / totalRooms) * 100) : 0;
+        document.getElementById('occTotal').textContent = totalRooms;
+        document.getElementById('occBooked').textContent = booked;
+        document.getElementById('occAvail').textContent = avail;
+        document.getElementById('occPct').textContent = pct + '%';
+      }
+
+      window.updateBookingStatus = function(id, status) {
+        if (currentUserRole !== 'manager') { showToast('Unauthorized: only managers can cancel bookings', 'error'); return; }
+        if (status === 'cancelled' && !confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) return;
+        supabase.from('bookings').update({ status: status }).eq('id', id).then(function(r) {
+          if (r.error) { Logger.error('Status update error:', r.error); showToast('Failed to update status', 'error'); return; }
+          showToast('Booking ' + status + ' successfully');
+          loadBookings();
+        }).catch(function(err) { Logger.error('Status update error:', err); showToast('Failed to update status', 'error'); });
+      };
+
+      window.sendWhatsApp = function(phone, message) {
+        if (!phone) { showToast('No phone number for this booking', 'error'); return; }
+        window.open('https://wa.me/' + phone + '?text=' + message, '_blank', 'noopener,noreferrer');
+      };
+
+      window.calcRevenue = function() {
+        var from = document.getElementById('revDateFrom').value;
+        var to = document.getElementById('revDateTo').value;
+        var todayStr = new Date().toISOString().substring(0, 10);
+        var monthStart = todayStr.substring(0, 8) + '01';
+        var totalRev = 0, todayRev = 0, monthRev = 0, count = 0;
+        var roomMap = {};
+        for (var i = 0; i < allRooms.length; i++) { roomMap[allRooms[i].id] = allRooms[i]; }
+        for (var i = 0; i < allBookings.length; i++) {
+          var b = allBookings[i];
+          if (b.status !== 'active') continue;
+          var ci = String(b.check_in).substring(0, 10);
+          var co = String(b.check_out).substring(0, 10);
+          var nights = b.nights || Math.max(1, Math.ceil((new Date(co) - new Date(ci)) / 86400000));
+          var price = b.price_at_booking || (roomMap[b.room_id] ? (roomMap[b.room_id].price || 0) : 0);
+          var rev = price * nights;
+          if (from && to) { if (ci < from || ci > to) continue; }
+          totalRev += rev;
+          count++;
+          if (ci === todayStr) todayRev += rev;
+          if (ci >= monthStart) monthRev += rev;
+        }
+        document.getElementById('revTotal').textContent = '\u20B9' + totalRev.toLocaleString('en-IN');
+        document.getElementById('revToday').textContent = '\u20B9' + todayRev.toLocaleString('en-IN');
+        document.getElementById('revMonth').textContent = '\u20B9' + monthRev.toLocaleString('en-IN');
+        document.getElementById('revAvg').textContent = count > 0 ? '\u20B9' + Math.round(totalRev / count).toLocaleString('en-IN') : '\u20B90';
+        renderRevenueBarChart();
+        renderRevenuePieChart();
+      };
+
+      function renderCalendar() {
+        var content = document.getElementById('calendarContent');
+        if (!allRooms.length || !allBookings.length) { content.innerHTML = '<p class="empty">No data to display</p>'; return; }
+        var today = new Date();
+        var days = [];
+        for (var i = 0; i < 14; i++) { var d = new Date(today); d.setDate(d.getDate() + i); days.push(d.toISOString().substring(0, 10)); }
+        var table = document.createElement('table');
+        table.className = 'calendar-table';
+        var thead = document.createElement('thead');
+        var headRow = document.createElement('tr');
+        var roomTh = document.createElement('th');
+        roomTh.textContent = 'Room';
+        headRow.appendChild(roomTh);
+        for (var i = 0; i < days.length; i++) { var th = document.createElement('th'); th.textContent = new Date(days[i]).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }); headRow.appendChild(th); }
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+        var tbody = document.createElement('tbody');
+        for (var r = 0; r < allRooms.length; r++) {
+          var room = allRooms[r];
+          var row = document.createElement('tr');
+          var roomTd = document.createElement('td');
+          roomTd.textContent = room.name;
+          row.appendChild(roomTd);
+          for (var d = 0; d < days.length; d++) {
+            var dateStr = days[d];
+            var td = document.createElement('td');
+            var bookedBookings = allBookings.filter(function(b) { if (b.status !== 'active') return false; var bCi = String(b.check_in).substring(0, 10); var bCo = String(b.check_out).substring(0, 10); return b.room_id === room.id && bCi <= dateStr && bCo > dateStr; });
+            var cell = document.createElement('span');
+            cell.className = 'cal-cell ' + (bookedBookings.length > 0 ? 'booked' : 'available');
+            if (bookedBookings.length > 0) {
+              var tooltip = document.createElement('span');
+              tooltip.className = 'cal-tooltip';
+              tooltip.textContent = bookedBookings.map(function(b) { return b.customer_name || 'Guest'; }).join(', ');
+              cell.appendChild(tooltip);
+            }
+            td.appendChild(cell);
+            row.appendChild(td);
+          }
+          tbody.appendChild(row);
+        }
+        table.appendChild(tbody);
+        content.innerHTML = '';
+        content.appendChild(table);
+      }
+
+      function renderAvailability() {
+        var date = els.availDateFilter.value;
+        var content = document.getElementById('availContent');
+        if (!date) { content.innerHTML = '<p class="empty">Select a date above to view availability</p>'; return; }
+        if (!allRooms.length) { content.innerHTML = '<p class="error">Rooms data not loaded. Please refresh.</p>'; return; }
+        var activeBookings = allBookings.filter(function(b) { return b.status === 'active' && String(b.check_in).substring(0, 10) <= date && String(b.check_out).substring(0, 10) > date; });
+        var grid = document.createElement('div');
+        grid.className = 'avail-grid';
+        allRooms.forEach(function(room) {
+          var booked = 0;
+          activeBookings.forEach(function(b) { if (String(b.room_id) === String(room.id)) booked++; });
+          var available = room.total_rooms - booked;
+          var card = document.createElement('div');
+          card.className = 'avail-card';
+          var h4 = document.createElement('h4');
+          h4.textContent = room.name;
+          card.appendChild(h4);
+          var rows = [
+            { label: 'Total Rooms (Editable)', value: room.total_rooms, cls: 'gold' },
+            { label: 'Booked', value: booked, cls: 'red' },
+            { label: 'Available', value: available, cls: available > 0 ? 'green' : 'red' }
+          ];
+          rows.forEach(function(row) {
+            var rowEl = document.createElement('div');
+            rowEl.className = 'avail-row';
+            var labelEl = document.createElement('span');
+            labelEl.className = 'label';
+            labelEl.textContent = row.label;
+            var valueEl = document.createElement('span');
+            valueEl.className = 'value ' + row.cls;
+            valueEl.textContent = row.value;
+            rowEl.appendChild(labelEl);
+            rowEl.appendChild(valueEl);
+            card.appendChild(rowEl);
+          });
+          grid.appendChild(card);
+        });
+        content.innerHTML = '';
+        content.appendChild(grid);
+      }
+
+      function renderRoomManagement() {
+        var content = document.getElementById('roomMgmtContent');
+        if (!allRooms.length) { content.innerHTML = '<p class="error">Rooms data not loaded. Please refresh.</p>'; return; }
+        var grid = document.createElement('div');
+        grid.className = 'room-mgmt-grid';
+        allRooms.forEach(function(room) {
+          var card = document.createElement('div');
+          card.className = 'room-mgmt-card';
+          card.setAttribute('data-room-id', room.id);
+          var h4 = document.createElement('h4');
+          h4.textContent = room.name;
+          card.appendChild(h4);
+          var priceRow = document.createElement('div');
+          priceRow.className = 'room-mgmt-row';
+          var priceLabel = document.createElement('label');
+          priceLabel.textContent = 'Price (\u20B9)';
+          var priceInput = document.createElement('input');
+          priceInput.type = 'number';
+          priceInput.className = 'edit-price';
+          priceInput.value = room.price || 0;
+          priceInput.min = '0';
+          priceRow.appendChild(priceLabel);
+          priceRow.appendChild(priceInput);
+          card.appendChild(priceRow);
+          var roomsRow = document.createElement('div');
+          roomsRow.className = 'room-mgmt-row';
+          var roomsLabel = document.createElement('label');
+          roomsLabel.textContent = 'Total Rooms';
+          var roomsInput = document.createElement('input');
+          roomsInput.type = 'number';
+          roomsInput.className = 'edit-total-rooms';
+          roomsInput.value = room.total_rooms || 0;
+          roomsInput.min = '1';
+          roomsRow.appendChild(roomsLabel);
+          roomsRow.appendChild(roomsInput);
+          card.appendChild(roomsRow);
+          var saveBtn = document.createElement('button');
+          saveBtn.className = 'save-room-btn';
+          saveBtn.setAttribute('data-room-id', room.id);
+          saveBtn.textContent = 'Save Changes';
+          saveBtn.addEventListener('click', function() { window.updateRoom(room.id, saveBtn); });
+          card.appendChild(saveBtn);
+          var msgEl = document.createElement('p');
+          msgEl.className = 'room-mgmt-msg';
+          card.appendChild(msgEl);
+          grid.appendChild(card);
+        });
+        content.innerHTML = '';
+        content.appendChild(grid);
+      }
+
+      window.updateRoom = function(roomId, btnEl) {
+        if (currentUserRole !== 'manager') { showToast('Unauthorized: only managers can edit rooms', 'error'); return; }
+        if (!confirm('Are you sure you want to update this room\'s price and/or total rooms?')) return;
+        var card = btnEl.closest('.room-mgmt-card');
+        var priceInput = card.querySelector('.edit-price');
+        var roomsInput = card.querySelector('.edit-total-rooms');
+        var msgEl = card.querySelector('.room-mgmt-msg');
+        var price = parseInt(priceInput.value, 10);
+        var totalRooms = parseInt(roomsInput.value, 10);
+        if (isNaN(price) || price < 0) { msgEl.textContent = 'Invalid price'; msgEl.className = 'room-mgmt-msg error'; return; }
+        if (isNaN(totalRooms) || totalRooms < 1) { msgEl.textContent = 'Minimum 1 room required'; msgEl.className = 'room-mgmt-msg error'; return; }
+        btnEl.disabled = true;
+        btnEl.textContent = 'Saving...';
+        msgEl.className = 'room-mgmt-msg';
+        msgEl.textContent = 'Updating room...';
+        supabase.from('rooms').update({ price: price, total_rooms: totalRooms }).eq('id', roomId).then(function(r) {
+          if (r.error) throw r.error;
+          msgEl.textContent = 'Room updated successfully!';
+          msgEl.className = 'room-mgmt-msg success';
+          btnEl.disabled = false;
+          btnEl.textContent = 'Save Changes';
+          showToast('Room updated successfully!');
+          loadBookings();
+        }).catch(function(err) {
+          Logger.error('Update room error:', err);
+          msgEl.textContent = 'Failed: ' + (err.message || 'Unknown error');
+          msgEl.className = 'room-mgmt-msg error';
+          btnEl.disabled = false;
+          btnEl.textContent = 'Save Changes';
+          showToast('Failed to update room: ' + (err.message || 'Unknown error'), 'error');
+        });
+      };
+
+      /* ---- BOOKING DETAIL MODAL ---- */
+      window.openBookingDetail = function(bookingId) {
+        currentDetailBookingId = bookingId;
+        var b = allBookings.find(function(x) { return x.id === bookingId; });
+        if (!b) { showToast('Booking not found', 'error'); return; }
+        if (!b.is_seen) {
+          supabase.from('bookings').update({ is_seen: true }).eq('id', bookingId).then(function(r) {
+            if (!r.error) {
+              b.is_seen = true;
+              renderNewBookings();
+              renderTodayBookings();
+              updateNotificationBadge();
+            }
+          }).catch(function(err) { Logger.error('Auto mark seen error:', err); });
+        }
+        var roomMap = {};
+        allRooms.forEach(function(r) { roomMap[r.id] = r.name; });
+        var nights = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
+        var price = b.price_at_booking || (roomMap[b.room_id] ? roomMap[b.room_id].price || 0 : 0);
+        var visitCount = getGuestVisitCount(b.phone);
+        var body = document.getElementById('bookingDetailBody');
+        var html = '';
+        html += '<div class="detail-section"><h5>Guest Information</h5>';
+        html += '<div class="detail-row"><span class="label">Name</span><span class="value">' + sanitize(b.customer_name) + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Phone</span><span class="value">' + sanitize(b.phone) + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Visits</span><span class="value">' + visitCount + (visitCount >= 5 ? ' \u2B50 VIP' : visitCount >= 2 ? ' \uD83D\uDD01 Returning' : '') + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Source</span><span class="value">' + sanitize(b.source || 'direct') + '</span></div>';
+        if (b.guest_email) html += '<div class="detail-row"><span class="label">Email</span><span class="value">' + sanitize(b.guest_email) + '</span></div>';
+        if (b.special_requests) html += '<div class="detail-row"><span class="label">Requests</span><span class="value">' + sanitize(b.special_requests) + '</span></div>';
+        html += '</div>';
+        html += '<div class="detail-section"><h5>Booking Details</h5>';
+        html += '<div class="detail-row"><span class="label">Booking ID</span><span class="value" style="font-size:0.75rem;">' + sanitize(b.id) + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Room</span><span class="value">' + sanitize(roomMap[b.room_id] || 'Unknown') + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Check-in</span><span class="value">' + formatDate(b.check_in) + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Check-out</span><span class="value">' + formatDate(b.check_out) + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Nights</span><span class="value">' + nights + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Price/Night</span><span class="value">\u20B9' + price.toLocaleString() + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Total Amount</span><span class="value" style="font-weight:700;color:var(--accent);">\u20B9' + (price * nights).toLocaleString() + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Payment Status</span><span class="value">' + sanitize((b.payment_status || 'unpaid').replace('_', ' ').toUpperCase()) + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Booked At</span><span class="value">' + formatDateTime(b.created_at) + '</span></div>';
+        html += '</div>';
+        body.innerHTML = html;
+        var footer = document.getElementById('bookingDetailFooter');
+        footer.innerHTML = '';
+        var btns = [
+          { text: '\uD83D\uDCF1 WhatsApp', cls: 'detail-action-btn', fn: function() { openWhatsApp(b, roomMap); window.closeBookingDetail(); } },
+          { text: '\uD83D\uDCB0 Payment', cls: 'detail-action-btn primary', fn: function() { window.closeBookingDetail(); window.openPaymentModal(b.id); } },
+          { text: '\uD83D\uDC64 Guest History', cls: 'detail-action-btn', fn: function() { window.closeBookingDetail(); window.openGuestHistory(b.phone); } }
+        ];
+        if (b.status === 'active' && currentUserRole === 'manager') {
+          btns.push({ text: '\u274C Cancel', cls: 'detail-action-btn danger', fn: function() { window.updateBookingStatus(b.id, 'cancelled'); window.closeBookingDetail(); } });
+        }
+        btns.forEach(function(btn) {
+          var el = document.createElement('button');
+          el.className = btn.cls;
+          el.textContent = btn.text;
+          el.addEventListener('click', btn.fn);
+          footer.appendChild(el);
+        });
+        document.getElementById('bookingDetailModal').classList.add('active');
+      };
+
+      window.closeBookingDetail = function() {
+        document.getElementById('bookingDetailModal').classList.remove('active');
+        currentDetailBookingId = null;
+      };
+
+      /* ---- PAYMENT MODAL ---- */
+      window.openPaymentModal = function(bookingId) {
+        currentPaymentBookingId = bookingId;
+        var b = allBookings.find(function(x) { return x.id === bookingId; });
+        if (!b) { showToast('Booking not found', 'error'); return; }
+        var roomMap = {};
+        allRooms.forEach(function(r) { roomMap[r.id] = r.name; });
+        var nights = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
+        var price = b.price_at_booking || (roomMap[b.room_id] ? roomMap[b.room_id].price || 0 : 0);
+        document.getElementById('payGuestName').textContent = b.customer_name || '-';
+        document.getElementById('payRoomName').textContent = roomMap[b.room_id] || 'Unknown';
+        document.getElementById('payExpectedAmount').textContent = '\u20B9' + (price * nights).toLocaleString();
+        
+        var discEl = document.getElementById('payDiscount');
+        if (discEl) discEl.value = 0;
+        document.getElementById('payAmount').value = price * nights;
+        window.currentExpectedAmount = price * nights;
+        
+        document.getElementById('paymentModal').classList.add('active');
+      };
+
+      window.calcDiscount = function() {
+        var disc = parseFloat(document.getElementById('payDiscount').value) || 0;
+        var newAmt = Math.max(0, window.currentExpectedAmount - disc);
+        document.getElementById('payAmount').value = newAmt;
+      };
+
+      window.closePaymentModal = function() {
+        document.getElementById('paymentModal').classList.remove('active');
+        currentPaymentBookingId = null;
+      };
+
+      window.submitPayment = function() {
+        if (!currentPaymentBookingId) return;
+        var amount = parseFloat(document.getElementById('payAmount').value);
+        var type = document.getElementById('payType').value;
+        var method = document.getElementById('payMethod').value;
+        var notes = document.getElementById('payNotes').value.trim();
+        if (!amount || amount <= 0) { showToast('Enter a valid amount', 'error'); return; }
+        var b = allBookings.find(function(x) { return x.id === currentPaymentBookingId; });
+        var paymentStatus = type === 'full' ? 'fully_paid' : type === 'advance' ? 'advance_paid' : type === 'checkout' ? 'fully_paid' : (b && b.payment_status) || 'unpaid';
+        supabase.from('payments').insert({
+          booking_id: currentPaymentBookingId,
+          amount: amount,
+          payment_type: type,
+          payment_method: method,
+          notes: notes || null,
+          recorded_by_name: currentUserRole
+        }).then(function(r) {
+          if (r.error) throw r.error;
+          supabase.from('bookings').update({ payment_status: paymentStatus }).eq('id', currentPaymentBookingId).then(function() {
+            showToast('Payment recorded successfully');
+            window.closePaymentModal();
+            loadBookings();
+          });
+        }).catch(function(err) {
+          Logger.error('Payment error:', err);
+          showToast('Failed to record payment: ' + (err.message || 'Unknown error'), 'error');
+        });
+      };
+
+      /* ---- GUEST HISTORY ---- */
+      window.openGuestHistory = function(phone) {
+        if (!phone) { showToast('No phone number', 'error'); return; }
+        var guestBookings = allBookings.filter(function(b) { return b.phone === phone; });
+        if (!guestBookings.length) { showToast('No booking history found', 'error'); return; }
+        var roomMap = {};
+        allRooms.forEach(function(r) { roomMap[r.id] = r.name; });
+        var visitCount = guestBookings.length;
+        var totalSpent = 0;
+        guestBookings.forEach(function(b) {
+          var n = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
+          var p = b.price_at_booking || (roomMap[b.room_id] ? roomMap[b.room_id].price || 0 : 0);
+          totalSpent += p * n;
+        });
+        var body = document.getElementById('guestHistoryBody');
+        var html = '';
+        html += '<div class="detail-section">';
+        html += '<div class="detail-row"><span class="label">Phone</span><span class="value">' + sanitize(phone) + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Total Visits</span><span class="value">' + visitCount + (visitCount >= 5 ? ' \u2B50 VIP' : visitCount >= 2 ? ' \uD83D\uDD01 Returning' : '') + '</span></div>';
+        html += '<div class="detail-row"><span class="label">Total Spent</span><span class="value" style="color:var(--accent);font-weight:700;">\u20B9' + totalSpent.toLocaleString() + '</span></div>';
+        html += '</div>';
+        html += '<div class="detail-section"><h5>Booking History</h5>';
+        guestBookings.sort(function(a, b) { return new Date(b.created_at) - new Date(a.created_at); });
+        guestBookings.forEach(function(b) {
+          var n = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
+          var p = b.price_at_booking || (roomMap[b.room_id] ? roomMap[b.room_id].price || 0 : 0);
+          html += '<div class="guest-history-item">';
+          html += '<div class="gh-room">' + sanitize(roomMap[b.room_id] || 'Unknown') + ' <span class="status-badge ' + b.status + '" style="font-size:0.65rem;">' + b.status + '</span></div>';
+          html += '<div class="gh-dates">' + formatDate(b.check_in) + ' \u2192 ' + formatDate(b.check_out) + ' (' + n + ' nights)</div>';
+          html += '<div class="gh-amount">\u20B9' + (p * n).toLocaleString() + ' \u2022 ' + relativeTime(b.created_at) + '</div>';
+          html += '</div>';
+        });
+        html += '</div>';
+        body.innerHTML = html;
+        document.getElementById('guestHistoryModal').classList.add('active');
+      };
+
+      window.closeGuestHistory = function() {
+        document.getElementById('guestHistoryModal').classList.remove('active');
+      };
+
+      /* ---- SHIFT NOTES ---- */
+      window.loadShiftNotes = function() {
+        supabase.from('shift_notes').select('*').order('created_at', { ascending: false }).then(function(r) {
+          if (r.error) { Logger.error('Shift notes error:', r.error); return; }
+          allShiftNotes = r.data || [];
+          renderShiftNotes();
+        }).catch(function(err) { Logger.error('Shift notes error:', err); });
+      };
+
+      window.postShiftNote = function() {
+        var input = document.getElementById('shiftNoteInput');
+        var priority = document.getElementById('shiftNotePriority').value;
+        var note = input.value.trim();
+        if (!note) { showToast('Please write a note', 'error'); return; }
+        var payload = {
+          author_name: currentUserRole === 'manager' ? 'Manager' : 'Receptionist',
+          note: note,
+          priority: priority
+        };
+        supabase.from('shift_notes').insert(payload).then(function(r) {
+          if (r.error) {
+            Logger.error('Post note error:', r.error);
+            showToast('Failed: ' + r.error.message, 'error');
+            return;
+          }
+          input.value = '';
+          showToast('Note posted');
+          window.loadShiftNotes();
+        }).catch(function(err) {
+          Logger.error('Post note error:', err);
+          showToast('Failed: ' + err.message, 'error');
+        });
+      };
+
+      window.resolveShiftNote = function(id) {
+        supabase.from('shift_notes').update({ is_resolved: true, resolved_at: new Date().toISOString() }).eq('id', id).then(function(r) {
+          if (r.error) throw r.error;
+          showToast('Note resolved');
+          window.loadShiftNotes();
+        }).catch(function(err) { Logger.error('Resolve note error:', err); });
+      };
+
+      window.filterShiftNotes = function(filter) {
+        currentShiftNoteFilter = filter;
+        document.querySelectorAll('.shift-notes-filters .filter-btn').forEach(function(btn) { btn.classList.remove('active'); });
+        var btns = document.querySelectorAll('.shift-notes-filters .filter-btn');
+        for (var i = 0; i < btns.length; i++) { if (btns[i].textContent.toLowerCase().indexOf(filter) !== -1 || (filter === 'all' && btns[i].textContent === 'All')) { btns[i].classList.add('active'); break; } }
+        renderShiftNotes();
+      };
+
+      function renderShiftNotes() {
+        var container = document.getElementById('shiftNotesList');
+        if (!container) return;
+        var notes = allShiftNotes.slice();
+        if (currentShiftNoteFilter === 'unresolved') notes = notes.filter(function(n) { return !n.is_resolved; });
+        if (currentShiftNoteFilter === 'urgent') notes = notes.filter(function(n) { return n.priority === 'urgent'; });
+        if (!notes.length) { container.innerHTML = '<p class="empty">No shift notes</p>'; return; }
+        var html = '';
+        notes.forEach(function(n) {
+          html += '<div class="shift-note-card' + (n.priority === 'urgent' ? ' urgent' : '') + (n.is_resolved ? ' resolved' : '') + '">';
+          html += '<div class="sn-header"><span class="sn-author">' + sanitize(n.author_name) + '</span><span class="sn-time">' + relativeTime(n.created_at) + '</span></div>';
+          html += '<div class="sn-note">' + sanitize(n.note) + '</div>';
+          html += '<div class="sn-footer"><span class="sn-priority ' + sanitize(n.priority) + '">' + sanitize(n.priority) + '</span>';
+          if (!n.is_resolved) html += '<button class="sn-resolve" onclick="window.resolveShiftNote(\'' + n.id + '\')">Mark Resolved</button>';
+          else html += '<span style="font-size:0.72rem;color:var(--green);">Resolved</span>';
+          html += '</div></div>';
+        });
+        container.innerHTML = html;
+        var unresolved = allShiftNotes.filter(function(n) { return !n.is_resolved; }).length;
+        var badge = document.getElementById('shiftNotesBadge');
+        if (badge) { badge.textContent = unresolved; badge.style.display = unresolved > 0 ? '' : 'none'; }
+      };
+
+      /* ---- AUDIT LOG ---- */
+      window.loadAuditLog = function() {
+        if (currentUserRole !== 'manager') return;
+        supabase.from('audit_log').select('*').order('created_at', { ascending: false }).limit(200).then(function(r) {
+          if (r.error) { Logger.error('Audit log error:', r.error); return; }
+          allAuditLogs = r.data || [];
+          renderAuditLog();
+        }).catch(function(err) { Logger.error('Audit log error:', err); });
+      };
+
+      window.filterAuditLog = function() {
+        currentAuditFilter = document.getElementById('auditActionFilter').value;
+        renderAuditLog();
+      };
+
+      function renderAuditLog() {
+        var container = document.getElementById('auditLogContent');
+        if (!container) return;
+        var logs = allAuditLogs.slice();
+        var dateFrom = document.getElementById('auditDateFrom').value;
+        var dateTo = document.getElementById('auditDateTo').value;
+        if (currentAuditFilter !== 'all') logs = logs.filter(function(l) { return l.action === currentAuditFilter; });
+        if (dateFrom) logs = logs.filter(function(l) { return String(l.created_at).substring(0, 10) >= dateFrom; });
+        if (dateTo) logs = logs.filter(function(l) { return String(l.created_at).substring(0, 10) <= dateTo; });
+        if (!logs.length) { container.innerHTML = '<p class="empty">No audit entries</p>'; return; }
+        var html = '<table class="audit-table"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Entity</th><th>Details</th></tr></thead><tbody>';
+        logs.forEach(function(l) {
+          html += '<tr>';
+          html += '<td>' + formatDateTime(l.created_at) + '</td>';
+          html += '<td>' + sanitize(l.user_name || '-') + ' <span style="color:var(--text-muted);font-size:0.72rem;">(' + sanitize(l.user_role || '-') + ')</span></td>';
+          html += '<td><span class="status-badge active" style="font-size:0.65rem;">' + sanitize(l.action) + '</span></td>';
+          html += '<td>' + sanitize(l.entity_type) + '</td>';
+          html += '<td style="font-size:0.75rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;">' + (l.new_value ? sanitize(JSON.stringify(l.new_value).substring(0, 80)) : '-') + '</td>';
+          html += '</tr>';
+        });
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      };
+
+      /* ---- ANALYTICS ---- */
+      window.loadAnalytics = function() {
+        var days = parseInt(document.getElementById('analyticsDays').value, 10) || 30;
+        supabase.rpc('get_booking_trend', { p_days: days }).then(function(r) {
+          if (r.error) { Logger.error('Trend error:', r.error); return; }
+          renderAnalyticsTrend(r.data || []);
+        }).catch(function(err) { Logger.error('Trend error:', err); });
+        supabase.rpc('get_repeat_guests').then(function(r) {
+          if (r.error) { Logger.error('Repeat guests error:', r.error); return; }
+          renderRepeatGuests(r.data || []);
+        }).catch(function(err) { Logger.error('Repeat guests error:', err); });
+        renderSourceBreakdown();
+        renderAnalyticsStats();
+      };
+
+      function renderAnalyticsTrend(data) {
+        var container = document.getElementById('analyticsTrendChart');
+        if (!container) return;
+        if (!data.length) { container.innerHTML = '<p class="empty">No data</p>'; return; }
+        var maxBookings = Math.max.apply(null, data.map(function(d) { return d.bookings || 0; })) || 1;
+        var svgW = 500, svgH = 160, pad = 20;
+        var points = data.map(function(d, i) {
+          var x = pad + (i / (data.length - 1)) * (svgW - 2 * pad);
+          var y = svgH - pad - ((d.bookings || 0) / maxBookings) * (svgH - 2 * pad);
+          return x + ',' + y;
+        });
+        var areaPoints = points.join(' ') + ' ' + (pad + ((data.length - 1) / (data.length - 1)) * (svgW - 2 * pad)) + ',' + (svgH - pad) + ' ' + pad + ',' + (svgH - pad);
+        var html = '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" preserveAspectRatio="none">';
+        html += '<polygon class="line-area" points="' + areaPoints + '"/>';
+        html += '<polyline points="' + points.join(' ') + '"/>';
+        html += '</svg>';
+        container.innerHTML = html;
+      };
+
+      function renderSourceBreakdown() {
+        var container = document.getElementById('analyticsSourceBreakdown');
+        if (!container) return;
+        var sources = {};
+        allBookings.forEach(function(b) {
+          var s = b.source || 'direct';
+          sources[s] = (sources[s] || 0) + 1;
+        });
+        var total = allBookings.length || 1;
+        var colors = ['#d4a843', '#22c55e', '#60a5fa', '#f87171', '#fbbf24', '#a78bfa', '#34d399', '#fb923c'];
+        var html = '';
+        var i = 0;
+        for (var s in sources) {
+          var pct = Math.round((sources[s] / total) * 100);
+          html += '<div class="analytics-stat"><span class="as-label">' + sanitize(s) + '</span><span class="as-value">' + sources[s] + ' (' + pct + '%)</span></div>';
+          i++;
+        }
+        if (!html) html = '<p class="empty">No data</p>';
+        container.innerHTML = html;
+      };
+
+      function renderRepeatGuests(data) {
+        var container = document.getElementById('analyticsRepeatGuests');
+        if (!container) return;
+        if (!data.length) { container.innerHTML = '<p class="empty">No repeat guests found</p>'; return; }
+        var html = '';
+        data.slice(0, 10).forEach(function(g) {
+          html += '<div class="analytics-stat"><span class="as-label">' + sanitize(g.guest_name) + ' <span style="color:var(--text-muted);font-size:0.72rem;">' + sanitize(g.phone) + '</span></span><span class="as-value">' + g.visit_count + ' visits \u2022 \u20B9' + (g.total_spent || 0).toLocaleString() + '</span></div>';
+        });
+        container.innerHTML = html;
+      };
+
+      function renderAnalyticsStats() {
+        var container = document.getElementById('analyticsStats');
+        if (!container) return;
+        var active = allBookings.filter(function(b) { return b.status === 'active'; }).length;
+        var cancelled = allBookings.filter(function(b) { return b.status === 'cancelled'; }).length;
+        var total = allBookings.length;
+        var cancelRate = total > 0 ? Math.round((cancelled / total) * 100) : 0;
+        var avgNights = 0;
+        if (active > 0) {
+          var totalNights = 0;
+          allBookings.filter(function(b) { return b.status === 'active'; }).forEach(function(b) { totalNights += (b.nights || 1); });
+          avgNights = Math.round(totalNights / active * 10) / 10;
+        }
+        var html = '';
+        html += '<div class="analytics-stat"><span class="as-label">Total Bookings</span><span class="as-value">' + total + '</span></div>';
+        html += '<div class="analytics-stat"><span class="as-label">Active</span><span class="as-value" style="color:var(--green);">' + active + '</span></div>';
+        html += '<div class="analytics-stat"><span class="as-label">Cancelled</span><span class="as-value" style="color:var(--red);">' + cancelled + '</span></div>';
+        html += '<div class="analytics-stat"><span class="as-label">Cancellation Rate</span><span class="as-value">' + cancelRate + '%</span></div>';
+        html += '<div class="analytics-stat"><span class="as-label">Avg Stay</span><span class="as-value">' + avgNights + ' nights</span></div>';
+        container.innerHTML = html;
+      };
+
+      /* ---- REVENUE CHARTS ---- */
+      function renderRevenueBarChart() {
+        var container = document.getElementById('revenueBarChart');
+        if (!container) return;
+        var days = 30;
+        supabase.rpc('get_booking_trend', { p_days: days }).then(function(r) {
+          if (r.error) return;
+          var data = r.data || [];
+          var maxRev = Math.max.apply(null, data.map(function(d) { return parseFloat(d.revenue) || 0; })) || 1;
+          var html = '';
+          data.forEach(function(d) {
+            var h = Math.max(2, ((parseFloat(d.revenue) || 0) / maxRev) * 160);
+            var dateLabel = String(d.date).substring(5);
+            html += '<div class="bar" style="height:' + h + 'px;"><span class="bar-tooltip">\u20B9' + (parseFloat(d.revenue) || 0).toLocaleString() + '<br>' + dateLabel + '</span></div>';
+          });
+          container.innerHTML = html;
+        }).catch(function() {});
+      };
+
+      function renderRevenuePieChart() {
+        var container = document.getElementById('revenuePieChart');
+        if (!container) return;
+        var from = document.getElementById('revDateFrom').value;
+        var to = document.getElementById('revDateTo').value;
+        supabase.rpc('get_revenue_by_room', { p_from: from || null, p_to: to || null }).then(function(r) {
+          if (r.error) return;
+          var data = r.data || [];
+          var totalRev = 0;
+          data.forEach(function(d) { totalRev += parseFloat(d.total_revenue) || 0; });
+          if (!totalRev) { container.innerHTML = '<p class="empty">No revenue data</p>'; return; }
+          var colors = ['#d4a843', '#22c55e', '#60a5fa', '#f87171', '#fbbf24', '#a78bfa'];
+          var gradientParts = [];
+          var cumulative = 0;
+          data.forEach(function(d, i) {
+            var pct = ((parseFloat(d.total_revenue) || 0) / totalRev) * 100;
+            gradientParts.push(colors[i % colors.length] + ' ' + cumulative + '% ' + (cumulative + pct) + '%');
+            cumulative += pct;
+          });
+          var html = '<div class="pie-chart" style="background: conic-gradient(' + gradientParts.join(', ') + ');"></div>';
+          html += '<div class="pie-legend">';
+          data.forEach(function(d, i) {
+            html += '<div class="pie-legend-item"><span class="pie-legend-color" style="background:' + colors[i % colors.length] + ';"></span><span>' + sanitize(d.room_name) + ' \u2022 \u20B9' + (parseFloat(d.total_revenue) || 0).toLocaleString() + '</span></div>';
+          });
+          html += '</div>';
+          container.innerHTML = html;
+        }).catch(function() {});
+      };
+
+      /* ---- OTA IMPORT ---- */
+      window.previewOtaImport = function() {
+        var file = document.getElementById('otaCsvFile').files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var text = e.target.result;
+          var lines = text.split('\n').filter(function(l) { return l.trim(); });
+          if (lines.length < 2) { showToast('CSV is empty', 'error'); return; }
+          var headers = lines[0].split(',').map(function(h) { return h.trim().replace(/"/g, ''); });
+          otaCsvData = [];
+          for (var i = 1; i < lines.length; i++) {
+            var values = lines[i].split(',').map(function(v) { return v.trim().replace(/"/g, ''); });
+            var row = {};
+            headers.forEach(function(h, j) { row[h] = values[j] || ''; });
+            otaCsvData.push(row);
+          }
+          var html = '<table><thead><tr>';
+          headers.forEach(function(h) { html += '<th>' + sanitize(h) + '</th>'; });
+          html += '</tr></thead><tbody>';
+          otaCsvData.slice(0, 10).forEach(function(row) {
+            html += '<tr>';
+            headers.forEach(function(h) { html += '<td>' + sanitize(row[h] || '') + '</td>'; });
+            html += '</tr>';
+          });
+          html += '</tbody></table>';
+          if (otaCsvData.length > 10) html += '<p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Showing 10 of ' + otaCsvData.length + ' rows</p>';
+          document.getElementById('otaPreview').innerHTML = html;
+          document.getElementById('importOtaBtn').style.display = '';
+        };
+        reader.readAsText(file);
+      };
+
+      window.importOtaBookings = function() {
+        if (!otaCsvData.length) { showToast('No data to import', 'error'); return; }
+        var imported = 0;
+        var errors = 0;
+        otaCsvData.forEach(function(row) {
+          var name = row['Guest Name'] || row['guest_name'] || row['Name'] || 'Unknown';
+          var phone = row['Phone'] || row['phone'] || '';
+          var checkIn = row['Check-in'] || row['check_in'] || '';
+          var checkOut = row['Check-out'] || row['check_out'] || '';
+          var source = row['Source'] || row['source'] || 'makemytrip';
+          if (!phone || !checkIn || !checkOut) { errors++; return; }
+          phone = phone.replace(/\D/g, '');
+          if (phone.length < 10) { errors++; return; }
+          supabase.rpc('create_booking_safe', {
+            p_room_id: allRooms[0] ? allRooms[0].id : '00000000-0000-0000-0000-000000000000',
+            p_check_in: checkIn.substring(0, 10),
+            p_check_out: checkOut.substring(0, 10),
+            p_customer_name: name,
+            p_phone: phone
+          }).then(function(r) {
+            if (!r.error && r.data && r.data.success) imported++;
+          });
+        });
+        setTimeout(function() {
+          showToast('Import complete: ' + imported + ' imported, ' + errors + ' errors');
+          document.getElementById('otaCsvFile').value = '';
+          document.getElementById('otaPreview').innerHTML = '';
+          document.getElementById('importOtaBtn').style.display = 'none';
+          otaCsvData = [];
+          loadBookings();
+        }, 2000);
+      };
+
+      function showAppError(msg, details) {
+        var el = document.getElementById('appError');
+        var msgEl = document.getElementById('appErrorMsg');
+        var detailedEl = document.getElementById('appErrorDetails');
+        if (el) { 
+          el.style.display = 'block'; 
+          if (msgEl) msgEl.textContent = msg; 
+          if (detailedEl && details) {
+            detailedEl.innerHTML = details + '<br><br><a href="ERROR_CODES.md" target="_blank" style="color:#d4a843;text-decoration:none;font-weight:600;"><i class="fas fa-book"></i> View Error Codes Guide</a>';
+            detailedEl.style.display = 'block';
+          }
+        }
+      }
+
+      function showDetailedError(context, error, suggestion, errorCode) {
+        var errorMsg = error.message || error || 'Unknown error';
+        var details = 'Context: ' + context + ' | Error: ' + errorMsg;
+        if (suggestion) details += ' | Suggestion: ' + suggestion;
+        Logger.error(context + ' Error [' + (errorCode || 'MISC') + ']:', error);
+        var prefix = errorCode ? '[' + errorCode + '] ' : '';
+        showAppError(prefix + 'Error in ' + context + ': ' + errorMsg, details);
+      }
+
+      function handleSupabaseError(context, response, fallbackMsg) {
+        if (response.error) {
+          var err = response.error;
+          var msg = err.message || 'Database error';
+          var code = err.code || '';
+          var hint = err.hint || '';
+          
+          var detailedMsg = fallbackMsg || msg;
+          var suggestion = '';
+          var errCode = 'ERR-1002'; // Default database error code
+          
+          if (code === 'PGRST116') {
+            errCode = 'ERR-1006';
+            suggestion = 'No matching record found. The record may have been deleted.';
+          } else if (code === '23505') {
+            errCode = 'ERR-1007';
+            suggestion = 'Duplicate entry. This value already exists.';
+          } else if (code === '23503') {
+            errCode = 'ERR-1005';
+            suggestion = 'Foreign key violation. Related record does not exist or invalid data.';
+          } else if (code === '42501' || msg.includes('row-level security')) {
+            errCode = 'ERR-1004';
+            suggestion = 'Access denied. You do not have permission for this action.';
+          } else if (msg.includes('connection')) {
+            errCode = 'ERR-1002';
+            suggestion = 'Check your internet connection and try again.';
+          } else if (msg.includes('timeout')) {
+            errCode = 'ERR-1002';
+            suggestion = 'Request timed out. Try again in a few seconds.';
+          }
+          
+          showDetailedError(context, msg + (hint ? ' - ' + hint : ''), suggestion, errCode);
+          return true;
+        }
+        return false;
+      }
+
+      function handleNetworkError(context, err) {
+        var msg = err.message || 'Network error';
+        var errCode = 'ERR-1001';
+        if (msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
+          showDetailedError(context, 'Network connection failed', 'Check internet connection and refresh the page.', errCode);
+        } else if (msg.includes('timeout')) {
+          showDetailedError(context, 'Request timed out', 'Server is taking too long. Try again later.', errCode);
+        } else {
+          showDetailedError(context, msg, 'Try refreshing the page.', errCode);
+        }
+      }
+
+      function startApp() {
+        if (!window.supabase) { showAppError('[ERR-1001] Supabase SDK failed to load. Please check your internet connection.'); return; }
+        
+        // Auto-update version display
+        var versionEl = document.getElementById('vyantraVersion');
+        if (versionEl && window.VYANTRA_VERSION) {
+          versionEl.textContent = window.VYANTRA_VERSION;
+        }
+        
+        initApp();
+      }
+
+      // Wait for defer script to load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          if (window.supabase) { startApp(); }
+          else {
+            var checkInterval = setInterval(function() {
+              if (window.supabase) { clearInterval(checkInterval); startApp(); }
+            }, 100);
+            setTimeout(function() { clearInterval(checkInterval); if (!window.supabase) showAppError('Supabase SDK failed to load.'); }, 15000);
+          }
+        });
+      } else {
+        if (window.supabase) { startApp(); }
+        else {
+          var checkInterval = setInterval(function() {
+            if (window.supabase) { clearInterval(checkInterval); startApp(); }
+          }, 100);
+          setTimeout(function() { clearInterval(checkInterval); if (!window.supabase) showAppError('Supabase SDK failed to load.'); }, 15000);
+        }
+      }
+    })();
+  </script>
+
+  <script>
+    document.getElementById('waModal').addEventListener('click', function(e) {
+      if (e.target === this) window.closeWaModal();
+    });
+
+    document.getElementById('copyWaMsgBtn').addEventListener('click', function() {
+      var textarea = document.getElementById('waMsgText');
+      if (window.copyToClipboard) {
+        window.copyToClipboard(textarea.value);
+      } else {
+        textarea.select();
+        document.execCommand('copy');
+        if (window.showToast) window.showToast('Message copied to clipboard!');
+      }
+    });
+
+    document.getElementById('openWaMsgBtn').addEventListener('click', function() {
+      var textarea = document.getElementById('waMsgText');
+      var phone = textarea.getAttribute('data-phone') || '';
+      if (!phone) {
+        if (window.showToast) window.showToast('No phone number', 'error');
+        return;
+      }
+      var msg = textarea.value;
+      window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+    });
+
+    document.getElementById('closeWaModalBtn').addEventListener('click', function() {
+      document.getElementById('waModal').classList.remove('active');
+    });
+
+    var originalOpenWaModal = window.openWaModal;
+    window.openWaModal = function(phone, msg) {
+      var textarea = document.getElementById('waMsgText');
+      textarea.value = decodeURIComponent(msg);
+      textarea.setAttribute('data-phone', phone);
+      document.getElementById('waModal').classList.add('active');
+    };
+  </script>
+  
+
+
+</body>
+</html>

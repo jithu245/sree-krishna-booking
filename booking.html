@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="description" content="Secure your room easily.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#FDFBF7">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://chjwvpvsxeczvwqyouiw.supabase.co https://*.supabase.io https://cdn.jsdelivr.net; img-src 'self' data: https:;">
+  <!-- Universal configuration - This page can be embedded anywhere -->
+  <title>Reserve Room</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <script>
+    // Universal Property ID - Set for this deployment
+    window.VYANTRA_PROP_ID = "sreekrishna";
+    
+    // System Architecture Config: Universally customizable variables.
+    window.UniversalBookingConfig = {
+      defaultTitle: "Sree Krishna Residency",
+      defaultDesc: "Premium accommodation with exceptional comfort, modern furnishings, and dedicated service.",
+      phoneSupport: "0487-2556505",
+      logoIconClass: "fa-om",
+      brandHomeUrl: "index.html" // Usually derived from '?return_url='
+    };
+  </script>
+
+  <style>
+    /* CSS Variables driven universal theming */
+    :root {
+      /* Editorial Luxury Light Mode Palette */
+      --page-bg: #FDFBF7;
+      --card-bg: #ffffff;
+      --card-shell: rgba(10, 22, 40, 0.02);
+      
+      --text-main: #1A1A1A;
+      --text-muted: #6B7280;
+      
+      --gold-main: #D4AF37;
+      --gold-dark: #A8872E;
+      --gold-light: #F3E5AB;
+      
+      --border-soft: rgba(0, 0, 0, 0.06);
+      --border-hard: rgba(0, 0, 0, 0.12);
+      
+      --shadow-ambient: 0 40px 100px -20px rgba(0, 0, 0, 0.08);
+      --input-bg: #FFFFFF;
+      
+      --brand-error: #EF4444;
+      --brand-success: #10B981;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; font-size: 16px; background-color: var(--page-bg); }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--page-bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; min-height: 100dvh; position: relative; }
+    body.loading { overflow: hidden; }
+    
+    h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; line-height: 1.2; font-weight: 500; letter-spacing: -0.02em; }
+    button, input, select, textarea { font-size: 16px !important; }
+
+    /* Noise Texture overlay for physical paper feel */
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+    }
+
+    /* Navbar Pill */
+    .nav-wrapper { position: fixed; top: 24px; left: 0; right: 0; z-index: 1000; display: flex; justify-content: center; padding: 0 16px; }
+    .navbar { background: rgba(253, 251, 247, 0.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--border-hard); border-radius: 9999px; padding: 8px 24px 8px 8px; display: inline-flex; align-items: center; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .nav-back, .nav-logo { display: flex; align-items: center; text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s; cursor: pointer;}
+    .nav-back:hover { opacity: 0.7; color: var(--gold-dark); }
+    .nav-back i { margin-right: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.03); border-radius: 50%; border: 1px solid var(--border-soft); transition: all 0.3s; color: var(--text-main); }
+    .nav-back:hover i { background: var(--gold-main); color: #FFF; border-color: var(--gold-main); }
+    .nav-logo { gap: 10px; font-family: 'Playfair Display', serif; font-size: 1.1rem; border-left: 1px solid var(--border-hard); padding-left: 20px; }
+    .nav-logo-icon i { color: var(--gold-dark); }
+
+    /* Loader */
+    .loader { position: fixed; inset: 0; background: var(--page-bg); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+    .loader.hidden { opacity: 0; visibility: hidden; transition: opacity 0.8s cubic-bezier(0.32,0.72,0,1), visibility 0.8s; }
+    .loader-content { display: flex; flex-direction: column; align-items: center; }
+    .loader-om { position: relative; width: 60px; height: 60px; margin-bottom: 25px; }
+    .loader-om-circle { position: absolute; inset: 0; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 50%; animation: loaderPulse 2s cubic-bezier(0.32,0.72,0,1) infinite; }
+    .loader-om i { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; font-size: 24px; color: var(--gold-dark); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); }
+    @keyframes loaderPulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+    .loader-bar { width: 150px; height: 2px; background: var(--border-soft); border-radius: 2px; overflow: hidden; }
+    .loader-bar-fill { height: 100%; background: var(--gold-main); width: 0; animation: loadBar 1s ease-in-out forwards; }
+    @keyframes loadBar { to { width: 100%; } }
+
+    /* Layout Archetype: The Editorial Split */
+    .checkout-board { max-width: 1300px; margin: 0 auto; padding: 140px 24px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; position: relative; z-index: 10; }
+    
+    /* Typography Block (Left Box) */
+    .typo-block { position: sticky; top: 140px; }
+    .eyebrow { display: inline-flex; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.2); color: var(--gold-dark); border-radius: 9999px; padding: 6px 14px; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; margin-bottom: 24px; }
+    .room-title { font-size: clamp(2.5rem, 5vw, 4.5rem); color: var(--text-main); line-height: 1.1; margin-bottom: 24px; }
+    .room-desc { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; max-width: 480px; font-weight: 400; }
+    .price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 30px; }
+    .price-row .amount { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 3rem; font-weight: 300; color: var(--text-main); letter-spacing: -0.03em; }
+    .price-row .per { color: var(--text-muted); font-size: 1rem; }
+    
+    /* Double-Bezel Form Card (Right Box) */
+    .double-bezel-outer { background: var(--card-shell); padding: 8px; border-radius: 2.2rem; border: 1px solid var(--border-soft); box-shadow: var(--shadow-ambient); }
+    .double-bezel-inner { background: var(--card-bg); border-radius: calc(2.2rem - 8px); box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 4px 6px rgba(0,0,0,0.02); padding: 40px; position: relative; border: 1px solid var(--border-soft); }
+    
+    /* Forms & Inputs */
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 10px; display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-group label span.req { color: var(--gold-dark); }
+    
+    /* Custom Inputs */
+    .input-shell { background: var(--input-bg); border-radius: 16px; padding: 4px; border: 1px solid var(--border-hard); transition: all 0.4s cubic-bezier(0.32,0.72,0,1); }
+    .input-shell:focus-within { border-color: var(--gold-main); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1); }
+    .input-core { position: relative; display: flex; align-items: center; height: 48px; }
+    .input-core input { width: 100%; height: 100%; background: transparent; border: none; padding: 0 16px; color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; outline: none; }
+    .input-core input::placeholder { color: #A0AAB5; }
+    .input-shell.error { border-color: var(--brand-error); background: rgba(239,68,68,0.02); }
+    .input-core input[readonly] { color: var(--text-muted); cursor: default; }
+
+    /* Desktop Row */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    /* The "Button-in-Button" Island Architecture */
+    .btn-island { width: 100%; border: none; background: transparent; padding: 4px; border-radius: 9999px; margin-top: 10px; cursor: pointer; border: 1px solid transparent; transition: all 0.7s cubic-bezier(0.32,0.72,0,1); outline: none; }
+    .btn-island-inner { background: linear-gradient(135deg, var(--gold-main), var(--gold-dark)); display: flex; align-items: center; justify-content: space-between; padding: 6px 6px 6px 32px; border-radius: 9999px; overflow: hidden; position: relative; box-shadow: 0 8px 16px rgba(212, 175, 55, 0.2); }
+    .btn-island-inner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transform: translateX(-100%); transition: 0.6s cubic-bezier(0.32,0.72,0,1); }
+    .btn-text { color: #FFF; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.05rem; font-weight: 600; letter-spacing: 0.02em; position: relative; z-index: 1; }
+    .btn-icon-wrapper { width: 44px; height: 44px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFF; flex-shrink: 0; position: relative; z-index: 1; transition: transform 0.6s cubic-bezier(0.32,0.72,0,1), background 0.6s; backdrop-filter: blur(4px); }
+    
+    .btn-island:hover .btn-island-inner::before { transform: translateX(100%); }
+    .btn-island:hover .btn-icon-wrapper { transform: translate(4px, -1px) scale(1.05); background: rgba(255,255,255,0.3); }
+    .btn-island:active { transform: scale(0.98); }
+    
+    .btn-island:disabled { opacity: 0.6; pointer-events: none; filter: grayscale(1); }
+    
+    .btn-island.loading .btn-text { opacity: 0; }
+    .btn-island.loading .btn-icon-wrapper i { animation: spin 0.8s linear infinite; }
+    .btn-island.loading .btn-icon-wrapper i::before { content: "\f110"; /* spinner icon */ font-family: "Font Awesome 6 Free"; font-weight: 900; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .bm-msg { border-radius: 16px; padding: 18px 24px; font-size: 0.95rem; margin-top: 24px; display: none; line-height: 1.5; font-weight: 500; }
+    .bm-msg.success { display: block; background: rgba(16, 185, 129, 0.1); color: var(--brand-success); border: 1px solid rgba(16, 185, 129, 0.2); }
+    .bm-msg.error { display: block; background: rgba(239, 68, 68, 0.1); color: var(--brand-error); border: 1px solid rgba(239, 68, 68, 0.2); }
+    .phone-error { color: var(--brand-error); font-size: 0.8rem; display: none; margin-top: 8px; padding-left: 8px; font-weight: 500; }
+    .phone-error.show { display: block; }
+
+    /* Honeypot trap tightly hidden without display:none */
+    .hp-trap { position: absolute; left: -9999px; opacity: 0; height: 1px; width: 1px; overflow: hidden; }
+
+    /* Motion/Entry Classes */
+    .stagger-up { opacity: 0; transform: translateY(40px); filter: blur(6px); transition: opacity 1.2s cubic-bezier(0.32,0.72,0,1), transform 1.2s cubic-bezier(0.32,0.72,0,1), filter 1.2s cubic-bezier(0.32,0.72,0,1); }
+    .stagger-up.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+    
+    /* TOAST */
+    .toast-overlay { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--text-main); border-radius: 100px; padding: 16px 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); z-index: 9999; display: flex; align-items: center; gap: 12px; transition: transform 0.6s cubic-bezier(0.32,0.72,0,1), opacity 0.6s; opacity: 0; pointer-events: none; }
+    .toast-overlay.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast-overlay i { color: var(--brand-success); font-size: 1.2rem; }
+    .toast-overlay.error i { color: var(--brand-error); }
+    .toast-overlay span { color: #FFF; font-weight: 500; font-size: 0.95rem; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* Universal Footer */
+    .footer { padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; position: relative; z-index: 10; font-weight: 400; border-top: 1px solid var(--border-soft); margin-top: 60px; }
+    .footer a { color: var(--gold-dark); text-decoration: none; transition: opacity 0.3s; font-weight: 500; }
+    .footer a:hover { opacity: 0.7; }
+    
+    /* Not Found */
+    .not-found { grid-column: 1 / -1; text-align: center; padding: 180px 20px; display: flex; flex-direction: column; align-items: center; }
+    .not-found h2 { font-size: 3rem; margin-bottom: 20px; color: var(--text-main); }
+    .not-found a { display: inline-block; padding: 16px 32px; background: var(--card-bg); border: 1px solid var(--border-hard); border-radius: 9999px; text-decoration: none; color: var(--text-main); margin-top: 30px; font-weight: 600; box-shadow: var(--shadow-ambient); transition: all 0.3s; }
+    .not-found a:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+    /* Responsive Architecture perfectly scaled for iOS/Android touch targets */
+    @media (max-width: 992px) {
+      .checkout-board { gap: 40px; padding: 120px 20px 40px; grid-template-columns: 1fr; }
+      .typo-block { position: relative; top: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+      .room-title { font-size: 3rem; }
+      .price-row { justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      html { font-size: 15px; }
+      .form-row { grid-template-columns: 1fr; gap: 16px; }
+      .double-bezel-inner { padding: 28px 24px; }
+      .nav-wrapper { top: 16px; }
+      .room-title { font-size: 2.2rem; margin-bottom: 16px; }
+      .price-row .amount { font-size: 2.5rem; }
+      .input-core { height: 52px; /* Extra height for easier mobile tapping */ } 
+    }
+  </style>
+</head>
+<body class="loading">
+
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-om"><div class="loader-om-circle"></div><i class="fas fa-om" id="loaderIcon"></i></div>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
+  </div>
+
+  <div class="nav-wrapper">
+    <nav class="navbar stagger-up delay-1">
+      <a class="nav-back" id="navBackBtn"><i class="fas fa-chevron-left"></i> Home</a>
+      <div class="nav-logo">
+        <div class="nav-logo-icon"><i class="fas fa-om" id="navBrandIcon"></i></div>
+        <span id="navBrandName">Sree Krishna</span>
+      </div>
+    </nav>
+  </div>
+
+  <main id="content"></main>
+
+  <div class="toast-overlay" id="toastNotification"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+  <footer class="footer">
+    <p>&copy; <span id="footerYear"></span> <span id="footerName"></span>. All Rights Reserved. | <a href="https://vyantrastudio.in" target="_blank" rel="noopener noreferrer">Vyantra Studio</a></p>
+  </footer>
+
+  <script>
+    // Universal Property ID - Must load BEFORE vyantra-core.js
+    window.VYANTRA_PROP_ID = "sreekrishna";
+  </script>
+  <script src="vyantra-core.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (function() {
+      'use strict';
+      // 1. Supabase Init (Ideally injected via env in a mature system)
+      var SUPABASE_URL = 'https://chjwvpvsxeczvwqyouiw.supabase.co';
+      var SUPABASE_KEY = 'sb_publishable_NzVSE86YgeHsKbVYqOLGGw_MT1YQO3n';
+      var supabase, todayStr, propertyId;
+      
+      // 2. Extracted branding / router logic using VyantraCore
+      var returnPath = VyantraCore.getReturnUrl(window.UniversalBookingConfig.brandHomeUrl);
+      var roomId = VyantraCore.getRoomId();
+      try {
+        propertyId = VyantraCore.getPropertyId();
+      } catch(e) {
+        renderNotFound();
+        return;
+      }
+      
+      var brandName = window.UniversalBookingConfig.defaultTitle;
+      var brandIcon = window.UniversalBookingConfig.logoIconClass;
+
+      // Mount brand settings universally
+      document.getElementById('navBackBtn').href = returnPath;
+      document.getElementById('navBrandName').textContent = brandName;
+      document.getElementById('footerName').textContent = brandName;
+      document.getElementById('footerYear').textContent = new Date().getFullYear();
+      document.getElementById('navBrandIcon').className = 'fas ' + brandIcon;
+      document.getElementById('loaderIcon').className = 'fas ' + brandIcon;
+
+      if (roomId) {
+        var canonical = document.getElementById('canonicalLink');
+        if (canonical) canonical.href = window.location.origin + window.location.pathname + '?room_id=' + encodeURIComponent(roomId);
+      }
+
+      function sanitize(str) {
+        if (str == null) return '-';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+      }
+
+      function validatePhone(phone) { return phone && /^[0-9]{10}$/.test(phone.replace(/\D/g, '')); }
+      function validateName(name) { return name && name.trim().length >= 2; }
+      function sanitizePhone(phone) { return phone.replace(/\D/g, ''); }
+
+      function showToast(msg, isError) {
+        var toast = document.getElementById('toastNotification');
+        var toastMsg = document.getElementById('toastMsg');
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = msg;
+        toast.className = 'toast-overlay' + (isError ? ' error' : '');
+        toast.querySelector('i').className = isError ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+        toast.classList.add('show');
+        setTimeout(function() { toast.classList.remove('show'); }, 4000);
+      }
+
+      function hideLoader() {
+        var loader = document.getElementById('loader');
+        if (loader) loader.classList.add('hidden');
+        document.body.classList.remove('loading');
+        triggerStaggerAnim();
+      }
+
+      function triggerStaggerAnim() {
+        var elements = document.querySelectorAll('.stagger-up');
+        elements.forEach(function(el, i) {
+          setTimeout(function() { el.classList.add('visible'); }, 50 * i);
+        });
+      }
+
+      function renderNotFound() {
+        var html = '<div class="checkout-board"><div class="not-found stagger-up"><h2>Room Unavailable</h2><p style="color:var(--text-muted)">The selected room does not exist or has been removed from the system.</p><a href="' + sanitize(returnPath) + '">Go Back</a></div></div>';
+        document.getElementById('content').innerHTML = html;
+        hideLoader();
+      }
+
+      function renderRoom(r) {
+        // Universal robust description fallback
+        var description = r.description || window.UniversalBookingConfig.defaultDesc;
+        var priceFormatted = (r.price || 0).toLocaleString();
+        
+        var html = '<section class="checkout-board">';
+        // Left Column: Typography
+        html += '<div class="typo-block stagger-up">';
+        html += '<div class="eyebrow">Premium Suite</div>';
+        html += '<h1 class="room-title">' + sanitize(r.name) + '</h1>';
+        html += '<p class="room-desc">' + sanitize(description) + '</p>';
+        html += '<div class="price-row"><span class="amount">&#8377;' + priceFormatted + '</span><span class="per">/ night</span></div>';
+        html += '</div>';
+
+        // Right Column: Form in Double Bezel
+        html += '<div class="form-block stagger-up">';
+        html += '<div class="double-bezel-outer"><div class="double-bezel-inner">';
+        html += '<form id="universalBookingForm" class="booking-form">';
+        html += '<input type="hidden" id="bookingRoomId" value="' + sanitize(r.id) + '">';
+        
+        // Honeypot - hidden correctly
+        html += '<div class="hp-trap" aria-hidden="true">';
+        html += '<label for="bWebsite">Leave empty for human validation</label>';
+        html += '<input type="text" id="bWebsite" name="website" tabindex="-1" autocomplete="off">';
+        html += '</div>';
+
+        html += '<div class="form-group"><label>Room Selection</label><div class="input-shell"><div class="input-core"><input type="text" value="' + sanitize(r.name) + '" readonly></div></div></div>';
+        
+        html += '<div class="form-row">';
+        html += '<div class="form-group"><label>Check-In <span class="req">*</span></label><div class="input-shell"><div class="input-core"><input type="date" id="bCheckIn" required></div></div></div>';
+        html += '<div class="form-group"><label>Check-Out <span class="req">*</span></label><div class="input-shell"><div class="input-core"><input type="date" id="bCheckOut" required></div></div></div>';
+        html += '</div>';
+
+        html += '<div class="form-group"><label>Guest Name <span class="req">*</span></label><div class="input-shell"><div class="input-core"><input type="text" id="bName" placeholder="Enter your full name" required maxlength="100"></div></div></div>';
+        html += '<div class="form-group"><label>Phone Number <span class="req">*</span></label><div class="input-shell" id="phoneShell"><div class="input-core"><input type="tel" id="bPhone" placeholder="10-digit number" pattern="[0-9]{10}" inputmode="numeric" required maxlength="10"></div></div><p class="phone-error" id="bPhoneError">Enter a valid 10-digit phone number</p></div>';
+
+        html += '<button type="submit" class="btn-island" id="bSubmitBtn"><div class="btn-island-inner"><span class="btn-text">Confirm Booking</span><div class="btn-icon-wrapper"><i class="fas fa-arrow-right"></i></div></div></button>';
+        html += '<div class="bm-msg" id="bMsg"></div>';
+        
+        html += '</form></div></div></div>';
+        html += '</section>';
+
+        document.getElementById('content').innerHTML = html;
+
+        // Date selection logic
+        var ci = document.getElementById('bCheckIn');
+        var co = document.getElementById('bCheckOut');
+        if (ci) { ci.min = todayStr; ci.addEventListener('change', function() { if (ci.value && co) { co.min = ci.value; if (co.value && co.value <= ci.value) co.value = ''; } }); }
+        if (co) co.min = todayStr;
+
+        var phone = document.getElementById('bPhone');
+        if (phone) phone.addEventListener('input', function() { document.getElementById('phoneShell').classList.remove('error'); document.getElementById('bPhoneError').classList.remove('show'); });
+
+        document.getElementById('universalBookingForm').addEventListener('submit', handleBookingSubmit);
+        hideLoader();
+      }
+
+      function handleBookingSubmit(e) {
+        e.preventDefault();
+        var btn = document.getElementById('bSubmitBtn');
+        var msg = document.getElementById('bMsg');
+        var name = document.getElementById('bName').value.trim();
+        var phone = document.getElementById('bPhone').value.trim();
+        var bookingRoomId = document.getElementById('bookingRoomId').value;
+        var hp = document.getElementById('bWebsite');
+        
+        if (hp && hp.value) return; // Silent discard for bots
+        if (btn.disabled) return;
+        btn.disabled = true;
+
+        if (!validateName(name)) { msg.textContent = 'Please enter a valid guest name.'; msg.className = 'bm-msg error'; btn.disabled = false; return; }
+        if (!validatePhone(phone)) { document.getElementById('phoneShell').classList.add('error'); document.getElementById('bPhoneError').classList.add('show'); btn.disabled = false; return; }
+        
+        var ci = document.getElementById('bCheckIn').value.trim();
+        var co = document.getElementById('bCheckOut').value.trim();
+        if (!ci || !co || ci >= co) { msg.textContent = 'Invalid dates selected. Check-out must exceed Check-in.'; msg.className = 'bm-msg error'; btn.disabled = false; return; }
+
+        btn.classList.add('loading');
+        msg.style.display = 'none';
+
+        supabase.rpc('create_booking_safe', {
+          p_property_id: propertyId, p_room_id: bookingRoomId, p_check_in: ci.substring(0, 10), p_check_out: co.substring(0, 10), p_customer_name: sanitize(name), p_phone: sanitizePhone(phone)
+        }).then(function(res) {
+          if (res.error || !res.data || res.data.success === false) {
+            msg.textContent = '[ERR-1002] ' + ((res.error && res.error.message) || (res.data && res.data.error) || 'Currently unavailable for these dates.');
+            msg.className = 'bm-msg error'; btn.classList.remove('loading'); btn.disabled = false; return;
+          }
+          
+          msg.innerHTML = 'Reservation secured! &#9989;<br>Your Reference ID: <strong>' + sanitize(res.data.booking_id) + '</strong>';
+          msg.className = 'bm-msg success';
+          btn.classList.remove('loading');
+          btn.querySelector('.btn-text').textContent = 'Confirmed';
+          showToast('Success! We will contact you shortly.', false);
+          
+          document.getElementById('bCheckIn').value = ''; document.getElementById('bCheckOut').value = '';
+          document.getElementById('bName').value = ''; document.getElementById('bPhone').value = '';
+        }).catch(function(err) {
+          // Universal generic error message instead of hardcoded numbers
+          msg.innerHTML = VyantraCore.handleApiError(err, '[ERR-1001] A system error occurred. Please refresh or contact ' + sanitize(window.UniversalBookingConfig.phoneSupport) + '. <br><a href="ERROR_CODES.md" target="_blank" style="color:var(--brand-error);text-decoration:underline;">View Error Codes</a>');
+          msg.className = 'bm-msg error';
+          btn.classList.remove('loading'); btn.disabled = false;
+        });
+      }
+
+      function bootSystem() {
+        if (!window.supabase) { setTimeout(bootSystem, 100); return; }
+        supabase = VyantraCore.initSupabase(SUPABASE_URL, SUPABASE_KEY);
+        if (!supabase) return;
+        todayStr = new Date().toISOString().split('T')[0];
+        
+        if (!roomId || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(roomId)) { renderNotFound(); return; }
+
+        supabase.from('rooms').select('*').eq('id', roomId).eq('property_id', propertyId).single().then(function(r) {
+          if (r.error || !r.data) renderNotFound(); else renderRoom(r.data);
+        }).catch(renderNotFound);
+      }
+
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', bootSystem); } else { bootSystem(); }
+      window.addEventListener('load', function() { hideLoader(); });
+    })();
+  </script>
+</body>
+</html>
