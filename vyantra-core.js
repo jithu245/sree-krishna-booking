@@ -1,10 +1,10 @@
-// vyantra-core.js - Universal Template Core Platform v1.0.9-PRO
+// vyantra-core.js - Universal Template Core Platform v1.1.1-PRO
 // Encapsulates Supabase initialization, property extraction, and common utilities.
 
 (function() {
   'use strict';
 
-  var VYANTRA_VERSION = "1.0.9";
+  var VYANTRA_VERSION = "1.1.1";
 
   // ============================================================
   // VYANTRA ERROR REGISTRY (VY-ERR-001 to 012)

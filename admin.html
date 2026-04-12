@@ -878,6 +878,29 @@
             </div>
           </div>
           <div class="settings-card">
+            <div class="settings-card-header"><i class="fas fa-ban" style="color: var(--red);"></i><h4>Booking Controls</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row">
+                <div>
+                  <div class="setting-label">Stop All Bookings</div>
+                  <div class="setting-desc">When ON, visitors cannot make new bookings</div>
+                </div>
+                <div class="setting-control">
+                  <label class="toggle-switch"><input type="checkbox" id="settingStopBookings" onchange="window.toggleStopBookings(this.checked)"><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+              <div class="setting-row" id="stopBookingsStatus" style="display: none;">
+                <div>
+                  <div class="setting-label" style="color: var(--red); font-weight: 600;">Bookings are STOPPED</div>
+                  <div class="setting-desc">Website booking form is disabled</div>
+                </div>
+                <div class="setting-control">
+                  <button class="setting-btn danger" onclick="window.toggleStopBookings(false)"><i class="fas fa-play"></i> Resume</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card">
             <div class="settings-card-header"><i class="fas fa-database"></i><h4>Data & Export</h4></div>
             <div class="settings-card-body">
               <div class="setting-row">
@@ -1233,6 +1256,7 @@
       var currentPaymentBookingId = null;
       var currentDetailBookingId = null;
       var otaCsvData = [];
+      var bookingsStopped = settings.bookingsStopped || false;
 
       function loadSettings() {
         try {
@@ -1325,7 +1349,27 @@
         if (el('settingTimeFormat')) el('settingTimeFormat').value = settings.timeFormat;
         if (el('settingSound')) el('settingSound').checked = settings.sound;
         if (el('settingAutoRefresh')) el('settingAutoRefresh').value = String(settings.autoRefresh);
+        if (el('settingStopBookings')) el('settingStopBookings').checked = settings.bookingsStopped;
+        updateStopBookingsUI(settings.bookingsStopped);
         itemsPerPage = settings.perPage;
+      }
+
+      window.toggleStopBookings = function(enabled) {
+        settings.bookingsStopped = enabled;
+        bookingsStopped = enabled;
+        saveSettings();
+        updateStopBookingsUI(enabled);
+        if (el('settingStopBookings')) el('settingStopBookings').checked = enabled;
+      };
+
+      function updateStopBookingsUI(enabled) {
+        var statusEl = document.getElementById('stopBookingsStatus');
+        var toggleEl = document.getElementById('settingStopBookings');
+        if (statusEl) {
+          statusEl.style.display = enabled ? 'flex' : 'none';
+        }
+        var toastMsg = enabled ? 'Bookings STOPPED - Visitors cannot book online' : 'Bookings RESUMED - Online booking is active';
+        showToast(toastMsg);
       }
 
       window.resetSettings = function() {
