@@ -926,109 +926,166 @@
 
       <div class="tab-panel" id="tab-help">
         <div class="priority-section" style="margin-bottom: 30px;">
-          <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 8px;">Manager's Playbook</h3>
-          <p style="color: var(--text-secondary); font-size: 0.95rem;">Real scenarios, real solutions for Kerala hospitality.</p>
+          <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 8px;">Help & Support</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem;">Simple guides to help you manage your hotel efficiently.</p>
         </div>
 
-        <!-- Scenario-Based Guide -->
-        <div style="display:flex;flex-direction:column;gap:12px;max-width:700px;">
+        <!-- Quick Start Guide -->
+        <div style="max-width: 800px;">
+          <h4 style="font-family: 'Outfit', sans-serif; font-size: 1.2rem; margin-bottom: 16px; color: var(--text);">Quick Start Guide</h4>
           
-          <details class="kpi-card" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);padding:20px;" open>
-            <summary style="font-weight:600;font-size:1.1rem;display:flex;align-items:center;gap:10px;list-style:none;">
-              <i class="fas fa-user-plus" style="color:var(--gold);"></i> Scenario: Walk-in Guest
+          <details class="kpi-card" style="padding: 20px; margin-bottom: 12px;" open>
+            <summary style="font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-user-check" style="color: var(--green);"></i> How to do Check-in
             </summary>
-            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light);font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
-              <p style="margin-bottom:10px;"><strong>Problem:</strong> A guest walks in without a prior booking.</p>
-              <p style="margin-bottom:10px;"><strong>Solution:</strong></p>
-              <p style="margin-bottom:8px;">1. Go to <strong>"Rooms"</strong> in sidebar</p>
-              <p style="margin-bottom:8px;">2. Find an available room and toggle it to "Occupied"</p>
-              <p style="margin-bottom:8px;">3. <strong>Don't create a booking yet</strong> - just mark the room occupied</p>
-              <p>4. Click <strong>"Save All Room Changes"</strong> to update the live system</p>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-light); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              <p style="margin-bottom: 8px;">1. Go to <strong>Bookings</strong> tab</p>
+              <p style="margin-bottom: 8px;">2. Find the guest's booking</p>
+              <p style="margin-bottom: 8px;">3. Click the <strong>Status</strong> dropdown</p>
+              <p>4. Select <strong>"Active"</strong> to mark as checked-in</p>
             </div>
           </details>
 
-          <details class="kpi-card" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);padding:20px;">
-            <summary style="font-weight:600;font-size:1.1rem;display:flex;align-items:center;gap:10px;list-style:none;">
-              <i class="fas fa-tags" style="color:var(--gold);"></i> Scenario: Festival Season Pricing
+          <details class="kpi-card" style="padding: 20px; margin-bottom: 12px;">
+            <summary style="font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-user-times" style="color: var(--amber);"></i> How to do Check-out
             </summary>
-            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light);font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
-              <p style="margin-bottom:10px;"><strong>Problem:</strong> It's Onam/Vishu and you need to raise rates.</p>
-              <p style="margin-bottom:10px;"><strong>Solution:</strong></p>
-              <p style="margin-bottom:8px;">1. Go to <strong>"Rooms"</strong> in sidebar</p>
-              <p style="margin-bottom:8px;">2. Update the price field for each room type</p>
-              <p style="margin-bottom:8px;">3. Scroll to <strong>"Save All Room Changes"</strong> at bottom</p>
-              <p>4. The booking page updates automatically! No code changes needed.</p>
-              <p style="margin-top:10px;color:var(--text-muted);"><em>Pro tip: Kerala festivals = higher demand. Check your WhatsApp for enquiry spikes!</em></p>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-light); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              <p style="margin-bottom: 8px;">1. Go to <strong>Bookings</strong> tab</p>
+              <p style="margin-bottom: 8px;">2. Find the guest's booking</p>
+              <p style="margin-bottom: 8px;">3. Click the <strong>Status</strong> dropdown</p>
+              <p>4. Select <strong>"Completed"</strong> to mark as checked-out</p>
+              <p style="margin-top: 10px;"><em>Note: Record payment before marking as completed</em></p>
             </div>
           </details>
 
-          <details class="kpi-card" style="--kpi-color:var(--red);--kpi-bg:var(--red-bg);padding:20px;">
-            <summary style="font-weight:600;font-size:1.1rem;display:flex;align-items:center;gap:10px;list-style:none;">
-              <i class="fas fa-ban" style="color:var(--gold);"></i> Scenario: Dealing with Spam/Fake Bookings
+          <details class="kpi-card" style="padding: 20px; margin-bottom: 12px;">
+            <summary style="font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <i class="fab fa-whatsapp" style="color: #25D366;"></i> How to Message a Guest on WhatsApp
             </summary>
-            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light);font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
-              <p style="margin-bottom:10px;"><strong>Problem:</strong> You receive obviously fake bookings.</p>
-              <p style="margin-bottom:10px;"><strong>Solution:</strong></p>
-              <p style="margin-bottom:8px;">1. The system has <strong>Rate Limiter</strong> built-in - it blocks repeated spam automatically</p>
-              <p style="margin-bottom:8px;">2. Go to <strong>"Bookings"</strong> tab</p>
-              <p style="margin-bottom:8px;">3. Find the fake entry and click <strong>"Cancel"</strong></p>
-              <p>4. Optionally delete the booking permanently</p>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-light); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              <p style="margin-bottom: 8px;">1. Go to <strong>Bookings</strong> tab</p>
+              <p style="margin-bottom: 8px;">2. Click the <strong>WhatsApp icon</strong> next to guest name</p>
+              <p>3. A message will open in WhatsApp with guest details</p>
             </div>
           </details>
 
-          <details class="kpi-card" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);padding:20px;">
-            <summary style="font-weight:600;font-size:1.1rem;display:flex;align-items:center;gap:10px;list-style:none;">
-              <i class="fas fa-clock" style="color:var(--gold);"></i> Scenario: Shift Hand-over
+          <details class="kpi-card" style="padding: 20px; margin-bottom: 12px;">
+            <summary style="font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-money-bill-wave" style="color: var(--accent);"></i> How to Record Payment
             </summary>
-            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light);font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">
-              <p style="margin-bottom:10px;"><strong>Problem:</strong> Morning shift handing over to evening.</p>
-              <p style="margin-bottom:10px;"><strong>Solution:</strong></p>
-              <p style="margin-bottom:8px;">1. Go to <strong>"Shift Notes"</strong> in sidebar</p>
-              <p style="margin-bottom:8px;">2. Write notes about pending guests, issues, etc.</p>
-              <p style="margin-bottom:8px;">3. Click <strong>"Post Note"</strong></p>
-              <p>4. Next shift sees your notes immediately on login</p>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-light); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              <p style="margin-bottom: 8px;">1. Click <strong>"Payment"</strong> button on booking card</p>
+              <p style="margin-bottom: 8px;">2. Enter the <strong>amount received</strong></p>
+              <p style="margin-bottom: 8px;">3. Select <strong>payment method</strong> (Cash/UPI/Card)</p>
+              <p>4. Click <strong>"Record Payment"</strong></p>
+            </div>
+          </details>
+
+          <details class="kpi-card" style="padding: 20px; margin-bottom: 12px;">
+            <summary style="font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-tags" style="color: var(--blue);"></i> How to Change Room Prices
+            </summary>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-light); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              <p style="margin-bottom: 8px;">1. Go to <strong>Rooms</strong> tab</p>
+              <p style="margin-bottom: 8px;">2. Update the <strong>price</strong> for any room type</p>
+              <p style="margin-bottom: 8px;">3. Scroll down and click <strong>"Save All Room Changes"</strong></p>
+              <p>4. New price will show on the website automatically</p>
+            </div>
+          </details>
+
+          <details class="kpi-card" style="padding: 20px; margin-bottom: 12px;">
+            <summary style="font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-sticky-note" style="color: var(--purple);"></i> How to Use Shift Notes
+            </summary>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-light); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              <p style="margin-bottom: 8px;">1. Go to <strong>Shift Notes</strong> tab</p>
+              <p style="margin-bottom: 8px;">2. Write any important notes for the next shift</p>
+              <p style="margin-bottom: 8px;">3. Click <strong>"Post Note"</strong></p>
+              <p>4. The next person who logs in will see your note</p>
+            </div>
+          </details>
+
+          <details class="kpi-card" style="padding: 20px; margin-bottom: 12px;">
+            <summary style="font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-ban" style="color: var(--red);"></i> How to Cancel a Booking
+            </summary>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border-light); font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;">
+              <p style="margin-bottom: 8px;">1. Go to <strong>Bookings</strong> tab</p>
+              <p style="margin-bottom: 8px;">2. Find the booking to cancel</p>
+              <p style="margin-bottom: 8px;">3. Click the <strong>Status</strong> dropdown</p>
+              <p>4. Select <strong>"Cancelled"</strong></p>
             </div>
           </details>
 
         </div>
 
-        <div class="settings-grid" style="margin-top: 30px;">
-          <div class="settings-card" style="grid-column: span 1;">
-            <div class="settings-card-header"><i class="fas fa-book-open"></i><h4>System Instructions & FAQs</h4></div>
-            <div class="settings-card-body" id="faqList">
-              <div class="setting-row" style="flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 16px;">
-                <div class="setting-label" style="font-weight: 600; font-size: 0.95rem;">How do I message a guest via WhatsApp?</div>
-                <div class="setting-desc" style="white-space: normal; line-height: 1.5; font-size: 0.85rem;">In the Bookings tab, simply click the WhatsApp icon next to any guest's name. It will automatically prepare a greeting message with their details for rapid follow-ups.</div>
+        <!-- Common Tasks -->
+        <div style="max-width: 800px; margin-top: 30px;">
+          <h4 style="font-family: 'Outfit', sans-serif; font-size: 1.2rem; margin-bottom: 16px; color: var(--text);">Common Tasks</h4>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
+            <div class="kpi-card" style="padding: 16px;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <i class="fas fa-search" style="color: var(--accent);"></i>
+                <strong>Search Bookings</strong>
               </div>
-              <div class="setting-row" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 0;">
-                <div class="setting-label" style="font-weight: 600; font-size: 0.95rem;">How do I process a Check-in or Check-out?</div>
-                <div class="setting-desc" style="white-space: normal; line-height: 1.5; font-size: 0.85rem;">Locate the reservation. Use the Status dropdown to update it to 'Active' for check-in, or 'Completed' for check-out. The Room Availability tab will update securely in real-time.</div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Use the search box at the top to find bookings by guest name or phone number.</p>
+            </div>
+            
+            <div class="kpi-card" style="padding: 16px;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <i class="fas fa-filter" style="color: var(--blue);"></i>
+                <strong>Filter Bookings</strong>
               </div>
-              <div class="setting-row" style="flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 16px; border-bottom: none;">
-                <div class="setting-label" style="font-weight: 600; font-size: 0.95rem;">What if a manager needs to restrict staff access?</div>
-                <div class="setting-desc" style="white-space: normal; line-height: 1.5; font-size: 0.85rem;">This system strictly uses Multi-Tenant Row Level Security. General staff members (receptionists) securely log in without seeing manager-exclusive tabs like Audit Logs or Revenue reports.</div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Use the dropdown filters to show only Active, Completed, or Cancelled bookings.</p>
+            </div>
+            
+            <div class="kpi-card" style="padding: 16px;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <i class="fas fa-eye" style="color: var(--green);"></i>
+                <strong>View Guest History</strong>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Click the eye icon on a booking to see all previous stays by that guest.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Keyboard Shortcuts -->
+        <div style="max-width: 800px; margin-top: 30px;">
+          <h4 style="font-family: 'Outfit', sans-serif; font-size: 1.2rem; margin-bottom: 16px; color: var(--text);">Keyboard Shortcuts</h4>
+          
+          <div class="kpi-card" style="padding: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: var(--text-secondary);">Search</span>
+                <kbd style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">Ctrl + K</kbd>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: var(--text-secondary);">Refresh</span>
+                <kbd style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">Ctrl + R</kbd>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: var(--text-secondary);">Close Modal</span>
+                <kbd style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">Escape</kbd>
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- System Status -->
+        <div style="max-width: 800px; margin-top: 30px;">
+          <h4 style="font-family: 'Outfit', sans-serif; font-size: 1.2rem; margin-bottom: 16px; color: var(--text);">System Status</h4>
           
-          <div class="settings-card" style="grid-column: span 1;">
-            <div class="settings-card-header"><i class="fas fa-server"></i><h4>System Status</h4></div>
-            <div class="settings-card-body">
-              <div class="setting-row">
-                <div class="setting-label">Supabase Database Connection</div>
-                <div class="status-badge active">Operational</div>
+          <div class="kpi-card" style="padding: 20px;">
+            <div style="display: grid; gap: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Database Connection</span>
+                <span style="color: var(--green); font-weight: 600;"><i class="fas fa-check-circle"></i> Online</span>
               </div>
-              <div class="setting-row">
-                <div class="setting-label">Real-time Synchronization</div>
-                <div class="status-badge active">Operational</div>
-              </div>
-              <div class="setting-row">
-                <div class="setting-label">WhatsApp Integration</div>
-                <div class="status-badge active">Operational</div>
-              </div>
-              <div class="setting-row">
-                <div class="setting-label">Last Database Sync</div>
-                <div class="setting-desc" id="helpLastSync" style="font-weight: 500; color: var(--green);">Just now</div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Last Data Sync</span>
+                <span id="helpLastSync" style="color: var(--green);">Just now</span>
               </div>
             </div>
           </div>
@@ -1040,7 +1097,7 @@
 
   <div class="login-screen show" id="loginScreen">
     <div class="login-box">
-      <div class="logo">&#9784;</div>
+      <div class="logo"><i class="fas fa-hotel"></i></div>
       <h2>Admin Panel</h2>
       <p class="sub">Sign in to manage bookings</p>
       <form id="loginForm" role="form" aria-label="Admin login form">
