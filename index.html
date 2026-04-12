@@ -1398,12 +1398,8 @@
       }
 
       function initApp() {
-        console.log('initApp called');
-        console.log('window.supabase exists:', !!window.supabase);
-        console.log('SUPABASE_URL:', SUPABASE_URL);
-        
         if (!window.supabase) {
-          if (container) container.innerHTML = '<p class="rooms-error">Connection failed - Supabase not loaded. Please check your internet and refresh.</p>';
+          if (container) container.innerHTML = '<p class="rooms-error">Connection failed. Please refresh.</p>';
           var loader = document.getElementById('loader');
           if (loader) loader.style.display = 'none';
           document.body.classList.remove('loading');
@@ -1687,23 +1683,19 @@ function getRoomImage(name) {
 
       function loadRooms() {
         if (!container) return;
-        console.log('Loading rooms from:', SUPABASE_URL);
         
         supabase
           .from('rooms')
           .select('*')
+          .order('price', { ascending: true })
           .then(function(r) {
-            console.log('API Response:', JSON.stringify(r, null, 2));
             if (r.error) {
-              console.error('API Error:', r.error);
-              container.innerHTML = '<p class="rooms-error">Error: ' + (r.error.message || 'Unknown') + '</p>';
+              container.innerHTML = '<p class="rooms-error">Failed to load rooms. Please refresh.</p>';
               return;
             }
-            console.log('Data received:', r.data);
             allRooms = r.data || [];
-            console.log('Total rooms:', allRooms.length);
             if (allRooms.length === 0) {
-              container.innerHTML = '<p class="rooms-error">No rooms in database. Please add rooms in Supabase.</p>';
+              container.innerHTML = '<p class="rooms-error">No rooms available at the moment.</p>';
               return;
             }
             renderRooms(allRooms);
