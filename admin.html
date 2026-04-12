@@ -1153,7 +1153,7 @@
     (function() {
       'use strict';
 
-      var IS_PROD = false;
+      var IS_PROD = true;
       var SUPABASE_URL = 'https://chjwvpvsxeczvwqyouiw.supabase.co';
       var SUPABASE_KEY = 'sb_publishable_NzVSE86YgeHsKbVYqOLGGw_MT1YQO3n';
 
@@ -1539,25 +1539,6 @@
         if (!supabase) {
           supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         }
-        supabase.from('rooms').select('id').limit(1).then(function(r) {
-          if (r.error) {
-            console.error('Connection test failed:', r.error);
-            var errEl = document.getElementById('loginError') || document.querySelector('.login-error');
-            if (errEl) {
-              errEl.textContent = 'Connection error: ' + r.error.message;
-              errEl.classList.add('show');
-            }
-          } else {
-            console.log('Connection test passed');
-          }
-        }).catch(function(err) {
-          console.error('Connection test exception:', err);
-          var errEl = document.getElementById('loginError') || document.querySelector('.login-error');
-          if (errEl) {
-            errEl.textContent = 'Connection error: ' + err.message;
-            errEl.classList.add('show');
-          }
-        });
         supabase.auth.onAuthStateChange(function(event, session) {
           if (event === 'SIGNED_OUT' || (event === 'TOKEN_REFRESHED' && !session)) window.location.reload();
         });
