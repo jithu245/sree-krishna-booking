@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://*.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://chjwvpvsxeczvwqyouiw.supabase.co https://*.supabase.io https://*.supabase.co https://cdn.jsdelivr.net https://*.jsdelivr.net; worker-src 'self' blob:; img-src 'self' data: https:; frame-src https://www.google.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://chjwvpvsxeczvwqyouiw.supabase.co https://*.supabase.io https://chjwvpvsxeczvwqyouiw.supabase.co/* https://cdn.jsdelivr.net https://*.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com; worker-src 'self' blob:; frame-src https://www.google.com https://www.google.com/maps;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="description" content="Sree Krishna Residency - Premium hotel near Guruvayur Temple, Kerala. 62 rooms, AC marriage hall, free Wi-Fi, parking. Enquire now!">
   <meta name="keywords" content="Sree Krishna Residency, Guruvayur hotel, Kerala hotel, hotel near temple, Guruvayur accommodation, marriage hall">
@@ -1398,8 +1398,12 @@
       }
 
       function initApp() {
+        console.log('initApp called');
+        console.log('window.supabase exists:', !!window.supabase);
+        console.log('SUPABASE_URL:', SUPABASE_URL);
+        
         if (!window.supabase) {
-          if (container) container.innerHTML = '<p class="rooms-error">Connection failed. Please check your internet and refresh.</p>';
+          if (container) container.innerHTML = '<p class="rooms-error">Connection failed - Supabase not loaded. Please check your internet and refresh.</p>';
           var loader = document.getElementById('loader');
           if (loader) loader.style.display = 'none';
           document.body.classList.remove('loading');
