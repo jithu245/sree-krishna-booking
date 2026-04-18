@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://chjwvpvsxeczvwqyouiw.supabase.co https://*.supabase.io https://chjwvpvsxeczvwqyouiw.supabase.co/* https://cdn.jsdelivr.net https://*.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com; worker-src 'self' blob:; frame-src https://www.google.com https://www.google.com/maps;">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <meta name="description" content="Sree Krishna Residency - Premium hotel near Guruvayur Temple, Kerala. 62 rooms, AC marriage hall, free Wi-Fi, parking. Enquire now!">
+  <meta name="description" content="Sree Krishna Residency - Premium hotel near Guruvayur Temple, Kerala. 62 rooms, AC marriage hall, kitchen & dining, free Wi-Fi, parking. Enquire now!">
   <meta name="keywords" content="Sree Krishna Residency, Guruvayur hotel, Kerala hotel, hotel near temple, Guruvayur accommodation, marriage hall">
   <meta name="author" content="Sree Krishna Residency">
   <meta name="robots" content="index, follow">
@@ -21,7 +21,7 @@
   <!-- SEO: Canonical and Open Graph -->
   <link rel="canonical" href="index.html">
   <meta property="og:title" content="Sree Krishna Residency | Premium Hotel Near Guruvayur Temple">
-  <meta property="og:description" content="62 rooms, AC marriage hall, 300m from temple. Premium stay in Guruvayur with all modern amenities.">
+  <meta property="og:description" content="62 rooms, AC marriage hall, kitchen & dining, 300m from temple. Premium stay in Guruvayur with all modern amenities.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="index.html">
   <meta property="og:image" content="images/Outdoors%20photo%201.webp">
@@ -32,9 +32,9 @@
     "@context": "https://schema.org",
     "@type": "Hotel",
     "name": "Sree Krishna Residency",
-    "description": "Premium hotel near Guruvayur Temple with 62 rooms, AC marriage hall, restaurant, and warm Kerala hospitality.",
+    "description": "Premium hotel near Guruvayur Temple with 62 rooms, AC marriage hall, kitchen & dining, and warm Kerala hospitality.",
     "url": "https://sreekrishnaresidency.com",
-    "telephone": "+91-487-2556505",
+    "telephone": "+91-9400291111",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "West Nada",
@@ -138,35 +138,218 @@
     .marquee-card-body p { font-size: 0.8rem; color: var(--text-light); }
     .marquee-label { display: inline-block; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--white); padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-bottom: 8px; }
 
-    /* NAVBAR */
-    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(10, 22, 40, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 2px 20px rgba(0,0,0,0.15); z-index: 1000; transition: all 0.28s ease; }
-    .navbar.scrolled { background: rgba(10, 22, 40, 0.97); box-shadow: 0 4px 30px rgba(0,0,0,0.25); }
-    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; max-width: 1200px; margin: 0 auto; transition: padding 0.21s ease; }
-    .navbar.scrolled .nav-container { padding: 8px 20px; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3); transition: transform 0.21s; flex-shrink: 0; }
-    .nav-logo:hover .nav-logo-icon { transform: rotate(10deg) scale(1.05); }
-    .nav-logo-icon i { font-size: 18px; color: var(--white); }
-    .nav-logo span { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); letter-spacing: 0.02em; }
-    .nav-links { display: flex; list-style: none; gap: 24px; align-items: center; }
-    .nav-links a { text-decoration: none; color: rgba(255,255,255,0.85); font-weight: 500; font-size: 0.9rem; transition: all 0.21s; position: relative; padding: 5px 0; }
-    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--gold); transition: all 0.21s; transform: translateX(-50%); }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta { background: linear-gradient(135deg, var(--gold), var(--gold-dark)) !important; color: var(--white) !important; padding: 10px 24px !important; border-radius: 25px !important; font-weight: 600 !important; box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3); }
+    /* NAVBAR - Glass Effect Premium Design */
+    .navbar { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.85) 0%, rgba(10, 22, 40, 0.75) 100%);
+      backdrop-filter: blur(25px) saturate(180%);
+      -webkit-backdrop-filter: blur(25px) saturate(180%);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+      z-index: 1000; 
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .navbar.scrolled { 
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.95) 0%, rgba(10, 22, 40, 0.92) 100%);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+    .nav-container { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 16px 30px; 
+      max-width: 1400px; 
+      margin: 0 auto; 
+      transition: padding 0.3s ease; 
+    }
+    .navbar.scrolled .nav-container { padding: 12px 30px; }
+    .nav-logo { 
+      display: flex; 
+      align-items: center; 
+      gap: 14px; 
+      text-decoration: none; 
+      position: relative;
+    }
+    .nav-logo::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 70%;
+      background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+      border-radius: 2px;
+    }
+    .nav-logo-icon { 
+      width: 46px; 
+      height: 46px; 
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); 
+      border-radius: 12px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4), 0 0 30px rgba(201, 168, 76, 0.2);
+      transition: all 0.3s ease; 
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-logo-icon::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    }
+    .nav-logo:hover .nav-logo-icon { 
+      transform: scale(1.08) rotate(5deg); 
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.5), 0 0 40px rgba(201, 168, 76, 0.3);
+    }
+    .nav-logo-icon i { 
+      font-size: 20px; 
+      color: var(--white); 
+      position: relative;
+      z-index: 1;
+    }
+    .nav-logo span { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 1.3rem; 
+      font-weight: 700; 
+      color: var(--white); 
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .nav-links { 
+      display: flex; 
+      list-style: none; 
+      gap: 8px; 
+      align-items: center; 
+    }
+    .nav-links a { 
+      text-decoration: none; 
+      color: rgba(255,255,255,0.8); 
+      font-weight: 500; 
+      font-size: 0.9rem; 
+      transition: all 0.25s ease; 
+      position: relative; 
+      padding: 10px 16px;
+      border-radius: 8px;
+    }
+    .nav-links a:hover { 
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.08);
+    }
+    .nav-links a::after { 
+      content: ''; 
+      position: absolute; 
+      bottom: 6px; 
+      left: 50%; 
+      width: 0; 
+      height: 2px; 
+      background: var(--gold); 
+      transition: all 0.25s ease; 
+      transform: translateX(-50%); 
+      border-radius: 1px;
+    }
+    .nav-links a:hover::after { width: 60%; }
+    .nav-cta { 
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%) !important; 
+      color: var(--white) !important; 
+      padding: 10px 20px !important; 
+      border-radius: 25px !important; 
+      font-weight: 600 !important; 
+      font-size: 0.85rem !important;
+      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3), 0 2px 8px rgba(201, 168, 76, 0.15);
+      margin-left: 12px;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-cta i { font-size: 0.9rem; }
     .nav-cta::after { display: none !important; }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4) !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; background: none; border: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-    .hamburger span { width: 24px; height: 2.5px; background: var(--white); border-radius: 2px; transition: all 0.21s; display: block; }
-    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav-cta:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 8px 25px rgba(201, 168, 76, 0.45) !important; 
+    }
+    .hamburger { 
+      display: none; 
+      flex-direction: column; 
+      gap: 6px; 
+      cursor: pointer; 
+      padding: 12px; 
+      background: rgba(255,255,255,0.05); 
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.21s; 
+    }
+    .hamburger:hover { background: rgba(255,255,255,0.1); }
+    .hamburger span { 
+      width: 26px; 
+      height: 2.5px; 
+      background: var(--white); 
+      border-radius: 3px; 
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+      display: block; 
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-    .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--navy); padding: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.35); max-height: calc(100vh - 64px); overflow-y: auto; z-index: 999; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
-    .mobile-menu.active { display: block; animation: slideDown 0.25s ease; }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-    .mobile-menu a { display: block; padding: 16px 20px; text-decoration: none; color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 1rem; transition: all 0.21s; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-    .mobile-menu a:hover { background: rgba(201, 168, 76, 0.1); color: var(--gold); padding-left: 25px; }
-    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu { 
+      display: none; 
+      position: fixed; 
+      top: 72px; 
+      left: 0; 
+      right: 0; 
+      background: linear-gradient(180deg, rgba(10, 22, 40, 0.98) 0%, rgba(10, 22, 40, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 20px; 
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+      max-height: calc(100vh - 72px); 
+      overflow-y: auto; 
+      z-index: 999; 
+      border-top: 1px solid rgba(201, 168, 76, 0.15);
+    }
+    .mobile-menu.active { 
+      display: block; 
+      animation: slideDown 0.3s ease; 
+    }
+    @keyframes slideDown { 
+      from { opacity: 0; transform: translateY(-20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    .mobile-menu a { 
+      display: block; 
+      padding: 16px 20px; 
+      text-decoration: none; 
+      color: var(--white); 
+      font-size: 1.05rem; 
+      transition: all 0.21s; 
+      border-radius: 10px;
+      margin-bottom: 6px;
+      border: 1px solid transparent;
+    }
+    .mobile-menu a:hover { 
+      background: rgba(201, 168, 76, 0.15); 
+      color: var(--gold); 
+      border-color: rgba(201, 168, 76, 0.2);
+      padding-left: 28px;
+    }
+    .mobile-menu a:last-child { 
+      margin-bottom: 0;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--white);
+      text-align: center;
+      font-weight: 600;
+    }
+    .mobile-menu a:last-child:hover { 
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      transform: scale(1.02);
+    }
 
     /* HERO */
     .hero { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%); position: relative; overflow: hidden; padding: 85px 0 60px; }
@@ -214,6 +397,57 @@
     .section-divider { height: 4px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; }
     .section-divider-dark { height: 4px; background: linear-gradient(90deg, transparent, var(--gold-light), transparent); opacity: 0.15; }
     .gradient-divider { height: 6px; background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy)); opacity: 0.4; }
+    
+    /* GURUVAYUR TEMPLE SHOWCASE */
+    .guruvayur-temple { padding: 80px 0; background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%); }
+    .temple-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 40px; }
+    .temple-showcase-main { position: relative; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
+    .temple-showcase-main img { width: 100%; height: 350px; object-fit: cover; }
+    .temple-main-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 30px; background: linear-gradient(transparent, rgba(10,22,40,0.9)); color: var(--white); }
+    .temple-main-overlay h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 5px; }
+    .temple-main-overlay p { font-size: 0.9rem; opacity: 0.8; }
+    .temple-showcase-info h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 15px; }
+    .temple-showcase-info p { font-size: 0.95rem; color: var(--text-light); line-height: 1.7; margin-bottom: 15px; }
+    .temple-highlights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .temple-highlight { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--navy); background: var(--white); padding: 10px 14px; border-radius: 10px; }
+    .temple-highlight i { color: var(--gold); }
+    .temple-legend { background: var(--white); padding: 20px; border-radius: 12px; border-left: 4px solid var(--gold); }
+    .temple-legend h4 { font-size: 1rem; color: var(--navy); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .temple-legend h4 i { color: var(--gold); }
+    .temple-legend p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+    .temple-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .temple-feature-box { background: var(--white); padding: 25px 20px; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s; }
+    .temple-feature-box:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .temple-feature-box i { font-size: 2rem; color: var(--gold); margin-bottom: 12px; }
+    .temple-feature-box h4 { font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
+    .temple-feature-box p { font-size: 0.8rem; color: var(--text-light); }
+    
+    @media (max-width: 900px) {
+      .temple-showcase { grid-template-columns: 1fr; }
+      .temple-features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .temple-features-grid { grid-template-columns: 1fr; }
+      .temple-highlights { grid-template-columns: 1fr; }
+    }
+    
+    /* TEMPLE TIMINGS */
+    .temple-timings { padding: 80px 0; background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%); }
+    .timings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; max-width: 1000px; margin: 0 auto; }
+    .timing-card { background: var(--white); border-radius: 16px; padding: 24px; box-shadow: var(--shadow-sm); text-align: center; }
+    .timing-card h3 { color: var(--navy); font-size: 1.1rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .timing-card h3 i { color: var(--gold); }
+    .timing-card ul { list-style: none; text-align: left; }
+    .timing-card ul li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--cream-dark); }
+    .timing-card ul li:last-child { border-bottom: none; }
+    .timing-card .time { color: var(--gold); font-weight: 600; font-size: 0.9rem; }
+    .timing-card .time.special { color: var(--navy); font-size: 0.8rem; background: rgba(201, 168, 76, 0.15); padding: 4px 8px; border-radius: 4px; }
+    .timing-card .event { color: var(--text); font-size: 0.9rem; }
+    
+    @media (max-width: 768px) {
+      .timings-grid { grid-template-columns: 1fr; gap: 15px; }
+      .timing-card { padding: 20px; }
+    }
     .gold-line { height: 2px; background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%); opacity: 0.3; }
     
     /* Ornamental Divider */
@@ -286,6 +520,53 @@
     .view-details-btn:active { transform: scale(0.98); }
     .view-details-btn i { transition: transform 0.21s; }
     .view-details-btn:hover i { transform: translateX(4px); }
+    
+    /* Static Room Cards - Redesigned */
+    .rooms-grid-static { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+    .room-card-static { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); transition: all 0.35s ease; position: relative; }
+    .room-card-static:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.18); }
+    .room-image-static { position: relative; height: 180px; overflow: hidden; background: linear-gradient(135deg, #f5f5f5, #e8e8e8); }
+    .room-image-static img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .room-card-static:hover .room-image-static img { transform: scale(1.1); }
+    .room-image-static::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(transparent, rgba(0,0,0,0.3)); }
+    .room-badge-static { position: absolute; top: 12px; left: 12px; background: var(--navy); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+    .room-badge-ac { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); }
+    .room-badge-dorm { background: var(--navy-mid); }
+    .room-content-static { padding: 18px; }
+    .room-content-static h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 6px; font-family: 'Playfair Display', serif; font-weight: 600; }
+    .room-price-static { font-size: 1.4rem; color: var(--gold); font-weight: 700; margin-bottom: 12px; display: flex; align-items: baseline; gap: 4px; }
+    .room-price-static .currency { font-size: 0.9rem; }
+    .room-price-note { font-size: 0.75rem; font-weight: 400; color: var(--text-light); }
+    .room-prices { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .room-prices .price-ac { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--white); padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; }
+    .room-prices .price-nonac { background: var(--navy); color: var(--white); padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; }
+    .room-features-static { list-style: none; margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .room-features-static li { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--text-light); background: var(--cream); padding: 4px 10px; border-radius: 12px; }
+    .room-features-static li i { color: var(--gold); font-size: 0.7rem; }
+    .room-buttons-static { display: flex; gap: 8px; }
+    .room-buttons-static .view-details-btn { flex: 1; text-align: center; padding: 10px 12px; font-size: 0.8rem; border-radius: 10px; }
+    .btn-secondary-static { background: var(--cream-dark) !important; color: var(--navy) !important; }
+    .btn-secondary-static:hover { background: var(--cream) !important; }
+    .rooms-note { text-align: center; margin-top: 30px; padding: 16px; background: rgba(201, 168, 76, 0.1); border-radius: 10px; }
+    .rooms-note p { color: var(--text-light); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .rooms-note i { color: var(--gold); }
+    
+    @media (max-width: 1200px) {
+      .rooms-grid-static { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .rooms-grid-static { grid-template-columns: 1fr; gap: 15px; }
+      .room-card-static { border-radius: 16px; }
+      .room-image-static { height: 150px; }
+      .room-content-static { padding: 14px; }
+      .room-content-static h3 { font-size: 1rem; }
+      .room-prices { gap: 6px; }
+      .room-prices .price-ac, .room-prices .price-nonac { padding: 5px 10px; font-size: 0.75rem; }
+      .room-features-static { gap: 6px; margin-bottom: 12px; }
+      .room-features-static li { font-size: 0.7rem; padding: 3px 8px; }
+      .room-buttons-static { gap: 6px; }
+      .room-buttons-static .view-details-btn { padding: 8px 10px; font-size: 0.75rem; border-radius: 8px; }
+    }
 
     /* SEARCH SECTION */
     .search-section { background: var(--white); padding: 24px 0; box-shadow: var(--shadow-sm); position: relative; z-index: 10; }
@@ -303,6 +584,15 @@
     .search-btn.loading::after { content: ''; position: absolute; width: 18px; height: 18px; top: 50%; left: 50%; margin: -9px 0 0 -9px; border: 2px solid var(--white); border-radius: 50%; border-top-color: transparent; animation: spin 0.8s linear infinite; }
     .search-status { text-align: center; margin-top: 14px; font-size: 0.85rem; color: var(--text-light); }
     .search-status.active { color: var(--gold); font-weight: 500; }
+    
+    @media (max-width: 600px) {
+      .search-section { padding: 16px 0; }
+      .search-bar { gap: 10px; padding: 0 16px; }
+      .search-field { flex: 1; min-width: 45%; }
+      .search-field label { font-size: 0.65rem; }
+      .search-field input { padding: 10px 12px; min-width: 100%; font-size: 0.9rem; }
+      .search-btn { padding: 10px 20px; font-size: 0.85rem; width: 100%; margin-top: 10px; }
+    }
 
     .rooms-loading, .rooms-error { text-align: center; padding: 60px 20px; color: var(--text-light); font-size: 1.1rem; }
     .rooms-error { color: #f44336; }
@@ -389,6 +679,20 @@
     .temple-tags { display: flex; flex-wrap: wrap; gap: 10px; }
     .temple-tag { background: var(--white); padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; color: var(--text); border: 1px solid rgba(201, 168, 76, 0.3); display: flex; align-items: center; gap: 6px; }
     .temple-tag i { color: var(--gold); }
+    .nearby-temples-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .nearby-temple-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--white); border-radius: 10px; border: 1px solid var(--cream-dark); }
+    .nearby-temple-item .temple-name { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+    .nearby-temple-item .temple-distance { font-size: 0.8rem; color: var(--gold); font-weight: 600; background: rgba(201, 168, 76, 0.1); padding: 4px 10px; border-radius: 15px; }
+    .tourist-places h4 { font-size: 1.2rem; color: var(--navy); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+    .tourist-places h4 i { color: var(--gold); }
+    .tourist-places-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .tourist-place-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--white); border-radius: 10px; border: 1px solid var(--cream-dark); }
+    .tourist-place-item .place-name { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+    .tourist-place-item .place-distance { font-size: 0.8rem; color: var(--gold); font-weight: 600; background: rgba(201, 168, 76, 0.1); padding: 4px 10px; border-radius: 15px; }
+    @media (max-width: 600px) {
+      .nearby-temples-list { grid-template-columns: 1fr; }
+      .tourist-places-list { grid-template-columns: 1fr; }
+    }
     .map-container { height: 100%; min-height: 350px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
     .map-container iframe { width: 100%; height: 100%; min-height: 350px; border: none; }
 
@@ -437,7 +741,10 @@
     .form-group.full { grid-column: span 2; }
     .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--navy); font-size: 0.9rem; }
     .form-group label span { color: var(--gold); }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; border: 2px solid var(--cream-dark); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; transition: all 0.21s; background: var(--cream); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; border: 2px solid var(--cream-dark); border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; transition: all 0.21s; background: var(--cream); color: var(--text); }
+    .form-group select { appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23718096' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+    .form-group select:focus { outline: none; border-color: var(--gold); background-color: var(--white); box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1); }
+    .form-group select option { padding: 10px; background: var(--white); color: var(--text); }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); background: var(--white); box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1); }
     .form-group textarea { resize: vertical; min-height: 100px; }
     .form-submit { text-align: center; margin-top: 35px; }
@@ -515,11 +822,13 @@
       .nav-links { display: none; }
       .hamburger { display: flex; padding: 10px; margin-right: -10px; }
       .hamburger span { width: 26px; height: 3px; }
-      .nav-logo-icon { width: 38px; height: 38px; }
+      .nav-logo::before { display: none; }
+      .nav-logo-icon { width: 40px; height: 40px; border-radius: 10px; }
       .nav-logo-icon i { font-size: 18px; }
-      .nav-logo span { font-size: 1rem; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .mobile-menu { top: 62px; }
-      .mobile-menu a { padding: 14px 20px; font-size: 1rem; min-height: 48px; display: flex; align-items: center; }
+      .nav-logo span { font-size: 1.05rem; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .mobile-menu { top: 60px; padding: 15px; }
+      .mobile-menu a { padding: 14px 18px; font-size: 1rem; min-height: 48px; display: flex; align-items: center; }
+      .mobile-menu a:last-child { margin-top: 10px; }
       
       /* HERO - Better mobile hero */
       .hero { padding: 80px 0 50px; min-height: auto; min-height: calc(100vh - 62px); display: flex; align-items: center; }
@@ -630,6 +939,7 @@
       .booking-form { padding: 28px 20px; border-radius: 20px; }
       .booking-form::before { border-radius: 20px 20px 0 0; }
       .form-grid { gap: 0; }
+      .form-group.full { grid-column: span 1; }
       .form-group { margin-bottom: 16px; }
       .form-group label { font-size: 0.9rem; }
       .form-group input, .form-group select, .form-group textarea { padding: 14px 16px; font-size: 1rem !important; min-height: 50px; border-radius: 12px; }
@@ -1001,13 +1311,14 @@
           <div class="hero-location"><i class="fas fa-map-marker-alt"></i><span>300 Meters from Guruvayur Temple</span></div>
           <div class="hero-info">
             <div class="hero-info-item"><i class="fas fa-bed"></i><span>62 Rooms</span></div>
-            <div class="hero-info-item"><i class="fas fa-clock"></i><span>Check-in: 3 PM</span></div>
+            <div class="hero-info-item"><i class="fas fa-elevator"></i><span>Elevator</span></div>
+            <div class="hero-info-item"><i class="fas fa-car"></i><span>Pickup & Drop</span></div>
             <div class="hero-info-item"><i class="fas fa-wifi"></i><span>Free Wi-Fi</span></div>
-            <div class="hero-info-item"><i class="fas fa-phone"></i><span>0487-2556505</span></div>
+            <div class="hero-info-item"><i class="fas fa-phone"></i><span>940 029 1111</span></div>
           </div>
           <div class="hero-buttons">
             <a href="#booking" class="btn btn-primary"><i class="fab fa-whatsapp"></i>Send Enquiry (WhatsApp)</a>
-            <a href="tel:04872556505" class="btn btn-secondary"><i class="fas fa-phone"></i>Call Now</a>
+            <a href="tel:9400291111" class="btn btn-secondary"><i class="fas fa-phone"></i>Call Now</a>
           </div>
         </div>
         <div class="hero-image">
@@ -1024,6 +1335,58 @@
 
   <div class="wave-divider"><svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#f8f5f0"/></svg></div>
   <div class="gradient-divider"></div>
+
+  <section class="guruvayur-temple" id="guruvayur-temple">
+    <div class="container">
+      <div class="section-header reveal"><h2>Guruvayur Temple</h2><div class="section-line"></div><p>The divine abode of Lord Krishna</p></div>
+      <div class="temple-showcase">
+        <div class="temple-showcase-main reveal-left">
+          <img src="images/Outdoors%20photo%201.webp" alt="Guruvayur Temple" loading="lazy">
+          <div class="temple-main-overlay">
+            <h3>Sri Krishna Temple</h3>
+            <p>One of the most sacred pilgrimage centers in Kerala</p>
+          </div>
+        </div>
+        <div class="temple-showcase-info reveal-right">
+          <h3>About Guruvayur Temple</h3>
+          <p>Guruvayur Temple is one of the most famous and revered Hindu temples in Kerala, dedicated to Lord Krishna. Known as the "Dwarka of the South", this temple attracts millions of devotees every year.</p>
+          <p>The temple is managed by the Guruvayur Devaswom Board under the Government of Kerala. The deity here is worshipped as Lord Vishnu in his form as Lord Krishna.</p>
+          <div class="temple-highlights">
+            <div class="temple-highlight"><i class="fas fa-star"></i><span>4th richest temple in Kerala</span></div>
+            <div class="temple-highlight"><i class="fas fa-star"></i><span>500+ years of history</span></div>
+            <div class="temple-highlight"><i class="fas fa-star"></i><span>Millions of devotees annually</span></div>
+            <div class="temple-highlight"><i class="fas fa-star"></i><span>Traditional Kerala architecture</span></div>
+          </div>
+          <div class="temple-legend">
+            <h4><i class="fas fa-history"></i> Legend</h4>
+            <p>According to legends, the idol was installed by Lord Krishna's devotees after the destruction of Dwarka. The name "Guruvayur" comes from "Guru" (Lord Brihaspati) and "Vayur" (wind).</p>
+          </div>
+        </div>
+      </div>
+      <div class="temple-features-grid">
+        <div class="temple-feature-box">
+          <i class="fas fa-pray"></i>
+          <h4>Daily Poojas</h4>
+          <p>Morning to evening</p>
+        </div>
+        <div class="temple-feature-box">
+          <i class="fas fa-utensils"></i>
+          <h4>Prasadam</h4>
+          <p>Palpayasam & Appam</p>
+        </div>
+        <div class="temple-feature-box">
+          <i class="fas fa-music"></i>
+          <h4>Chendamelam</h4>
+          <p>Traditional music</p>
+        </div>
+        <div class="temple-feature-box">
+          <i class="fas fa-child"></i>
+          <h4>Child Offerings</h4>
+          <p>URL Appam tradition</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="about" id="about">
     <div class="container">
@@ -1210,9 +1573,104 @@
       <p class="search-status" id="searchStatus"></p>
     </div>
     <div class="container">
-      <div class="section-header reveal"><h2>Our Rooms</h2><div class="section-line"></div><p id="roomsSubtitle">Select dates above to check availability</p></div>
-      <div id="rooms-container">
-        <p class="rooms-loading">Loading rooms...</p>
+      <div class="section-header reveal"><h2>Our Rooms</h2><div class="section-line"></div><p id="roomsSubtitle">Comfortable stays starting from ₹1,100</p></div>
+      <div id="rooms-container" class="rooms-grid-static">
+        <!-- Room Card: 2 Bed (AC + Non-AC) -->
+        <div class="room-card-static">
+          <div class="room-image-static">
+            <img src="images/2%20Bed%20Non%20AC%205%20this%20should%20be%20shown%20first.avif" alt="2 Bed Room" loading="lazy">
+          </div>
+          <div class="room-content-static">
+            <h3>2 Bed Room</h3>
+            <div class="room-prices">
+              <span class="price-ac">AC: ₹1,800</span>
+              <span class="price-nonac">Non-AC: ₹1,100</span>
+            </div>
+            <ul class="room-features-static">
+              <li><i class="fas fa-user"></i> 2 Beds</li>
+              <li><i class="fas fa-snowflake"></i> AC / Non-AC Available</li>
+              <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
+              <li><i class="fas fa-tv"></i> TV</li>
+              <li><i class="fas fa-shower"></i> Attached Bathroom</li>
+              <li><i class="fas fa-bolt"></i> 24/7 Power Backup</li>
+            </ul>
+            <div class="room-buttons-static">
+              <a href="booking.html?room_id=2bed-ac" class="view-details-btn">Book AC</a>
+              <a href="booking.html?room_id=2bed-nonac" class="view-details-btn btn-secondary-static">Book Non-AC</a>
+            </div>
+          </div>
+        </div>
+        <!-- Room Card: 3 Bed (AC + Non-AC) -->
+        <div class="room-card-static">
+          <div class="room-image-static">
+            <img src="images/2%20Bed%20AC.webp" alt="3 Bed Room" loading="lazy">
+          </div>
+          <div class="room-content-static">
+            <h3>3 Bed Room</h3>
+            <div class="room-prices">
+              <span class="price-ac">AC: ₹2,000</span>
+              <span class="price-nonac">Non-AC: ₹1,300</span>
+            </div>
+            <ul class="room-features-static">
+              <li><i class="fas fa-user"></i> 3 Beds</li>
+              <li><i class="fas fa-snowflake"></i> AC / Non-AC Available</li>
+              <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
+              <li><i class="fas fa-tv"></i> TV</li>
+              <li><i class="fas fa-shower"></i> Attached Bathroom</li>
+              <li><i class="fas fa-bolt"></i> 24/7 Power Backup</li>
+            </ul>
+            <div class="room-buttons-static">
+              <a href="booking.html?room_id=3bed-ac" class="view-details-btn">Book AC</a>
+              <a href="booking.html?room_id=3bed-nonac" class="view-details-btn btn-secondary-static">Book Non-AC</a>
+            </div>
+          </div>
+        </div>
+        <!-- Room Card: 4 Bed (AC + Non-AC) -->
+        <div class="room-card-static">
+          <div class="room-image-static">
+            <img src="images/Four%20Bed%20Ac%20Family%20Room.webp" alt="4 Bed Room" loading="lazy">
+          </div>
+          <div class="room-content-static">
+            <h3>4 Bed Room</h3>
+            <div class="room-prices">
+              <span class="price-ac">AC: ₹2,400</span>
+              <span class="price-nonac">Non-AC: ₹1,400</span>
+            </div>
+            <ul class="room-features-static">
+              <li><i class="fas fa-user"></i> 4 Beds</li>
+              <li><i class="fas fa-snowflake"></i> AC / Non-AC Available</li>
+              <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
+              <li><i class="fas fa-tv"></i> TV</li>
+              <li><i class="fas fa-shower"></i> Attached Bathroom</li>
+              <li><i class="fas fa-bolt"></i> 24/7 Power Backup</li>
+            </ul>
+            <div class="room-buttons-static">
+              <a href="booking.html?room_id=4bed-ac" class="view-details-btn">Book AC</a>
+              <a href="booking.html?room_id=4bed-nonac" class="view-details-btn btn-secondary-static">Book Non-AC</a>
+            </div>
+          </div>
+        </div>
+        <!-- Room Card: 8 Bed Dormitory (Non-AC only) -->
+        <div class="room-card-static">
+          <div class="room-image-static">
+            <img src="images/Outdoors%20photo%201.webp" alt="8 Bed Dormitory" loading="lazy">
+            <span class="room-badge-static room-badge-dorm">Non-AC Only</span>
+          </div>
+          <div class="room-content-static">
+            <h3>8 Bed Dormitory</h3>
+            <p class="room-price-static">₹2,400<span class="room-price-note">/night</span></p>
+            <ul class="room-features-static">
+              <li><i class="fas fa-users"></i> 8 Shared Beds</li>
+              <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
+              <li><i class="fas fa-bolt"></i> Power Backup</li>
+              <li><i class="fas fa-shower"></i> Common Bathroom</li>
+            </ul>
+            <a href="booking.html?room_id=8bed-dorm" class="view-details-btn">Book Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="rooms-note">
+        <p><i class="fas fa-info-circle"></i> GST applicable | Check-In: 3 PM | Check-Out: 2 PM</p>
       </div>
     </div>
   </section>
@@ -1233,6 +1691,7 @@
         <div class="amenity-card"><i class="fas fa-user-md"></i><h4>Doctor on Call</h4></div>
         <div class="amenity-card"><i class="fas fa-broom"></i><h4>Housekeeping</h4></div>
         <div class="amenity-card"><i class="fas fa-elevator"></i><h4>Elevator</h4></div>
+        <div class="amenity-card"><i class="fas fa-car"></i><h4>Pickup & Drop</h4></div>
         <div class="amenity-card"><i class="fas fa-shuttle-van"></i><h4>Airport Shuttle</h4></div>
         <div class="amenity-card"><i class="fas fa-headset"></i><h4>24hr Help Desk</h4></div>
         <div class="amenity-card"><i class="fas fa-briefcase"></i><h4>Business Centre</h4></div>
@@ -1378,28 +1837,19 @@
 
   <section class="dining" id="dining">
     <div class="container">
-      <div class="section-header reveal"><h2>Dining Experience</h2><div class="section-line"></div><p>Authentic vegetarian cuisine</p></div>
+      <div class="section-header reveal"><h2>Kitchen & Dining</h2><div class="section-line"></div><p>Self-cooking facilities & dining area available</p></div>
       <div class="dining-content">
-        <div class="dining-main reveal-left">
-          <img src="images/Outdoors%20photo%201.webp" alt="Restaurant" loading="lazy">
-        </div>
-        <div class="dining-info reveal-right">
-          <h3>Shree Krishna Brahmins Veg Restaurant</h3>
-          <p>Delicious South Indian vegetarian cuisine with fresh ingredients and traditional recipes.</p>
-          <div class="dining-type"><i class="fas fa-clock"></i><span>Breakfast | Lunch | Dinner</span></div>
-          <div class="dining-type"><i class="fas fa-utensils"></i><span>Buffet & À la carte</span></div>
-          <div class="nearby-food">
-            <h4>Nearby Restaurants</h4>
-            <div class="food-item"><i class="fas fa-utensils"></i><div><strong>Nivedyam</strong><p style="margin:0;color:var(--text-light);font-size:0.85rem;">Kerala Cuisine</p></div></div>
-            <div class="food-item"><i class="fas fa-pizza-slice"></i><div><strong>Big Bun Theory</strong><p style="margin:0;color:var(--text-light);font-size:0.85rem;">Italian / Pizza</p></div></div>
-            <div class="food-item"><i class="fas fa-mug-hot"></i><div><strong>Indian Coffee House</strong><p style="margin:0;color:var(--text-light);font-size:0.85rem;">North Indian</p></div></div>
-            <div class="food-item"><i class="fas fa-fish"></i><div><strong>Rasoi</strong><p style="margin:0;color:var(--text-light);font-size:0.85rem;">Chinese / Seafood</p></div></div>
-          </div>
-          <div class="food-rules">
+        <div class="dining-info reveal-left" style="text-align:center;max-width:700px;margin:0 auto;">
+          <h3>Guest Kitchen & Dining Area</h3>
+          <p>We provide a well-equipped kitchen and dining area for our guests. Prepare your own meals or store food. Perfect for families and long-stay guests.</p>
+          <div class="dining-type"><i class="fas fa-fire"></i><span>Gas Connection Available</span></div>
+          <div class="dining-type"><i class="fas fa-utensils"></i><span>Dining Area</span></div>
+          <div class="dining-type"><i class="fas fa-fridge"></i><span>Refrigerator for Guest Use</span></div>
+          <div class="food-rules" style="margin-top:20px;max-width:500px;margin-left:auto;margin-right:auto;">
             <h4><i class="fas fa-info-circle"></i> Food Policy</h4>
-            <div class="food-rules-item allow"><i class="fas fa-check-circle"></i><span>Non-veg food allowed</span></div>
             <div class="food-rules-item allow"><i class="fas fa-check-circle"></i><span>Outside food permitted</span></div>
-            <div class="food-rules-item allow"><i class="fas fa-check-circle"></i><span>Zomato/Swiggy available</span></div>
+            <div class="food-rules-item allow"><i class="fas fa-check-circle"></i><span>Zomato/Swiggy delivery available</span></div>
+            <div class="food-rules-item allow"><i class="fas fa-check-circle"></i><span>Self-cooking allowed</span></div>
             <div class="food-rules-item disallow"><i class="fas fa-times-circle"></i><span>No Alcohol</span></div>
           </div>
         </div>
@@ -1426,13 +1876,27 @@
             <div class="distance-item"><span><i class="fas fa-plane"></i> Cochin Airport</span><strong>78 km</strong></div>
           </div>
           <div class="temples">
-            <h4><i class="fas fa-map-marker-alt"></i> Nearby Attractions</h4>
-            <div class="temple-tags">
-              <span class="temple-tag"><i class="fas fa-landmark"></i> Guruvayur Temple</span>
-              <span class="temple-tag"><i class="fas fa-landmark"></i> Mammiyoor Temple</span>
-              <span class="temple-tag"><i class="fas fa-landmark"></i> Parthasarathy</span>
-              <span class="temple-tag"><i class="fas fa-landmark"></i> Chamundeswari</span>
-              <span class="temple-tag"><i class="fas fa-landmark"></i> Thiruvenkidom</span>
+            <h4><i class="fas fa-place-of-worship"></i> Nearest Temples</h4>
+            <div class="nearby-temples-list">
+              <div class="nearby-temple-item"><span class="temple-name">Mamiyoor Mahadeva Temple</span><span class="temple-distance">0.5 km</span></div>
+              <div class="nearby-temple-item"><span class="temple-name">Parthasarathy Mahavishnu Temple</span><span class="temple-distance">0.5 km</span></div>
+              <div class="nearby-temple-item"><span class="temple-name">Venkitachalapathy Temple</span><span class="temple-distance">1.5 km</span></div>
+              <div class="nearby-temple-item"><span class="temple-name">Chamundeswari Temple</span><span class="temple-distance">1.5 km</span></div>
+              <div class="nearby-temple-item"><span class="temple-name">Kakkad Ganapathi Temple, Kunnamkulam</span><span class="temple-distance">7 km</span></div>
+              <div class="nearby-temple-item"><span class="temple-name">Dhanwandari Sreekrishna Temple, Nelluvai</span><span class="temple-distance">22 km</span></div>
+              <div class="nearby-temple-item"><span class="temple-name">Thiruvambadi Sreekrishna Temple, Thrissur</span><span class="temple-distance">25 km</span></div>
+              <div class="nearby-temple-item"><span class="temple-name">Paremakkavu Bhagavathi Temple, Thrissur</span><span class="temple-distance">25 km</span></div>
+              <div class="nearby-temple-item"><span class="temple-name">Vadakumnathan Mahadeva Temple, Thrissur</span><span class="temple-distance">25 km</span></div>
+            </div>
+          </div>
+          <div class="tourist-places" style="margin-top: 25px;">
+            <h4><i class="fas fa-camera"></i> Nearest Tourist Places</h4>
+            <div class="tourist-places-list">
+              <div class="tourist-place-item"><span class="place-name">Anakotta (Elephant Sanctuary)</span><span class="place-distance">1.5 km</span></div>
+              <div class="tourist-place-item"><span class="place-name">Marine World Aquarium, Chavakkad</span><span class="place-distance">9 km</span></div>
+              <div class="tourist-place-item"><span class="place-name">Chavakkad Beach</span><span class="place-distance">4 km</span></div>
+              <div class="tourist-place-item"><span class="place-name">Chettuva Azhimugham</span><span class="place-distance">14 km</span></div>
+              <div class="tourist-place-item"><span class="place-name">Athirapally Waterfalls (Bahubali Falls)</span><span class="place-distance">88 km</span></div>
             </div>
           </div>
         </div>
@@ -1444,6 +1908,45 @@
   </section>
 
   <div class="wave-divider-bottom"><svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,50 C240,10 480,70 720,40 C960,10 1200,60 1440,30 L1440,80 L0,80 Z" fill="#f8f5f0"/></svg></div>
+
+  <section class="temple-timings" id="temple-timings">
+    <div class="container">
+      <div class="section-header reveal"><h2>Guruvayur Temple Timings</h2><div class="section-line"></div><p>Plan your visit accordingly</p></div>
+      <div class="timings-grid">
+        <div class="timing-card">
+          <h3><i class="fas fa-sun"></i> Morning</h3>
+          <ul>
+            <li><span class="time">05:55 AM</span><span class="event">Usha Pooja</span></li>
+            <li><span class="time">08:00 AM</span><span class="event">Palabhishekam</span></li>
+            <li><span class="time">11:30 AM</span><span class="event">Ucha Pooja</span></li>
+            <li><span class="time special">07:00 - 08:00 AM</span><span class="event">Senior Citizen Darshan</span></li>
+          </ul>
+        </div>
+        <div class="timing-card">
+          <h3><i class="fas fa-moon"></i> Evening</h3>
+          <ul>
+            <li><span class="time">04:30 PM</span><span class="event">Seeveli</span></li>
+            <li><span class="time">06:10 PM</span><span class="event">Deeparadhana</span></li>
+            <li><span class="time">07:30 PM</span><span class="event">Athazhapooja</span></li>
+            <li><span class="time">08:45 PM</span><span class="event">Seeveli</span></li>
+            <li><span class="time">09:00 PM</span><span class="event">Tripuka</span></li>
+            <li><span class="time special">04:30 - 06:00 PM</span><span class="event">Senior Citizen Darshan</span></li>
+          </ul>
+        </div>
+        <div class="timing-card">
+          <h3><i class="fas fa-star"></i> Night</h3>
+          <ul>
+            <li><span class="time">03:00 AM</span><span class="event">Nirmalyam</span></li>
+            <li><span class="time">03:10 AM</span><span class="event">Vakacharthu</span></li>
+            <li><span class="time">03:45 AM</span><span class="event">Malar Nivedyam</span></li>
+            <li><span class="time">06:55 AM</span><span class="event">Seeveli</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gradient-divider" style="height:4px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.3;"></div>
 
   <section class="reviews" id="reviews">
     <div class="container">
@@ -1490,7 +1993,7 @@
 
   <section class="rules" id="rules">
     <div class="container">
-      <div class="section-header reveal"><h2>Property Rules</h2><div class="section-line"></div><p>Please review before enquiring</p></div>
+      <div class="section-header reveal"><h2>Property Rules</h2><div class="section-line"></div><p>Please review before enquiry</p></div>
       <div class="rules-grid stagger-children">
         <div class="rule-card">
           <h4><i class="fas fa-ban"></i> Not Allowed</h4>
@@ -1498,18 +2001,22 @@
           <div class="rule-item no"><i class="fas fa-times-circle"></i><span>No pets allowed</span></div>
           <div class="rule-item no"><i class="fas fa-times-circle"></i><span>No smoking in rooms</span></div>
           <div class="rule-item no"><i class="fas fa-times-circle"></i><span>No alcohol on property</span></div>
+          <div class="rule-item no"><i class="fas fa-times-circle"></i><span>Illegal activities strictly prohibited</span></div>
         </div>
         <div class="rule-card">
           <h4><i class="fas fa-id-card"></i> ID Required</h4>
           <div class="rule-item"><i class="fas fa-check-circle"></i><span>Aadhaar / DL / Govt ID / Passport</span></div>
           <div class="rule-item no"><i class="fas fa-times-circle"></i><span>Local IDs not accepted</span></div>
-        </div>
-        <div class="rule-card">
-          <h4><i class="fas fa-info-circle"></i> Info</h4>
           <div class="rule-item"><i class="fas fa-check-circle"></i><span>Infant (0-2yr): Free</span></div>
           <div class="rule-item"><i class="fas fa-check-circle"></i><span>Child under 4: Free on bed</span></div>
-          <div class="rule-item"><i class="fas fa-check-circle"></i><span>Season hike Oct-Dec: +₹1000</span></div>
-          <div class="rule-item"><i class="fas fa-check-circle"></i><span>Cards accepted</span></div>
+        </div>
+        <div class="rule-card">
+          <h4><i class="fas fa-info-circle"></i> Important Info</h4>
+          <div class="rule-item"><i class="fas fa-clock"></i><span>Check-in: 3 PM | Check-out: 2 PM</span></div>
+          <div class="rule-item"><i class="fas fa-exclamation-triangle"></i><span>Room may be re-let if guest stays away beyond checkout without intimation</span></div>
+          <div class="rule-item"><i class="fas fa-user-shield"></i><span>Guests responsible for belongings - management not liable for losses</span></div>
+          <div class="rule-item"><i class="fas fa-credit-card"></i><span>Cards accepted</span></div>
+          <div class="rule-item"><i class="fas fa-calendar-alt"></i><span>Season hike Oct-Dec: +₹1000</span></div>
         </div>
       </div>
     </div>
@@ -1546,11 +2053,11 @@
       <div class="footer-grid">
         <div class="footer-about">
           <h3>Sree Krishna Residency</h3>
-          <p>Your premium stay near Guruvayur Temple. 62 rooms, AC marriage hall, restaurant, and warm hospitality.</p>
+          <p>Your premium stay near Guruvayur Temple. 62 rooms, AC marriage hall, kitchen & dining, and warm hospitality.</p>
           <div class="footer-social">
             <a href="https://www.facebook.com/SreeKrishnaResidency" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/sreekrishnaresidency" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/919400691111" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://wa.me/919400291111" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
         <div class="footer-col">
@@ -1565,10 +2072,8 @@
           <h4>Contact</h4>
           <ul class="footer-contact">
             <li><i class="fas fa-map-marker-alt"></i><span>West Nada, Guruvayur, Kerala 680101</span></li>
-            <li><i class="fas fa-phone"></i><a href="tel:04872556505">0487-2556505</a></li>
             <li><i class="fas fa-phone"></i><a href="tel:9400291111">940 029 1111</a></li>
-            <li><i class="fas fa-phone"></i><a href="tel:9400691111">940 069 1111</a></li>
-            <li><i class="fab fa-whatsapp"></i><a href="https://wa.me/919400691111">+91 940 069 1111</a></li>
+            <li><i class="fab fa-whatsapp"></i><a href="https://wa.me/919400291111">+91 940 029 1111</a></li>
             <li><i class="fas fa-clock"></i><span>Check-in: 3 PM<br>Check-out: 2 PM</span></li>
           </ul>
         </div>
@@ -1578,8 +2083,8 @@
   </footer>
 
   <div class="floating-buttons">
-    <a href="https://wa.me/919400691111?text=Hi,%20I%20want%20to%20enquire%20about%20a%20room" class="float-btn float-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="tel:04872556505" class="float-btn float-call" aria-label="Call"><i class="fas fa-phone"></i></a>
+    <a href="https://wa.me/919400291111?text=Hi,%20I%20want%20to%20enquire%20about%20a%20room" class="float-btn float-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:9400291111" class="float-btn float-call" aria-label="Call"><i class="fas fa-phone"></i></a>
   </div>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
@@ -1589,7 +2094,7 @@
       <div class="modal-icon"><i class="fas fa-check"></i></div>
       <h3>Enquiry Sent!</h3>
       <p>Your enquiry has been sent via WhatsApp. We'll get back to you shortly.</p>
-      <p style="font-weight:600;">Or call us: <a href="tel:04872556505" style="color:var(--gold);text-decoration:none;">0487-2556505</a></p>
+      <p style="font-weight:600;">Or call us: <a href="tel:9400291111" style="color:var(--gold);text-decoration:none;">940 029 1111</a></p>
       <a href="#" class="btn btn-primary" onclick="closeModal()">Close</a>
     </div>
   </div>
@@ -1668,13 +2173,19 @@
         container = document.getElementById('rooms-container');
         todayStr = new Date().toISOString().split('T')[0];
 
+        // Skip loading rooms if static cards already exist
+        if (container && container.querySelector('.room-card-static')) {
+          console.log('Static room cards already present, skipping dynamic load');
+        } else if (container) {
+          loadRooms();
+        }
+
         var sci = document.getElementById('searchCheckIn');
         var sco = document.getElementById('searchCheckOut');
         if (sci) sci.min = todayStr;
         if (sco) sco.min = todayStr;
 
         setupUI();
-        loadRooms();
       }
 
       function setupUI() {
@@ -1778,7 +2289,7 @@
               (nights ? '🌙 *Nights:* ' + nights + '%0A' : '') +
               '💬 *Message:* ' + encodeURIComponent(sanitize(message));
 
-            window.open('https://wa.me/919400691111?text=' + text, '_blank', 'noopener,noreferrer');
+            window.open('https://wa.me/919400291111?text=' + text, '_blank', 'noopener,noreferrer');
             var modal = document.getElementById('successModal');
             if (modal) modal.classList.add('active');
             e.target.reset();
