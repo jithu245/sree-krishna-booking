@@ -82,7 +82,8 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: 'Poppins', sans-serif; background-color: var(--cream); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    body { font-family: 'Poppins', sans-serif; background-color: var(--cream); color: var(--text); line-height: 1.6; overflow-x: hidden; max-width: 100vw; }
+    #page-wrapper { overflow-x: hidden; max-width: 100vw; position: relative; }
     h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; line-height: 1.3; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
     img { max-width: 100%; height: auto; display: block; transition: opacity 0.3s ease; }
@@ -525,9 +526,10 @@
     .rooms-grid-static { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
     .room-card-static { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); transition: all 0.35s ease; position: relative; }
     .room-card-static:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.18); }
-    .room-image-static { position: relative; height: 180px; overflow: hidden; background: linear-gradient(135deg, #f5f5f5, #e8e8e8); }
-    .room-image-static img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-    .room-card-static:hover .room-image-static img { transform: scale(1.1); }
+    .room-image-static { position: relative; height: 220px; overflow: hidden; background: linear-gradient(135deg, #f5f5f5, #e8e8e8); display: flex; align-items: stretch; }
+    .room-image-static > img { width: 100%; height: 100%; object-fit: cover; }
+    .room-slideshow { position: relative; width: 100%; height: 100%; display: block; }
+    .room-slideshow img { width: 100%; height: 100%; object-fit: cover; }
     .room-image-static::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(transparent, rgba(0,0,0,0.3)); }
     .room-badge-static { position: absolute; top: 12px; left: 12px; background: var(--navy); color: var(--white); padding: 6px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
     .room-badge-ac { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); }
@@ -551,13 +553,22 @@
     .rooms-note p { color: var(--text-light); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .rooms-note i { color: var(--gold); }
     
+    .room-slideshow { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    .room-slideshow .room-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease-in-out; }
+    .room-slideshow .room-slide.active { opacity: 1; }
+    .slide-indicators { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 10; justify-content: center; }
+    .slide-dot { width: 5px; height: 5px; min-width: 5px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s ease; }
+    .slide-dot.active { background: var(--gold); width: 16px; min-width: 16px; border-radius: 3px; }
+    .slide-dot:hover { background: rgba(255,255,255,0.9); }
+    
     @media (max-width: 1200px) {
       .rooms-grid-static { grid-template-columns: repeat(2, 1fr); }
+      .room-image-static { height: 200px; }
     }
     @media (max-width: 600px) {
       .rooms-grid-static { grid-template-columns: 1fr; gap: 15px; }
       .room-card-static { border-radius: 16px; }
-      .room-image-static { height: 150px; }
+      .room-image-static { height: 180px; }
       .room-content-static { padding: 14px; }
       .room-content-static h3 { font-size: 1rem; }
       .room-prices { gap: 6px; }
@@ -1269,6 +1280,7 @@
   </style>
 </head>
 <body>
+  <div id="page-wrapper">
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#" class="nav-logo">
@@ -1415,7 +1427,20 @@
         <!-- Room Card: 2 Bed (AC + Non-AC) -->
         <div class="room-card-static">
           <div class="room-image-static">
-            <img src="images/2%20Bed%20Non%20AC%205%20this%20should%20be%20shown%20first.avif" alt="2 Bed Room" loading="lazy">
+            <div class="room-slideshow">
+              <img src="images/2%20Bed%20AC.webp" alt="2 Bed Room" class="room-slide active" loading="lazy">
+              <img src="images/2%20Bed%20AC%202.webp" alt="2 Bed Room" class="room-slide" loading="lazy">
+              <img src="images/2%20Bed%20AC%203.webp" alt="2 Bed Room" class="room-slide" loading="lazy">
+              <img src="images/2%20Bed%20AC%204.webp" alt="2 Bed Room" class="room-slide" loading="lazy">
+              <img src="images/2%20Bed%20AC%205.webp" alt="2 Bed Room" class="room-slide" loading="lazy">
+              <div class="slide-indicators">
+                <span class="slide-dot active"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+              </div>
+            </div>
           </div>
           <div class="room-content-static">
             <h3>2 Bed Room</h3>
@@ -1440,7 +1465,18 @@
         <!-- Room Card: 3 Bed (AC + Non-AC) -->
         <div class="room-card-static">
           <div class="room-image-static">
-            <img src="images/2%20Bed%20AC.webp" alt="3 Bed Room" loading="lazy">
+            <div class="room-slideshow">
+              <img src="images/3%20Bed%20Room.webp" alt="3 Bed Room" class="room-slide active" loading="lazy">
+              <img src="images/3%20Bed%20Room%202.webp" alt="3 Bed Room" class="room-slide" loading="lazy">
+              <img src="images/3%20Bed%20Room%203.webp" alt="3 Bed Room" class="room-slide" loading="lazy">
+              <img src="images/3%20Bed%20Room%204.webp" alt="3 Bed Room" class="room-slide" loading="lazy">
+              <div class="slide-indicators">
+                <span class="slide-dot active"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+              </div>
+            </div>
           </div>
           <div class="room-content-static">
             <h3>3 Bed Room</h3>
@@ -1465,7 +1501,16 @@
         <!-- Room Card: 4 Bed (AC + Non-AC) -->
         <div class="room-card-static">
           <div class="room-image-static">
-            <img src="images/Four%20Bed%20Ac%20Family%20Room.webp" alt="4 Bed Room" loading="lazy">
+            <div class="room-slideshow">
+              <img src="images/Four%20Bed%20Ac%20Family%20Room.webp" alt="4 Bed Room" class="room-slide active" loading="lazy">
+              <img src="images/Four%20Bed%20Ac%20Family%20Room%202.webp" alt="4 Bed Room" class="room-slide" loading="lazy">
+              <img src="images/Four%20Bed%20Ac%20Family%20Room%203.webp" alt="4 Bed Room" class="room-slide" loading="lazy">
+              <div class="slide-indicators">
+                <span class="slide-dot active"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+              </div>
+            </div>
           </div>
           <div class="room-content-static">
             <h3>4 Bed Room</h3>
@@ -1490,8 +1535,17 @@
         <!-- Room Card: 8 Bed Dormitory (Non-AC only) -->
         <div class="room-card-static">
           <div class="room-image-static">
-            <img src="images/Outdoors%20photo%201.webp" alt="8 Bed Dormitory" loading="lazy">
-            <span class="room-badge-static room-badge-dorm">Non-AC Only</span>
+            <div class="room-slideshow">
+              <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room.webp" alt="8 Bed Dormitory" class="room-slide active" loading="lazy">
+              <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room%202.webp" alt="8 Bed Dormitory" class="room-slide" loading="lazy">
+              <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room%203.webp" alt="8 Bed Dormitory" class="room-slide" loading="lazy">
+              <span class="room-badge-static room-badge-dorm">Non-AC Only</span>
+              <div class="slide-indicators">
+                <span class="slide-dot active"></span>
+                <span class="slide-dot"></span>
+                <span class="slide-dot"></span>
+              </div>
+            </div>
           </div>
           <div class="room-content-static">
             <h3>8 Bed Dormitory</h3>
@@ -1590,19 +1644,19 @@
       </div>
       <div class="gallery-grid stagger-children" id="galleryGrid">
         <div class="gallery-item" data-category="rooms">
-          <img src="images/2%20Bed%20Non%20AC%205%20this%20should%20be%20shown%20first.avif" alt="2 Bed Non AC Room" loading="lazy">
+          <img src="images/2%20Bed%20AC%205.webp" alt="2 Bed Non AC Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>2 Bed Non AC</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/2%20Bed%20Non%20AC%204.avif" alt="2 Bed Non AC Room" loading="lazy">
+          <img src="images/2%20Bed%20AC%204.webp" alt="2 Bed Non AC Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>2 Bed Non AC</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/2%20Bed%20Non%20AC%203.webp" alt="2 Bed Non AC Room" loading="lazy">
+          <img src="images/2%20Bed%20AC%203.webp" alt="2 Bed Non AC Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>2 Bed Non AC</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/2%20Bed%20Non%20AC.avif" alt="2 Bed Non AC Room" loading="lazy">
+          <img src="images/2%20Bed%20AC%202.webp" alt="2 Bed Non AC Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>2 Bed Non AC</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
@@ -1610,51 +1664,51 @@
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>2 Bed AC</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/2%20Bed%20AC%202.avif" alt="2 Bed AC Room" loading="lazy">
+          <img src="images/2%20Bed%20AC%202.webp" alt="2 Bed AC Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>2 Bed AC</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/2%20Bed%20AC%203.avif" alt="2 Bed AC Room" loading="lazy">
+          <img src="images/2%20Bed%20AC%203.webp" alt="2 Bed AC Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>2 Bed AC</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/2%20Bed%20AC%204.avif" alt="2 Bed AC Room" loading="lazy">
+          <img src="images/2%20Bed%20AC%204.webp" alt="2 Bed AC Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>2 Bed AC</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/Four%20Bed%20Ac%20Family%20Room.webp?v=20260412?v=20260412" alt="4 Bed AC Family Room" loading="lazy">
+          <img src="images/Four%20Bed%20Ac%20Family%20Room.webp" alt="4 Bed AC Family Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>4 Bed AC Family</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/Four%20Bed%20Ac%20Family%20Room%202.avif?v=20260412" alt="4 Bed AC Family Room" loading="lazy">
+          <img src="images/Four%20Bed%20Ac%20Family%20Room%202.webp" alt="4 Bed AC Family Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>4 Bed AC Family</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/Four%20Bed%20Ac%20Family%20Room%203.avif?v=20260412" alt="4 Bed AC Family Room" loading="lazy">
+          <img src="images/Four%20Bed%20Ac%20Family%20Room%202.webp" alt="4 Bed AC Family Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>4 Bed AC Family</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room%201.avif?v=20260412?v=20260412" alt="8 Bed Non AC Family Room" loading="lazy">
+          <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room.webp" alt="8 Bed Non AC Family Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>8 Bed Family</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room%202.avif?v=20260412" alt="8 Bed Non AC Family Room" loading="lazy">
+          <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room%202.webp" alt="8 Bed Non AC Family Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>8 Bed Family</span></div>
         </div>
         <div class="gallery-item" data-category="rooms">
-          <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room%203.avif?v=20260412" alt="8 Bed Non AC Family Room" loading="lazy">
+          <img src="images/Eight%20Bed%20Non%20Ac%20Family%20Room%203.webp" alt="8 Bed Non AC Family Room" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>8 Bed Family</span></div>
         </div>
         <div class="gallery-item" data-category="wedding">
-          <img src="images/wedding%20hall%20photo%201.webp" alt="Wedding Hall" loading="lazy">
+          <img src="images/Wedding%20Hall%205.webp" alt="Wedding Hall" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Wedding Hall</span></div>
         </div>
         <div class="gallery-item" data-category="wedding">
-          <img src="images/wedding%20hall%20photo%202.avif" alt="Wedding Hall" loading="lazy">
+          <img src="images/Wedding%20Hall%205a.webp" alt="Wedding Hall" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Wedding Hall</span></div>
         </div>
         <div class="gallery-item" data-category="wedding">
-          <img src="images/wedding%20hall%20photo%203.webp" alt="Wedding Hall" loading="lazy">
+          <img src="images/Wedding%20Hall%205b.webp" alt="Wedding Hall" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Wedding Hall</span></div>
         </div>
         <div class="gallery-item" data-category="wedding">
@@ -1670,7 +1724,7 @@
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Outdoor</span></div>
         </div>
         <div class="gallery-item" data-category="common">
-          <img src="images/Reception%20photo%201.avif" alt="Reception" loading="lazy">
+          <img src="images/Reception.webp" alt="Reception" loading="lazy">
           <div class="gallery-overlay"><i class="fas fa-expand"></i><span>Reception</span></div>
         </div>
         <div class="gallery-item" data-category="common">
@@ -2038,7 +2092,6 @@
         container = document.getElementById('rooms-container');
         todayStr = new Date().toISOString().split('T')[0];
 
-        // Skip loading rooms if static cards already exist
         if (container && container.querySelector('.room-card-static')) {
           console.log('Static room cards already present, skipping dynamic load');
         } else if (container) {
@@ -2051,6 +2104,50 @@
         if (sco) sco.min = todayStr;
 
         setupUI();
+        initRoomSlideshows();
+      }
+
+      function initRoomSlideshows() {
+        var slideshows = document.querySelectorAll('.room-slideshow');
+        slideshows.forEach(function(slideshow) {
+          var slides = slideshow.querySelectorAll('.room-slide');
+          var dots = slideshow.querySelectorAll('.slide-dot');
+          if (slides.length < 2) return;
+          var currentIndex = 0;
+          var interval;
+          
+          function showSlide(index) {
+            slides.forEach(function(s, i) { s.classList.toggle('active', i === index); });
+            dots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
+          }
+          
+          function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+          }
+          
+          function startSlideshow() {
+            stopSlideshow();
+            interval = setInterval(nextSlide, 3500);
+          }
+          
+          function stopSlideshow() {
+            if (interval) clearInterval(interval);
+          }
+          
+          dots.forEach(function(dot, i) {
+            dot.addEventListener('click', function(e) {
+              e.stopPropagation();
+              currentIndex = i;
+              showSlide(currentIndex);
+              startSlideshow();
+            });
+          });
+          
+          slideshow.addEventListener('mouseenter', stopSlideshow);
+          slideshow.addEventListener('mouseleave', startSlideshow);
+          startSlideshow();
+        });
       }
 
       function setupUI() {
@@ -2504,5 +2601,6 @@ function getRoomImage(name) {
   <meta name="apple-mobile-web-app-title" content="Sree Krishna Residency">
 
 
+</div>
 </body>
 </html>
