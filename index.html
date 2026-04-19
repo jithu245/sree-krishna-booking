@@ -559,6 +559,11 @@
     .rooms-note p { color: var(--text-light); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .rooms-note i { color: var(--gold); }
     
+    .wedding-hall-card { border: 2px solid var(--gold); background: linear-gradient(135deg, rgba(201,168,76,0.05), rgba(201,168,76,0.02)); }
+    .wedding-hall-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); }
+    .wedding-hall-card .room-price-static { font-size: 1.1rem; color: var(--navy); }
+    .wedding-hall-card .room-content-static h3 { color: var(--gold-dark); }
+    
     .room-slideshow { position: relative; width: 100%; height: 100%; overflow: hidden; }
     .room-slideshow .room-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease-in-out; }
     .room-slideshow .room-slide.active { opacity: 1; }
@@ -1608,6 +1613,62 @@
               <li><i class="fas fa-shower"></i> Common Bathroom</li>
             </ul>
             <a href="booking.html?room_id=8bed-dorm" class="view-details-btn">Book Now</a>
+          </div>
+        </div>
+      </div>
+      <!-- Wedding Hall Card -->
+      <div class="room-card-static wedding-hall-card">
+        <div class="room-image-static">
+          <div class="room-slideshow">
+            <img src="images/Wedding%20Hall%205.webp" alt="Wedding Hall" class="room-slide active" loading="lazy">
+            <img src="images/Wedding%20Hall%205a.webp" alt="Wedding Hall" class="room-slide" loading="lazy">
+            <img src="images/Wedding%20Hall%205b.webp" alt="Wedding Hall" class="room-slide" loading="lazy">
+            <div class="slide-indicators">
+              <span class="slide-dot active"></span>
+              <span class="slide-dot"></span>
+              <span class="slide-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="room-content-static">
+          <h3>AC Wedding Hall</h3>
+          <p class="room-price-static">Contact for Price<span class="room-price-note"></span></p>
+          <ul class="room-features-static">
+            <li><i class="fas fa-users"></i> Seating: 200 Guests</li>
+            <li><i class="fas fa-snowflake"></i> Air Conditioned</li>
+            <li><i class="fas fa-utensils"></i> Catering Available</li>
+            <li><i class="fas fa-lightbulb"></i> Decorative Lighting</li>
+            <li><i class="fas fa-parking"></i> Free Parking</li>
+          </ul>
+          <div class="room-buttons-static">
+            <a href="https://wa.me/919400291111?text=Hi,%20I%20am%20interested%20in%20booking%20the%20AC%20Wedding%20Hall%20for%20my%20event.%20Please%20share%20the%20price%20details." class="view-details-btn">Enquire on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <!-- Wedding Hall Card -->
+      <div class="room-card-static wedding-hall-card">
+        <div class="room-image-static">
+          <div class="room-slideshow">
+            <img src="images/Reception.webp" alt="Dining Hall" class="room-slide active" loading="lazy">
+            <img src="images/Reception%202.webp" alt="Dining Hall" class="room-slide" loading="lazy">
+            <div class="slide-indicators">
+              <span class="slide-dot active"></span>
+              <span class="slide-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="room-content-static">
+          <h3>Separate Dining Hall</h3>
+          <p class="room-price-static">Contact for Price<span class="room-price-note"></span></p>
+          <ul class="room-features-static">
+            <li><i class="fas fa-chair"></i> Seating: 100 Guests</li>
+            <li><i class="fas fa-snowflake"></i> Air Conditioned</li>
+            <li><i class="fas fa-utensils"></i> Self-Cooking Allowed</li>
+            <li><i class="fas fa-blender"></i> Kitchen Available</li>
+            <li><i class="fas fa-parking"></i> Free Parking</li>
+          </ul>
+          <div class="room-buttons-static">
+            <a href="https://wa.me/919400291111?text=Hi,%20I%20am%20interested%20in%20booking%20the%20Separate%20Dining%20Hall%20for%20my%20event.%20Please%20share%20the%20price%20details." class="view-details-btn">Enquire on WhatsApp</a>
           </div>
         </div>
       </div>
