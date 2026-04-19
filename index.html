@@ -26,7 +26,7 @@
   <meta property="og:url" content="index.html">
   <meta property="og:image" content="images/Outdoors%20photo%201.webp">
   <title>Sree Krishna Residency | Premium Hotel Near Guruvayur Temple</title>
-  <link rel="icon" type="image/webp" href="images/Outdoors%20photo%201.webp">
+  <link rel="icon" type="image/webp" href="images/logo.webp">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -198,6 +198,12 @@
       flex-shrink: 0;
       position: relative;
       overflow: hidden;
+    }
+    .nav-logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
     }
     .nav-logo-icon::after {
       content: '';
@@ -765,6 +771,7 @@
     .footer { background: var(--navy); color: var(--white); padding: 80px 0 30px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 50px; }
     .footer-about h3 { font-size: 1.8rem; color: var(--gold); margin-bottom: 20px; }
+    .footer-logo { width: 120px; height: auto; margin-bottom: 15px; }
     .footer-about p { color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 20px; font-size: 0.95rem; }
     .footer-social { display: flex; gap: 12px; }
     .footer-social a { width: 44px; height: 44px; background: rgba(255,255,255,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: all 0.21s; }
@@ -1328,7 +1335,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#" class="nav-logo">
-        <div class="nav-logo-icon"><i class="fas fa-hotel"></i></div>
+        <div class="nav-logo-icon"><img src="images/logo.webp" alt="SREE KRISHNA RESIDENCY" loading="lazy"></div>
         <span>SREE KRISHNA RESIDENCY</span>
       </a>
       <ul class="nav-links">
@@ -2007,7 +2014,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-about">
-          <h3>SREE KRISHNA RESIDENCY</h3>
+          <img src="images/logo.webp" alt="SREE KRISHNA RESIDENCY" class="footer-logo" loading="lazy">
           <p>Your premium stay near Guruvayur Temple. 62 rooms, AC marriage hall, kitchen & dining, and warm hospitality.</p>
           <div class="footer-social">
             <a href="https://www.facebook.com/SreeKrishnaResidency" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
