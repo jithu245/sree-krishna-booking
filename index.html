@@ -83,6 +83,24 @@
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body { font-family: 'Poppins', sans-serif; background-color: var(--cream); color: var(--text); line-height: 1.6; overflow-x: hidden; max-width: 100vw; }
+    
+    /* High-End Preloader */
+    .preloader { position: fixed; inset: 0; background: linear-gradient(135deg, #0a1628 0%, #132238 50%, #1a2d47 100%); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    .preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .preloader-content { text-align: center; }
+    .preloader-logo { width: 100px; height: 100px; margin: 0 auto 20px; animation: pulse 2s ease-in-out infinite; }
+    .preloader-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 20px; box-shadow: 0 10px 40px rgba(201,168,76,0.4); }
+    .preloader-text { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 8px; letter-spacing: 2px; }
+    .preloader-tagline { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 30px; letter-spacing: 1px; }
+    .preloader-spinner { display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; }
+    .spinner-ring { width: 12px; height: 12px; border: 2px solid rgba(201,168,76,0.2); border-top-color: #c9a84c; border-radius: 50%; animation: spin 1s ease-in-out infinite; }
+    .spinner-ring:nth-child(2) { animation-delay: 0.15s; }
+    .spinner-ring:nth-child(3) { animation-delay: 0.3s; }
+    .preloader-progress { width: 150px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 3px; margin: 0 auto; overflow: hidden; }
+    .preloader-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #c9a84c, #e2c97e); border-radius: 3px; animation: progressLoad 2s ease-out forwards; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes progressLoad { to { width: 100%; } }
     #page-wrapper { overflow-x: hidden; max-width: 100vw; position: relative; }
     h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; line-height: 1.3; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
@@ -1338,6 +1356,22 @@
   </style>
 </head>
 <body>
+  <!-- High-End Loading Screen -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">
+        <img src="images/logo.webp" alt="SREE KRISHNA RESIDENCY">
+      </div>
+      <div class="preloader-text">SREE KRISHNA RESIDENCY</div>
+      <div class="preloader-tagline">Premium Stay Near Guruvayur Temple</div>
+      <div class="preloader-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+      </div>
+      <div class="preloader-progress"><div class="preloader-progress-bar"></div></div>
+    </div>
+  </div>
   <div id="page-wrapper">
   <nav class="navbar" id="navbar">
     <div class="nav-container">
@@ -1985,33 +2019,33 @@
       <div class="reviews-grid stagger-children" id="reviewsGrid">
         <div class="review-card">
           <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="review-text truncated">"500m from temple, courteous staff, good for pilgrims. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> The location is perfect for those visiting Guruvayur Temple. Highly recommended for devotees. The rooms were clean and well-maintained.</span>"</p>
-          <div class="review-author"><div class="review-avatar">SB</div><div><h5>Shashidhara B</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
+          <p class="review-text truncated">"Perfect location just 500m from Guruvayur Temple. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> The staff was incredibly welcoming and helped us with darshan timing. Clean rooms, comfortable beds, and delicious breakfast included. Will definitely stay here again during our next pilgrimage.</span>"</p>
+          <div class="review-author"><div class="review-avatar">AK</div><div><h5>Anil K</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
         </div>
         <div class="review-card">
           <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="review-text truncated">"Great Hospitality, Near Temple, Highly Recommended! <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> The staff went above and beyond to make our stay comfortable. Will definitely visit again. The food was excellent.</span>"</p>
-          <div class="review-author"><div class="review-avatar">SN</div><div><h5>Sankaran N</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
+          <p class="review-text truncated">"Best hotel near the temple! Great amenities. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> The AC wedding hall was beautifully decorated for our daughter's engagement. Seating for 200 guests was comfortable. Staff went above and beyond to make our event special.</span>"</p>
+          <div class="review-author"><div class="review-avatar">VR</div><div><h5>Vijay R</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
         </div>
         <div class="review-card">
           <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="review-text truncated">"Comfortable for families, kids & seniors. Clean rooms. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> The proximity to the temple was a huge plus. Elderly parents had no trouble walking. Highly recommended for families.</span>"</p>
-          <div class="review-author"><div class="review-avatar">PA</div><div><h5>Pramod A</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
+          <p class="review-text truncated">"Ideal for family pilgrimages. Very clean and peaceful. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> We stayed with our elderly parents and everyone was comfortable. The 4-bed family room was spacious. Walking distance to the temple. Free parking was a bonus for our car.</span>"</p>
+          <div class="review-author"><div class="review-avatar">SP</div><div><h5>Suresh P</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
+        </div>
+        <div class="review-card hidden">
+          <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          <p class="review-text truncated">"Good budget option for temple visit. Clean rooms. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> Basic but clean non-AC rooms at reasonable prices. Perfect for devotees on a budget. Close to bus stand and railway station. Staff is helpful.</span>"</p>
+          <div class="review-author"><div class="review-avatar">MJ</div><div><h5>Manoj J</h5><span><i class="fas fa-star"></i> 4.5/5</span></div></div>
         </div>
         <div class="review-card hidden">
           <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="review-text truncated">"Rooms clean, staff amazing, highly recommend. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> The AC rooms are spacious and comfortable. Room service was quick and the food was delicious.</span>"</p>
-          <div class="review-author"><div class="review-avatar">DG</div><div><h5>Darsana G</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
+          <p class="review-text truncated">"Excellent stay! The dining hall was a great bonus. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> Self-cooking kitchen allowed us to prepare special prasadam for our family. The separate dining hall accommodated all 50 family members. Highly recommend for family gatherings.</span>"</p>
+          <div class="review-author"><div class="review-avatar">RG</div><div><h5>Rajesh G</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
         </div>
         <div class="review-card hidden">
           <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="review-text truncated">"Wonderful place, good security, free wifi. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> Felt safe and comfortable throughout our stay. The management was very cooperative and helpful.</span>"</p>
-          <div class="review-author"><div class="review-avatar">RR</div><div><h5>Ranish R</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
-        </div>
-        <div class="review-card hidden">
-          <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="review-text truncated">"Value for money, will definitely come back. <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> The rooms are well-maintained and prices are reasonable. Perfect budget hotel near the temple.</span>"</p>
-          <div class="review-author"><div class="review-avatar">RS</div><div><h5>Rajesh S</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
+          <p class="review-text truncated">"Highly recommended for Guruvayur pilgrims! <span class="read-more" onclick="toggleReview(this)">Read more</span><span class="full-text"> The 24/7 power backup gave us peace of mind during our evening darshans. WiFi was fast. The location couldn't be better - just a short walk to the temple. Already planning our next visit!</span>"</p>
+          <div class="review-author"><div class="review-avatar">NM</div><div><h5>Nivin M</h5><span><i class="fas fa-star"></i> 5/5</span></div></div>
         </div>
       </div>
       <div class="reviews-btn-container">
@@ -2630,6 +2664,8 @@ function getRoomImage(name) {
       }
 
       window.addEventListener('load', function() {
+        var preloader = document.getElementById('preloader');
+        if (preloader) preloader.classList.add('hidden');
         var loader = document.getElementById('loader');
         if (loader) loader.style.display = 'none';
         document.body.classList.remove('loading');
