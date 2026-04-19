@@ -229,13 +229,13 @@
 
       // Map custom room IDs to actual room names in database
       var roomIdMap = {
-        '2bed-ac': { name: '2 Bed Room', type: 'AC', price: 1800 },
-        '2bed-nonac': { name: '2 Bed Room', type: 'Non-AC', price: 1100 },
-        '3bed-ac': { name: '3 Bed Room', type: 'AC', price: 2000 },
-        '3bed-nonac': { name: '3 Bed Room', type: 'Non-AC', price: 1300 },
-        '4bed-ac': { name: '4 Bed Room', type: 'AC', price: 2400 },
-        '4bed-nonac': { name: '4 Bed Room', type: 'Non-AC', price: 1400 },
-        '8bed-dorm': { name: '8 Bed Dormitory', type: 'Non-AC', price: 2400 }
+        '2bed-ac': { name: '2 Bed AC', type: 'AC', price: 1800 },
+        '2bed-nonac': { name: '2 Bed Non AC', type: 'Non-AC', price: 1100 },
+        '3bed-ac': { name: '3 Bed AC', type: 'AC', price: 2000 },
+        '3bed-nonac': { name: '3 Bed Non AC', type: 'Non-AC', price: 1300 },
+        '4bed-ac': { name: '4 Bed AC', type: 'AC', price: 2400 },
+        '4bed-nonac': { name: '4 Bed Non AC', type: 'Non-AC', price: 1400 },
+        '8bed-dorm': { name: '8 Bed Non AC', type: 'Non-AC', price: 2400 }
       };
 
       // Store room type for display
@@ -413,12 +413,16 @@
         // Check if using custom room ID mapping (like '2bed-ac')
         if (roomId && roomIdMap[roomId]) {
           var targetRoom = roomIdMap[roomId];
-          supabase.from('rooms').select('*').eq('property_id', propertyId).ilike('name', '%' + targetRoom.name + '%').then(function(r) {
+supabase.from('rooms').select('*').eq('property_id', propertyId).then(function(r) {
             if (r.error || !r.data || r.data.length === 0) {
               renderNotFound();
-            } else {
-              renderRoom(r.data[0]);
+              return;
             }
+            var targetName = targetRoom.name.toLowerCase();
+            var matched = r.data.find(function(room) {
+              return (room.name || '').toLowerCase().indexOf(targetName.replace(' ', '')) !== -1;
+            });
+            renderRoom(matched || r.data[0]);
           }).catch(renderNotFound);
           return;
         }

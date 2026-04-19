@@ -230,6 +230,9 @@
     .avail-row .value.gold { color: var(--accent); }
 
     .room-mgmt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+      .room-type-section { margin-bottom: 24px; }
+      .room-type-section h3 { font-size: 1.1rem; color: var(--text); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+      .room-type-section h3 i { color: var(--accent); }
     .room-mgmt-card { background: var(--card); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: all 0.25s; }
     .room-mgmt-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
     .room-mgmt-card h4 { font-family: 'Outfit', sans-serif; font-size: 1rem; color: var(--text); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); }
@@ -913,6 +916,23 @@
             </div>
           </div>
           <div class="settings-card">
+            <div class="settings-card-header"><i class="fas fa-tags" style="color: var(--gold);"></i><h4>Pricing</h4></div>
+            <div class="settings-card-body">
+              <div class="setting-row">
+                <div><div class="setting-label">Update Room Prices</div><div class="setting-desc">Manage prices for all room types</div></div>
+                <div class="setting-control"><button class="setting-btn" onclick="window.openRoomPricing()"><i class="fas fa-edit"></i> Edit Prices</button></div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Apply Price Increase - AC</div><div class="setting-desc">Increase AC room prices</div></div>
+                <div class="setting-control"><button class="setting-btn" onclick="window.applyBulkPriceIncrease('ac')"><i class="fas fa-snowflake"></i> AC</button></div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Apply Price Increase - Non-AC</div><div class="setting-desc">Increase Non-AC room prices</div></div>
+                <div class="setting-control"><button class="setting-btn" onclick="window.applyBulkPriceIncrease('nonac')"><i class="fas fa-sun"></i> Non-AC</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card">
             <div class="settings-card-header"><i class="fas fa-database"></i><h4>Data & Export</h4></div>
             <div class="settings-card-body">
               <div class="setting-row">
@@ -922,6 +942,14 @@
               <div class="setting-row">
                 <div><div class="setting-label">Export Revenue</div><div class="setting-desc">Download revenue report</div></div>
                 <div class="setting-control"><button class="setting-btn" onclick="window.exportRevenueCSV()"><i class="fas fa-download"></i> Export</button></div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Monthly Report</div><div class="setting-desc">Export detailed monthly Excel report</div></div>
+                <div class="setting-control"><button class="setting-btn" onclick="window.exportMonthlyReport()"><i class="fas fa-file-excel"></i> Export</button></div>
+              </div>
+              <div class="setting-row">
+                <div><div class="setting-label">Backup Data</div><div class="setting-desc">Download full database backup</div></div>
+                <div class="setting-control"><button class="setting-btn" onclick="window.exportBackup()"><i class="fas fa-archive"></i> Backup</button></div>
               </div>
               <div class="setting-row">
                 <div><div class="setting-label">Reset Preferences</div><div class="setting-desc">Clear all custom settings</div></div>
@@ -1428,6 +1456,91 @@
         downloadCSV(rows, 'revenue_' + new Date().toISOString().slice(0,10) + '.csv');
       };
 
+      window.exportMonthlyReport = function() {
+        if (!allBookings.length) { showToast('No bookings to export', 'error'); return; }
+        var roomMap = {};
+        allRooms.forEach(function(r) { roomMap[r.id] = r; });
+        var headers = ['Booking ID','Guest Name','Phone','Email','Room','Room Type','Check-in','Check-out','Nights','Price/Night','Total Amount','Advanced Paid','Payment Status','Status','Source','Special Requests','Booked At','Created By'];
+        var xml = '<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Worksheet ss:Name="Monthly Report"><Table>';
+        xml += '<Row>';
+        headers.forEach(function(h) { xml += '<Cell><Data ss:Type="String">' + escapeXml(h) + '</Data></Cell>'; });
+        xml += '</Row>';
+        var totalRevenue = 0, totalAdvance = 0, totalNights = 0;
+        allBookings.forEach(function(b) {
+          var room = roomMap[b.room_id] || {};
+          var nights = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
+          var price = b.price_at_booking || (room.price || 0);
+          var advance = b.advance_paid || 0;
+          var total = price * nights;
+          totalRevenue += total;
+          totalAdvance += advance;
+          totalNights += nights;
+          var data = [
+            b.id || '',
+            b.customer_name || '',
+            b.phone || '',
+            b.guest_email || '',
+            room.name || '',
+            room.category || '',
+            b.check_in || '',
+            b.check_out || '',
+            nights,
+            price,
+            total,
+            advance,
+            (b.payment_status || 'unpaid').replace('_', ' ').toUpperCase(),
+            b.status === 'active' ? 'Confirmed' : b.status === 'cancelled' ? 'Cancelled' : b.status,
+            b.source || 'direct',
+            b.special_requests || '',
+            formatDateTime(b.created_at),
+            b.created_by || ''
+          ];
+          xml += '<Row>';
+          data.forEach(function(d, i) {
+            var type = (i >= 8 && i <= 11) ? 'Number' : 'String';
+            xml += '<Cell><Data ss:Type="' + type + '">' + escapeXml(String(d)) + '</Data></Cell>';
+          });
+          xml += '</Row>';
+        });
+        xml += '<Row>';
+        for (var i = 0; i < headers.length; i++) {
+          var val = i === 8 ? totalNights : i === 10 ? totalRevenue : i === 11 ? totalAdvance : i === 0 ? 'TOTAL' : '';
+          xml += '<Cell><Data ss:Type="String">' + val + '</Data></Cell>';
+        }
+        xml += '</Row></Table></Worksheet></Workbook>';
+        var blob = new Blob([xml], { type: 'application/vnd.ms-excel' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'monthly_report_' + new Date().toISOString().slice(0,10) + '.xls';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Monthly Excel report exported');
+      };
+
+      function escapeXml(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+      }
+
+      window.exportBackup = function() {
+        showToast('Preparing backup...');
+        var backup = {
+          exportDate: new Date().toISOString(),
+          version: '2.0.0',
+          bookings: allBookings,
+          rooms: allRooms,
+          settings: settings
+        };
+        var blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'backup_' + new Date().toISOString().slice(0,10) + '.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Backup downloaded');
+      };
+
       function downloadCSV(rows, filename) {
         var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
         var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
@@ -1501,6 +1614,7 @@
         if (tabName === 'overview') window.loadOverview();
         if (tabName === 'analytics') window.loadAnalytics();
         if (tabName === 'shift-notes') window.loadShiftNotes();
+        if (tabName === 'rooms') window.renderRoomManagement();
       };
 
       var currentTheme = settings.theme || 'dark';
@@ -1749,6 +1863,7 @@
         var safeDate = d;
         if (String(d).indexOf('Z') === -1) safeDate = d + 'Z';
         var date = new Date(safeDate);
+        if (isNaN(date.getTime())) return '-';
         return date.toLocaleDateString('en-IN', getDateFormatParts());
       }
 
@@ -1757,6 +1872,7 @@
         var safeDate = d;
         if (String(d).indexOf('Z') === -1) safeDate = d + 'Z';
         var date = new Date(safeDate);
+        if (isNaN(date.getTime())) return '-';
         return date.toLocaleString('en-IN', getTimeOptions());
       }
 
@@ -2503,59 +2619,39 @@
         var content = document.getElementById('roomMgmtContent');
         if (!allRooms.length) { content.innerHTML = '<p class="error">Rooms data not loaded. Please refresh.</p>'; return; }
         var isManager = currentUserRole === 'manager';
-        var grid = document.createElement('div');
-        grid.className = 'room-mgmt-grid';
-        allRooms.forEach(function(room) {
-          var card = document.createElement('div');
-          card.className = 'room-mgmt-card';
-          card.setAttribute('data-room-id', room.id);
-          var h4 = document.createElement('h4');
-          h4.textContent = room.name;
-          card.appendChild(h4);
-          if (isManager) {
-            var priceRow = document.createElement('div');
-            priceRow.className = 'room-mgmt-row';
-            var priceLabel = document.createElement('label');
-            priceLabel.textContent = 'Price (\u20B9)';
-            var priceInput = document.createElement('input');
-            priceInput.type = 'number';
-            priceInput.className = 'edit-price';
-            priceInput.value = room.price || 0;
-            priceInput.min = '0';
-            priceRow.appendChild(priceLabel);
-            priceRow.appendChild(priceInput);
-            card.appendChild(priceRow);
-          }
-          var roomsRow = document.createElement('div');
-          roomsRow.className = 'room-mgmt-row';
-          var roomsLabel = document.createElement('label');
-          roomsLabel.textContent = 'Available Rooms';
-          var roomsInput = document.createElement('input');
-          roomsInput.type = 'number';
-          roomsInput.className = 'edit-total-rooms';
-          roomsInput.value = room.total_rooms || 0;
-          roomsInput.min = '1';
-          roomsRow.appendChild(roomsLabel);
-          roomsRow.appendChild(roomsInput);
-          card.appendChild(roomsRow);
-          var saveBtn = document.createElement('button');
-          saveBtn.className = 'save-room-btn';
-          saveBtn.setAttribute('data-room-id', room.id);
-          if (isManager) {
-            saveBtn.textContent = 'Save All Changes';
-            saveBtn.addEventListener('click', function() { window.updateRoom(room.id, saveBtn); });
-          } else {
-            saveBtn.textContent = 'Update Availability';
-            saveBtn.addEventListener('click', function() { window.updateRoomAvailability(room.id, saveBtn); });
-          }
-          card.appendChild(saveBtn);
-          var msgEl = document.createElement('p');
-          msgEl.className = 'room-mgmt-msg';
-          card.appendChild(msgEl);
-          grid.appendChild(card);
-        });
-        content.innerHTML = '';
-        content.appendChild(grid);
+        var acRooms = allRooms.filter(function(r) { var rt = (r.room_type || '').toLowerCase(); return rt === 'ac'; });
+        var nonAcRooms = allRooms.filter(function(r) { var rt = (r.room_type || '').toLowerCase(); return rt === 'non-ac'; });
+        var html = '';
+        if (acRooms.length) {
+          html += '<div class="room-type-section"><h3><i class="fas fa-snowflake"></i> AC Rooms</h3><div class="room-mgmt-grid">';
+          acRooms.forEach(function(room) { html += createRoomCard(room, isManager); });
+          html += '</div></div>';
+        }
+        if (nonAcRooms.length) {
+          html += '<div class="room-type-section"><h3><i class="fas fa-sun"></i> Non-AC Rooms</h3><div class="room-mgmt-grid">';
+          nonAcRooms.forEach(function(room) { html += createRoomCard(room, isManager); });
+          html += '</div></div>';
+        }
+        if (acRooms.length === 0 && nonAcRooms.length === 0) {
+          html += '<div class="room-type-section"><h3><i class="fas fa-bed"></i> All Rooms</h3><div class="room-mgmt-grid">';
+          allRooms.forEach(function(room) { html += createRoomCard(room, isManager); });
+          html += '</div></div>';
+        }
+        content.innerHTML = html;
+      }
+
+      function createRoomCard(room, isManager) {
+        var card = '<div class="room-mgmt-card" data-room-id="' + room.id + '">';
+        card += '<h4>' + room.name + '</h4>';
+        if (isManager) {
+          card += '<div class="room-mgmt-row"><label>Price (\u20B9)</label><input type="number" class="edit-price" value="' + (room.price || 0) + '" min="0"></div>';
+        }
+        card += '<div class="room-mgmt-row"><label>Available Rooms</label><input type="number" class="edit-total-rooms" value="' + (room.total_rooms || 0) + '" min="1"></div>';
+        var btnText = isManager ? 'Save All Changes' : 'Update Availability';
+        var fn = isManager ? 'window.updateRoom(\'' + room.id + '\', this)' : 'window.updateRoomAvailability(\'' + room.id + '\', this)';
+        card += '<button class="save-room-btn" data-room-id="' + room.id + '" onclick="' + fn + '">' + btnText + '</button>';
+        card += '<p class="room-mgmt-msg"></p></div>';
+        return card;
       }
 
       window.updateRoom = function(roomId, btnEl) {
@@ -2589,6 +2685,38 @@
           btnEl.textContent = 'Save Changes';
           showToast('Failed to update room: ' + (err.message || 'Unknown error'), 'error');
         });
+      };
+
+      window.openRoomPricing = function() {
+        window.switchTab('rooms');
+      };
+
+      window.applyBulkPriceIncrease = function(type) {
+        if (currentUserRole !== 'manager') { showToast('Unauthorized: only managers can update prices', 'error'); return; }
+        if (!allRooms.length) { showToast('No rooms loaded', 'error'); return; }
+        var label = type === 'ac' ? 'AC' : 'Non-AC';
+        var roomsToUpdate = allRooms.filter(function(r) {
+          var name = (r.name || '').toLowerCase();
+          return type === 'ac' ? name.includes('ac') : !name.includes('ac') && !name.includes('non-ac') && !name.includes('nonac');
+        });
+        if (!roomsToUpdate.length) { showToast('No ' + label + ' rooms found', 'error'); return; }
+        var pct = prompt('Enter percentage increase for ' + label + ' rooms (e.g., 10 for 10%):');
+        if (pct === null || pct === '') return;
+        pct = parseFloat(pct);
+        if (isNaN(pct) || pct < 0) { showToast('Invalid percentage', 'error'); return; }
+        if (!confirm('Increase ' + label + ' room prices by ' + pct + '%?')) return;
+        var factor = 1 + (pct / 100);
+        var updated = 0;
+        roomsToUpdate.forEach(function(room) {
+          var newPrice = Math.round((room.price || 0) * factor);
+          supabase.from('rooms').update({ price: newPrice }).eq('id', room.id).then(function(r) {
+            if (!r.error) updated++;
+          });
+        });
+        setTimeout(function() {
+          showToast('Price updated for ' + updated + ' ' + label + ' rooms');
+          loadBookings();
+        }, 1000);
       };
 
       window.updateRoomAvailability = function(roomId, btnEl) {
