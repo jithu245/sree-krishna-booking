@@ -2464,10 +2464,10 @@
 function getRoomImage(name) {
         var n = name.toLowerCase();
         var v = '?v=20260412';
-        if (n.indexOf('2 bed non ac') !== -1 || n.indexOf('non ac') !== -1 && n.indexOf('2 bed') !== -1) return 'images/2%20Bed%20Non%20AC%205%20this%20should%20be%20shown%20first.avif' + v;
-        if (n.indexOf('2 bed') !== -1 && n.indexOf('ac') !== -1) return 'images/2%20Bed%20AC.webp' + v;
-        if (n.indexOf('eight bed') !== -1 || n.indexOf('8 bed') !== -1 || n.indexOf('family') !== -1 && n.indexOf('non ac') !== -1) return 'images/Eight%20Bed%20Non%20Ac%20Family%20Room%201.avif' + v;
-        if (n.indexOf('four bed') !== -1 || n.indexOf('4 bed') !== -1 || n.indexOf('family') !== -1 && n.indexOf('ac') !== -1) return 'images/Four%20Bed%20Ac%20Family%20Room.webp' + v;
+        if (n.indexOf('2 bed non ac') !== -1 || n.indexOf('non ac') !== -1 && n.indexOf('2 bed') !== -1) return 'images/2%20Bed%20AC%205.webp';
+        if (n.indexOf('2 bed') !== -1 && n.indexOf('ac') !== -1) return 'images/2%20Bed%20AC.webp';
+        if (n.indexOf('eight bed') !== -1 || n.indexOf('8 bed') !== -1 || n.indexOf('family') !== -1 && n.indexOf('non ac') !== -1) return 'images/Eight%20Bed%20Non%20Ac%20Family%20Room.webp';
+        if (n.indexOf('four bed') !== -1 || n.indexOf('4 bed') !== -1 || n.indexOf('family') !== -1 && n.indexOf('ac') !== -1) return 'images/Four%20Bed%20Ac%20Family%20Room.webp';
         return '';
       }
 
