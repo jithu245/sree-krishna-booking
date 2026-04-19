@@ -993,8 +993,52 @@
       .marquee-section::before, .marquee-section::after { width: 50px; }
     }
 
+    /* MOBILE SPECIFIC ANIMATIONS */
+    @media (max-width: 600px) {
+      /* Faster transitions for mobile */
+      * { -webkit-transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease !important; transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease !important; }
+      
+      /* Touch feedback */
+      .hero-buttons .btn:active, .view-details-btn:active, .search-btn:active {
+        transform: scale(0.96);
+      }
+      
+      /* Mobile card press effect */
+      .room-card-static:active, .room-card-dynamic:active, .gallery-item:active {
+        transform: scale(0.98);
+      }
+      
+      /* Swipe hint animation */
+      .gallery-container { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
+      .gallery-item { scroll-snap-align: start; }
+      
+      /* Better touch targets */
+      .amenity-card { min-height: 80px; }
+      .gallery-tab { min-height: 44px; }
+      
+      /* Smooth scroll snap for horizontal galleries */
+      .gallery-grid { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+      
+      /* Hide scrollbar but keep functionality */
+      .gallery-container::-webkit-scrollbar { display: none; }
+      
+      /* Mobile lightbox improvements */
+      .lightbox { -webkit-overflow-scrolling: touch; }
+      .lightbox img { max-height: 85vh; }
+    }
+
+    /* PREFER REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::before {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     @media (max-width: 480px) {
       html { font-size: 15px; }
+      body { font-family: 'Poppins', sans-serif; font-weight: 400; letter-spacing: 0.01em; }
       .container { padding: 0 14px; }
       .nav-container { padding: 10px 14px; }
       .nav-logo-icon { width: 36px; height: 36px; }
@@ -1005,7 +1049,7 @@
       /* HERO - Smaller screen hero */
       .hero { padding: 70px 0 40px; }
       .hero::before { opacity: 0.12; }
-      .hero-text h1 { font-size: 1.9rem; }
+      .hero-text h1 { font-size: 1.9rem; font-weight: 600; letter-spacing: -0.01em; }
       .hero-badge { padding: 6px 14px; margin-bottom: 14px; }
       .hero-badge span { font-size: 0.75rem; }
       .hero-location { font-size: 0.85rem; margin-bottom: 18px; }
@@ -2107,6 +2151,8 @@
           if (slides.length < 2) return;
           var currentIndex = 0;
           var interval;
+          var touchStartX = 0;
+          var touchEndX = 0;
           
           function showSlide(index) {
             slides.forEach(function(s, i) { s.classList.toggle('active', i === index); });
@@ -2115,6 +2161,11 @@
           
           function nextSlide() {
             currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+          }
+          
+          function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
             showSlide(currentIndex);
           }
           
@@ -2135,6 +2186,21 @@
               startSlideshow();
             });
           });
+          
+          slideshow.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            stopSlideshow();
+          }, { passive: true });
+          
+          slideshow.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            var diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+              if (diff > 0) nextSlide();
+              else prevSlide();
+              startSlideshow();
+            }
+          }, { passive: true });
           
           slideshow.addEventListener('mouseenter', stopSlideshow);
           slideshow.addEventListener('mouseleave', startSlideshow);
