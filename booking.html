@@ -418,9 +418,10 @@ supabase.from('rooms').select('*').eq('property_id', propertyId).then(function(r
               renderNotFound();
               return;
             }
-            var targetName = targetRoom.name.toLowerCase();
+            var targetName = targetRoom.name.toLowerCase().replace(/\s+/g, '');
             var matched = r.data.find(function(room) {
-              return (room.name || '').toLowerCase().indexOf(targetName.replace(' ', '')) !== -1;
+              var roomName = (room.name || '').toLowerCase().replace(/\s+/g, '');
+              return roomName === targetName;
             });
             renderRoom(matched || r.data[0]);
           }).catch(renderNotFound);

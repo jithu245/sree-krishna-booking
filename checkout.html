@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Out - SREE KRISHNA RESIDENCY</title>
+  <meta name="description" content="Check out from SREE KRISHNA RESIDENCY, Guruvayoor - We hope you had a wonderful stay!">
+  <meta name="theme-color" content="#1a1a2e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-deep: #0f0f1a;
+      --bg-card: #1a1a2e;
+      --bg-elevated: #252542;
+      --accent-gold: #d4a853;
+      --accent-gold-light: #e8c878;
+      --accent-gold-dark: #b8923f;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a0a0b0;
+      --text-muted: #6b6b7b;
+      --border-subtle: rgba(212, 168, 83, 0.15);
+      --border-glow: rgba(212, 168, 83, 0.3);
+      --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { font-size: 16px; scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 20% 0%, rgba(212, 168, 83, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(212, 168, 83, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-deep) 0%, #12121f 100%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+      animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .logo-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 35px rgba(212, 168, 83, 0.3);
+      animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .logo-glow {
+      position: absolute;
+      inset: -15px;
+      background: radial-gradient(circle, rgba(212, 168, 83, 0.2) 0%, transparent 70%);
+      filter: blur(18px);
+      z-index: -1;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .thankyou-section {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 32px 20px;
+      background: linear-gradient(135deg, rgba(212, 168, 83, 0.08) 0%, rgba(212, 168, 83, 0.02) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+    }
+
+    .thankyou-emoji {
+      font-size: 3rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .thankyou-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--accent-gold-light);
+      margin-bottom: 10px;
+    }
+
+    .thankyou-section p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-card);
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.15s; }
+    .card:nth-child(3) { animation-delay: 0.25s; }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--bg-deep);
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .checkout-time {
+      text-align: center;
+      padding: 20px;
+      background: var(--bg-elevated);
+      border-radius: 14px;
+      border: 1px solid var(--border-glow);
+    }
+
+    .checkout-time .time-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+
+    .checkout-time .time-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--accent-gold-light);
+    }
+
+    .departure-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .departure-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .departure-list li:hover {
+      transform: translateX(4px);
+    }
+
+    .step-number {
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--bg-deep);
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .rating-prompt {
+      text-align: center;
+      padding: 10px 0 24px;
+    }
+
+    .rating-prompt p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .star-rating {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .star {
+      font-size: 2.4rem;
+      color: #3a3a52;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 6px;
+      position: relative;
+    }
+
+    .star::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: rgba(212, 168, 83, 0);
+      transition: all 0.25s ease;
+    }
+
+    .star:hover {
+      color: var(--accent-gold-light);
+      transform: scale(1.2);
+    }
+
+    .star:hover::after {
+      background: rgba(212, 168, 83, 0.1);
+    }
+
+    .star.active {
+      color: var(--accent-gold);
+      transform: scale(1.1);
+    }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 18px 28px;
+      background: linear-gradient(135deg, #34A853 0%, #2E8B46 100%);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-top: 16px;
+    }
+
+    .google-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(52, 168, 83, 0.4);
+    }
+
+    .skip-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 24px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 12px;
+    }
+
+    .skip-btn:hover {
+      border-color: var(--border-glow);
+      color: var(--text-primary);
+    }
+
+    .final-thankyou {
+      text-align: center;
+      padding: 40px 20px;
+      animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .final-thankyou .emoji {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .final-thankyou h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--accent-gold-light);
+      margin-bottom: 12px;
+    }
+
+    .final-thankyou p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 16px 50px;
+      }
+      
+      .thankyou-section {
+        padding: 26px 16px;
+      }
+      
+      .thankyou-emoji {
+        font-size: 2.5rem;
+      }
+      
+      .star {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  
+  <div class="container">
+    <header class="header">
+      <div class="logo-container">
+        <div class="logo-glow"></div>
+        <div class="logo"><img src="images/logo.webp" alt="SREE KRISHNA RESIDENCY"></div>
+      </div>
+      <h1>SREE KRISHNA RESIDENCY</h1>
+      <p class="subtitle">Guruvayoor</p>
+    </header>
+
+    <section class="thankyou-section">
+      <span class="thankyou-emoji">🌟</span>
+      <h2>Thank You for Staying With Us</h2>
+      <p>We hope you had a wonderful and peaceful experience at SREE KRISHNA RESIDENCY. We look forward to welcoming you again!</p>
+    </section>
+
+    <article class="card">
+      <div class="card-header">
+        <div class="card-icon"><i class="fas fa-sign-out-alt"></i></div>
+        <h3 class="card-title">Check-out Time</h3>
+      </div>
+      <div class="checkout-time">
+        <div class="time-label">Please check out by</div>
+        <div class="time-value">02:00 PM</div>
+      </div>
+    </article>
+
+    <article class="card" id="departureCard">
+      <div class="card-header">
+        <div class="card-icon"><i class="fas fa-list-check"></i></div>
+        <h3 class="card-title">Departure Checklist</h3>
+      </div>
+      <ul class="departure-list">
+        <li>
+          <span class="step-number">1</span>
+          <span class="step-text">Hand over your room keys at the reception</span>
+        </li>
+        <li>
+          <span class="step-number">2</span>
+          <span class="step-text">Settle any pending bills at the reception</span>
+        </li>
+        <li>
+          <span class="step-number">3</span>
+          <span class="step-text">Collect your luggage from your room</span>
+        </li>
+        <li>
+          <span class="step-number">4</span>
+          <span class="step-text">Free parking available until checkout</span>
+        </li>
+      </ul>
+    </article>
+
+    <div id="ratingSection">
+      <article class="card">
+        <div class="card-header">
+          <div class="card-icon"><i class="fas fa-star"></i></div>
+          <h3 class="card-title">Rate Your Experience</h3>
+        </div>
+        <div class="rating-prompt">
+          <p>How was your stay at SREE KRISHNA RESIDENCY?</p>
+          <div class="star-rating" id="starContainer">
+            <span class="star" data-rating="1">★</span>
+            <span class="star" data-rating="2">★</span>
+            <span class="star" data-rating="3">★</span>
+            <span class="star" data-rating="4">★</span>
+            <span class="star" data-rating="5">★</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div id="googleSection" class="hidden">
+      <a href="https://maps.app.goo.gl/MXrVRaLwrrVDq2yd8" target="_blank" class="google-btn">
+        <i class="fab fa-google"></i> Write a Review on Google
+      </a>
+      <button class="skip-btn" onclick="skipFeedback()">Maybe Later</button>
+    </div>
+
+    <div id="below4Section" class="hidden">
+      <div class="final-thankyou">
+        <span class="emoji">💫</span>
+        <h3>Thank You!</h3>
+        <p>We appreciate your feedback and hope to serve you better next time. Safe travels!</p>
+      </div>
+    </div>
+
+    <div id="finalThankYou" class="hidden">
+      <div class="final-thankyou">
+        <span class="emoji">🌟</span>
+        <h3>Thank You!</h3>
+        <p>Your feedback means the world to us. We look forward to welcoming you back soon!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var selectedRating = 0;
+      var isHighRating = false;
+      
+      var starContainer = document.getElementById('starContainer');
+      var ratingSection = document.getElementById('ratingSection');
+      var googleSection = document.getElementById('googleSection');
+      var below4Section = document.getElementById('below4Section');
+      var finalThankYou = document.getElementById('finalThankYou');
+      var departureCard = document.getElementById('departureCard');
+
+      starContainer.addEventListener('click', function(e) {
+        var star = e.target.closest('.star');
+        if (!star) return;
+        
+        selectedRating = parseInt(star.dataset.rating);
+        isHighRating = selectedRating >= 4;
+        
+        document.querySelectorAll('.star').forEach(function(s, i) {
+          s.classList.toggle('active', i < selectedRating);
+        });
+        
+        setTimeout(function() {
+          ratingSection.classList.add('hidden');
+          departureCard.classList.add('hidden');
+          
+          if (isHighRating) {
+            googleSection.classList.remove('hidden');
+          } else {
+            below4Section.classList.remove('hidden');
+          }
+        }, 400);
+      });
+
+      window.skipFeedback = function() {
+        googleSection.classList.add('hidden');
+        below4Section.classList.add('hidden');
+        finalThankYou.classList.remove('hidden');
+      };
+    })();
+  </script>
+</body>
+</html>

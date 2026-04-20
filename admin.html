@@ -180,6 +180,12 @@
     .status-btn-confirmed { background: var(--green-bg); color: var(--green); cursor: default; }
     .whatsapp-btn { background: #25D366; color: #fff; border: none; padding: 6px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; display: flex; align-items: center; gap: 4px; }
     .whatsapp-btn:hover { background: #128C7E; transform: translateY(-1px); }
+    .link-btn { background: var(--accent); color: #0f172a; border: none; padding: 6px 14px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; display: flex; align-items: center; gap: 4px; }
+    .link-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .link-btn.checkin { background: #6366f1; color: #fff; }
+    .link-btn.checkin:hover { background: #4f46e5; }
+    .link-btn.checkout { background: #f59e0b; color: #0f172a; }
+    .link-btn.checkout:hover { background: #d97706; }
     .mark-seen-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 6px 14px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
     .mark-seen-btn:hover { background: var(--accent); color: #0f172a; }
     .mark-seen-btn:disabled { opacity: 0.5; cursor: default; }
@@ -694,21 +700,11 @@
           <input type="date" class="date-filter" id="revDateTo" title="To date">
           <button class="refresh-btn" id="calcRevenueBtn"><i class="fas fa-calculator"></i> Calculate</button>
         </div>
-        <div class="revenue-charts" id="revenueCharts">
-          <div class="chart-card">
-            <h4>30-Day Revenue</h4>
-            <div class="bar-chart" id="revenueBarChart"><p class="empty" style="padding:20px 0;">Click Calculate to load</p></div>
-          </div>
-          <div class="chart-card">
-            <h4>Revenue by Room Type</h4>
-            <div id="revenuePieChart"><p class="empty" style="padding:20px 0;">Click Calculate to load</p></div>
-          </div>
-        </div>
         <div class="kpi-grid" id="revStats">
-          <div class="kpi-card" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);">
+          <div class="kpi-card large" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);">
             <div class="kpi-icon"><i class="fas fa-indian-rupee-sign"></i></div>
             <div class="kpi-value" id="revTotal">&#8377;0</div>
-            <div class="kpi-label">Total Revenue</div>
+            <div class="kpi-label">Total Revenue (Selected Period)</div>
           </div>
           <div class="kpi-card" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);">
             <div class="kpi-icon"><i class="fas fa-calendar-day"></i></div>
@@ -718,13 +714,40 @@
           <div class="kpi-card" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);">
             <div class="kpi-icon"><i class="fas fa-calendar"></i></div>
             <div class="kpi-value" id="revMonth">&#8377;0</div>
-            <div class="kpi-label">This Month</div>
+            <div class="kpi-label">This Month Revenue</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--amber);--kpi-bg:var(--amber-bg);">
+            <div class="kpi-icon"><i class="fas fa-hand-holding-usd"></i></div>
+            <div class="kpi-value" id="revAdvance">&#8377;0</div>
+            <div class="kpi-label">Total Advance Received</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--red);--kpi-bg:var(--red-bg);">
+            <div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div>
+            <div class="kpi-value" id="revBalance">&#8377;0</div>
+            <div class="kpi-label">Pending Balance</div>
           </div>
           <div class="kpi-card" style="--kpi-color:var(--text-secondary);--kpi-bg:var(--bg-secondary);">
             <div class="kpi-icon"><i class="fas fa-chart-line"></i></div>
             <div class="kpi-value" id="revAvg">&#8377;0</div>
             <div class="kpi-label">Avg per Booking</div>
           </div>
+        </div>
+        <div class="revenue-charts" id="revenueCharts">
+          <div class="chart-card wide">
+            <h4><i class="fas fa-chart-bar"></i> Daily Revenue Trend</h4>
+            <div class="bar-chart" id="revenueBarChart"><p class="empty" style="padding:20px 0;">Click Calculate to load data</p></div>
+          </div>
+          <div class="chart-card">
+            <h4><i class="fas fa-chart-pie"></i> Revenue by Room Type</h4>
+            <div id="revenuePieChart"><p class="empty" style="padding:20px 0;">Click Calculate to load data</p></div>
+          </div>
+        </div>
+        <div class="analytics-card" style="margin-top:20px;">
+          <h4><i class="fas fa-list"></i> Detailed Revenue Breakdown</h4>
+          <table class="data-table" id="revenueDetailedTable">
+            <thead><tr><th>Room Type</th><th>Bookings</th><th>Nights</th><th>Revenue</th><th>% of Total</th></tr></thead>
+            <tbody><tr><td colspan="5" class="empty">Click Calculate to load</td></tr></tbody>
+          </table>
         </div>
       </div>
 
@@ -754,25 +777,62 @@
             <option value="7">Last 7 days</option>
             <option value="30" selected>Last 30 days</option>
             <option value="90">Last 90 days</option>
+            <option value="365">Last 1 Year</option>
           </select>
           <button class="refresh-btn" onclick="window.loadAnalytics()"><i class="fas fa-sync-alt"></i> Refresh</button>
         </div>
+        <div class="kpi-grid" id="analyticsKpi">
+          <div class="kpi-card" style="--kpi-color:var(--blue);--kpi-bg:var(--blue-bg);">
+            <div class="kpi-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="kpi-value" id="anaTotalBookings">0</div>
+            <div class="kpi-label">Total Bookings</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--green);--kpi-bg:var(--green-bg);">
+            <div class="kpi-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="kpi-value" id="anaConfirmedBookings">0</div>
+            <div class="kpi-label">Confirmed</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--amber);--kpi-bg:var(--amber-bg);">
+            <div class="kpi-icon"><i class="fas fa-users"></i></div>
+            <div class="kpi-value" id="anaTotalGuests">0</div>
+            <div class="kpi-label">Total Guests</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--accent);--kpi-bg:var(--accent-bg);">
+            <div class="kpi-icon"><i class="fas fa-star"></i></div>
+            <div class="kpi-value" id="anaRepeatRate">0%</div>
+            <div class="kpi-label">Repeat Guest Rate</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--red);--kpi-bg:var(--red-bg);">
+            <div class="kpi-icon"><i class="fas fa-times-circle"></i></div>
+            <div class="kpi-value" id="anaCancelledBookings">0</div>
+            <div class="kpi-label">Cancelled</div>
+          </div>
+          <div class="kpi-card" style="--kpi-color:var(--text-secondary);--kpi-bg:var(--bg-secondary);">
+            <div class="kpi-icon"><i class="fas fa-percentage"></i></div>
+            <div class="kpi-value" id="anaCancellationRate">0%</div>
+            <div class="kpi-label">Cancellation Rate</div>
+          </div>
+        </div>
         <div class="analytics-grid">
-          <div class="analytics-card">
-            <h4>Booking Trend</h4>
-            <div class="line-chart-container" id="analyticsTrendChart"><p class="empty">Loading...</p></div>
+          <div class="analytics-card wide">
+            <h4><i class="fas fa-chart-line"></i> Booking Trend</h4>
+            <div class="line-chart-container" id="analyticsTrendChart"><p class="empty">Click Refresh to load</p></div>
           </div>
           <div class="analytics-card">
-            <h4>Booking Sources</h4>
-            <div id="analyticsSourceBreakdown"><p class="empty">Loading...</p></div>
+            <h4><i class="fas fa-chart-pie"></i> Booking Sources</h4>
+            <div id="analyticsSourceBreakdown"><p class="empty">Click Refresh to load</p></div>
           </div>
           <div class="analytics-card">
-            <h4>Repeat Guests</h4>
-            <div id="analyticsRepeatGuests"><p class="empty">Loading...</p></div>
+            <h4><i class="fas fa-user-plus"></i> Repeat Guests</h4>
+            <div id="analyticsRepeatGuests"><p class="empty">Click Refresh to load</p></div>
           </div>
-          <div class="analytics-card">
-            <h4>Key Metrics</h4>
-            <div id="analyticsStats"><p class="empty">Loading...</p></div>
+          <div class="analytics-card wide">
+            <h4><i class="fas fa-bed"></i> Room Popularity</h4>
+            <div id="analyticsRoomPopularity"><p class="empty">Click Refresh to load</p></div>
+          </div>
+          <div class="analytics-card wide">
+            <h4><i class="fas fa-list"></i> Key Metrics Summary</h4>
+            <div id="analyticsStats"><p class="empty">Click Refresh to load</p></div>
           </div>
         </div>
       </div>
@@ -1456,63 +1516,100 @@
         downloadCSV(rows, 'revenue_' + new Date().toISOString().slice(0,10) + '.csv');
       };
 
+      function formatExcelDate(dateStr) {
+        if (!dateStr) return '';
+        try {
+          var d = new Date(dateStr);
+          if (isNaN(d.getTime())) return dateStr;
+          var day = String(d.getDate()).padStart(2, '0');
+          var month = String(d.getMonth() + 1).padStart(2, '0');
+          var year = d.getFullYear();
+          return day + '-' + month + '-' + year;
+        } catch(e) { return dateStr; }
+      }
+
+      function formatExcelDateTime(dateStr) {
+        if (!dateStr) return '';
+        try {
+          var d = new Date(dateStr);
+          if (isNaN(d.getTime())) return dateStr;
+          var day = String(d.getDate()).padStart(2, '0');
+          var month = String(d.getMonth() + 1).padStart(2, '0');
+          var year = d.getFullYear();
+          var hours = String(d.getHours()).padStart(2, '0');
+          var mins = String(d.getMinutes()).padStart(2, '0');
+          return day + '-' + month + '-' + year + ' ' + hours + ':' + mins;
+        } catch(e) { return dateStr; }
+      }
+
       window.exportMonthlyReport = function() {
         if (!allBookings.length) { showToast('No bookings to export', 'error'); return; }
         var roomMap = {};
         allRooms.forEach(function(r) { roomMap[r.id] = r; });
-        var headers = ['Booking ID','Guest Name','Phone','Email','Room','Room Type','Check-in','Check-out','Nights','Price/Night','Total Amount','Advanced Paid','Payment Status','Status','Source','Special Requests','Booked At','Created By'];
+        var headers = ['Booking ID','Guest Name','Phone','Email','Room','Room Type','AC/Non-AC','Check-in','Check-out','Nights','Price/Night','Total Amount','Advance Paid','Balance Due','Payment Status','Status','Source','Special Requests','Booked Date','Created By'];
         var xml = '<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Worksheet ss:Name="Monthly Report"><Table>';
         xml += '<Row>';
         headers.forEach(function(h) { xml += '<Cell><Data ss:Type="String">' + escapeXml(h) + '</Data></Cell>'; });
         xml += '</Row>';
-        var totalRevenue = 0, totalAdvance = 0, totalNights = 0;
+        var totalRevenue = 0, totalAdvance = 0, totalNights = 0, totalBalance = 0;
         allBookings.forEach(function(b) {
           var room = roomMap[b.room_id] || {};
           var nights = b.nights || Math.max(1, Math.ceil((new Date(b.check_out) - new Date(b.check_in)) / 86400000));
           var price = b.price_at_booking || (room.price || 0);
           var advance = b.advance_paid || 0;
           var total = price * nights;
+          var balance = total - advance;
           totalRevenue += total;
           totalAdvance += advance;
           totalNights += nights;
+          totalBalance += balance;
+          var roomType = (room.room_type || '').toUpperCase() === 'AC' ? 'AC' : 'Non-AC';
+          var statusText = b.status === 'active' ? 'Confirmed' : b.status === 'cancelled' ? 'Cancelled' : b.status === 'completed' ? 'Completed' : b.status;
           var data = [
             b.id || '',
             b.customer_name || '',
             b.phone || '',
             b.guest_email || '',
             room.name || '',
-            room.category || '',
-            b.check_in || '',
-            b.check_out || '',
+            room.name || '',
+            roomType,
+            formatExcelDate(b.check_in),
+            formatExcelDate(b.check_out),
             nights,
             price,
             total,
             advance,
-            (b.payment_status || 'unpaid').replace('_', ' ').toUpperCase(),
-            b.status === 'active' ? 'Confirmed' : b.status === 'cancelled' ? 'Cancelled' : b.status,
-            b.source || 'direct',
+            balance,
+            (b.payment_status || 'unpaid').replace(/_/g, ' ').toUpperCase(),
+            statusText,
+            (b.source || 'direct').toUpperCase(),
             b.special_requests || '',
-            formatDateTime(b.created_at),
+            formatExcelDateTime(b.created_at),
             b.created_by || ''
           ];
           xml += '<Row>';
           data.forEach(function(d, i) {
-            var type = (i >= 8 && i <= 11) ? 'Number' : 'String';
-            xml += '<Cell><Data ss:Type="' + type + '">' + escapeXml(String(d)) + '</Data></Cell>';
+            var isNumber = (i >= 8 && i <= 12);
+            xml += '<Cell><Data ss:Type="' + (isNumber ? 'Number' : 'String') + '">' + escapeXml(String(d)) + '</Data></Cell>';
           });
           xml += '</Row>';
         });
         xml += '<Row>';
         for (var i = 0; i < headers.length; i++) {
-          var val = i === 8 ? totalNights : i === 10 ? totalRevenue : i === 11 ? totalAdvance : i === 0 ? 'TOTAL' : '';
-          xml += '<Cell><Data ss:Type="String">' + val + '</Data></Cell>';
+          var val = '';
+          if (i === 9) val = totalNights;
+          else if (i === 11) val = totalRevenue;
+          else if (i === 12) val = totalAdvance;
+          else if (i === 13) val = totalBalance;
+          else if (i === 0) val = 'TOTAL';
+          xml += '<Cell><Data ss:Type="' + (val !== '' && i > 0 && i < 14 ? 'Number' : 'String') + '">' + escapeXml(String(val)) + '</Data></Cell>';
         }
         xml += '</Row></Table></Worksheet></Workbook>';
         var blob = new Blob([xml], { type: 'application/vnd.ms-excel' });
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'monthly_report_' + new Date().toISOString().slice(0,10) + '.xls';
+        a.download = 'SreeKrishna_Report_' + new Date().toISOString().slice(0,10) + '.xls';
         a.click();
         URL.revokeObjectURL(url);
         showToast('Monthly Excel report exported');
@@ -2198,7 +2295,29 @@
           (function(booking) {
             waBtn.addEventListener('click', function() { openWhatsApp(booking, roomMap); });
           })(b);
-          footerLeft.appendChild(waBtn);
+footerLeft.appendChild(waBtn);
+          var checkinBtn = document.createElement('button');
+          checkinBtn.className = 'link-btn checkin';
+          checkinBtn.title = 'Send Check-in Link';
+          var checkinIcon = document.createElement('i');
+          checkinIcon.className = 'fas fa-sign-in-alt';
+          checkinBtn.appendChild(checkinIcon);
+          checkinBtn.appendChild(document.createTextNode(' Check-in'));
+          (function(booking) {
+            checkinBtn.addEventListener('click', function() { sendCheckinLink(booking); });
+          })(b);
+          footerLeft.appendChild(checkinBtn);
+          var checkoutBtn = document.createElement('button');
+          checkoutBtn.className = 'link-btn checkout';
+          checkoutBtn.title = 'Send Check-out Link';
+          var checkoutIcon = document.createElement('i');
+          checkoutIcon.className = 'fas fa-sign-out-alt';
+          checkoutBtn.appendChild(checkoutIcon);
+          checkoutBtn.appendChild(document.createTextNode(' Check-out'));
+          (function(booking) {
+            checkoutBtn.addEventListener('click', function() { sendCheckoutLink(booking); });
+          })(b);
+          footerLeft.appendChild(checkoutBtn);
         }
 
         footer.appendChild(footerLeft);
@@ -2426,7 +2545,7 @@
 
           allBookings = allData;
           allRooms = responses[1].data || [];
-
+          
           updateStats(allBookings);
           calcOccupancyOverview();
           renderNewBookings();
@@ -2496,32 +2615,83 @@
         window.open('https://wa.me/' + phone + '?text=' + message, '_blank', 'noopener,noreferrer');
       };
 
+      window.sendCheckinLink = function(booking) {
+        var phone = booking.phone || '';
+        if (!phone) { showToast('No phone number for this booking', 'error'); return; }
+        var cleanPhone = phone.replace(/[\s\+\-()]/g, '');
+        if (!/^91/.test(cleanPhone)) cleanPhone = '91' + cleanPhone;
+        var name = sanitize(booking.customer_name || 'Guest');
+        var checkIn = sanitize(formatDate(booking.check_in));
+        var checkOut = sanitize(formatDate(booking.check_out));
+        var baseUrl = 'https://sree-krishna-booking.vercel.app/checkin.html';
+        var msg = 'Hello ' + name + ',\n\nWelcome to Sree Krishna Residency!\n\nYour booking details:\n- Check-in: ' + checkIn + '\n- Check-out: ' + checkOut + '\n\nHere is your Check-in information:\n' + baseUrl + '\n\nSee you soon!';
+        window.open('https://wa.me/' + cleanPhone + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+      };
+
+      window.sendCheckoutLink = function(booking) {
+        var phone = booking.phone || '';
+        if (!phone) { showToast('No phone number for this booking', 'error'); return; }
+        var cleanPhone = phone.replace(/[\s\+\-()]/g, '');
+        if (!/^91/.test(cleanPhone)) cleanPhone = '91' + cleanPhone;
+        var name = sanitize(booking.customer_name || 'Guest');
+        var baseUrl = 'https://sree-krishna-booking.vercel.app/checkout.html';
+        var msg = 'Hello ' + name + ',\n\nThank you for staying at Sree Krishna Residency!\n\nWe hope you had a wonderful stay.\n\nHere is your Check-out feedback page:\n' + baseUrl + '\n\nWe hope to see you again soon!';
+        window.open('https://wa.me/' + cleanPhone + '?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+      };
+
       window.calcRevenue = function() {
         var from = document.getElementById('revDateFrom').value;
         var to = document.getElementById('revDateTo').value;
         var todayStr = new Date().toISOString().substring(0, 10);
         var monthStart = todayStr.substring(0, 8) + '01';
-        var totalRev = 0, todayRev = 0, monthRev = 0, count = 0;
+        var totalRev = 0, todayRev = 0, monthRev = 0, totalAdvance = 0, totalBalance = 0, count = 0;
         var roomMap = {};
+        var roomRevenue = {};
+        var roomBookings = {};
+        var roomNights = {};
         for (var i = 0; i < allRooms.length; i++) { roomMap[allRooms[i].id] = allRooms[i]; }
         for (var i = 0; i < allBookings.length; i++) {
           var b = allBookings[i];
-          // Include both active and completed bookings (not cancelled)
           if (b.status === 'cancelled') continue;
           var ci = String(b.check_in).substring(0, 10);
           var co = String(b.check_out).substring(0, 10);
           var nights = b.nights || Math.max(1, Math.ceil((new Date(co) - new Date(ci)) / 86400000));
           var price = b.price_at_booking || (roomMap[b.room_id] ? (roomMap[b.room_id].price || 0) : 0);
+          var advance = b.advance_paid || 0;
           var rev = price * nights;
-          // Filter by booking date (created_at)
+          var balance = rev - advance;
           var bookedDate = b.created_at ? String(b.created_at).substring(0, 10) : ci;
           if (from && to) { if (bookedDate < from || bookedDate > to) continue; }
           totalRev += rev;
+          totalAdvance += advance;
+          totalBalance += balance;
           count++;
           if (bookedDate === todayStr) todayRev += rev;
           if (bookedDate >= monthStart) monthRev += rev;
+          var roomName = roomMap[b.room_id] ? roomMap[b.room_id].name : 'Unknown';
+          if (!roomRevenue[roomName]) { roomRevenue[roomName] = 0; roomBookings[roomName] = 0; roomNights[roomName] = 0; }
+          roomRevenue[roomName] += rev;
+          roomBookings[roomName] += 1;
+          roomNights[roomName] += nights;
         }
         document.getElementById('revTotal').textContent = '\u20B9' + totalRev.toLocaleString('en-IN');
+        document.getElementById('revToday').textContent = '\u20B9' + todayRev.toLocaleString('en-IN');
+        document.getElementById('revMonth').textContent = '\u20B9' + monthRev.toLocaleString('en-IN');
+        document.getElementById('revAdvance').textContent = '\u20B9' + totalAdvance.toLocaleString('en-IN');
+        document.getElementById('revBalance').textContent = '\u20B9' + totalBalance.toLocaleString('en-IN');
+        document.getElementById('revAvg').textContent = count > 0 ? '\u20B9' + Math.round(totalRev / count).toLocaleString('en-IN') : '\u20B90';
+        
+        var tableBody = document.querySelector('#revenueDetailedTable tbody');
+        if (tableBody) {
+          var tableHtml = '';
+          var roomNames = Object.keys(roomRevenue).sort(function(a, b) { return roomRevenue[b] - roomRevenue[a]; });
+          roomNames.forEach(function(name) {
+            var pct = totalRev > 0 ? Math.round((roomRevenue[name] / totalRev) * 100) : 0;
+            tableHtml += '<tr><td>' + name + '</td><td>' + roomBookings[name] + '</td><td>' + roomNights[name] + '</td><td>\u20B9' + roomRevenue[name].toLocaleString('en-IN') + '</td><td>' + pct + '%</td></tr>';
+          });
+          tableHtml += '<tr style="font-weight:bold;background:var(--table-header-bg);"><td>TOTAL</td><td>' + count + '</td><td>' + roomNights[Object.keys(roomNights).reduce(function(a,b){return roomNights[a]>roomNights[b]?a:b},0)] + '</td><td>\u20B9' + totalRev.toLocaleString('en-IN') + '</td><td>100%</td></tr>';
+          tableBody.innerHTML = tableHtml || '<tr><td colspan="5" class="empty">No data</td></tr>';
+        }
         document.getElementById('revToday').textContent = '\u20B9' + todayRev.toLocaleString('en-IN');
         document.getElementById('revMonth').textContent = '\u20B9' + monthRev.toLocaleString('en-IN');
         document.getElementById('revAvg').textContent = count > 0 ? '\u20B9' + Math.round(totalRev / count).toLocaleString('en-IN') : '\u20B90';
